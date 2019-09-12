@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "386934121844",
+    "firebase_url": "https://sonadores-eec21.firebaseio.com",
+    "project_id": "sonadores-eec21",
+    "storage_bucket": "sonadores-eec21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386934121844:android:2b669e0bdd4c284eabf821",
+        "android_client_info": {
+          "package_name": "com.sonadores.bosquemagico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386934121844-frh3vdtgcf7eg3oa3mgietddc88lf0vt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDc8qPZHbBaY0w9rar-wISabji7utx_6m0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386934121844-frh3vdtgcf7eg3oa3mgietddc88lf0vt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "386934121844-bpd9uo1tnpmtiqk2bdamvjoji5b524l4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sonadores.bosquemagico"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386934121844:android:3b15235d1274efbf",
+        "android_client_info": {
+          "package_name": "com.sonadores.ciudadalebrijes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386934121844-frh3vdtgcf7eg3oa3mgietddc88lf0vt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDc8qPZHbBaY0w9rar-wISabji7utx_6m0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386934121844-frh3vdtgcf7eg3oa3mgietddc88lf0vt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "386934121844-bpd9uo1tnpmtiqk2bdamvjoji5b524l4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sonadores.bosquemagico"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
