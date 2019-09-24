@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:386934121844:ios:e4f9ddeded744a98abf821</string>
+	<string>1:386934121844:ios:1a6b7008cd215426abf821</string>
 	<key>DATABASE_URL</key>
 	<string>https://sonadores-eec21.firebaseio.com</string>
 </dict>
