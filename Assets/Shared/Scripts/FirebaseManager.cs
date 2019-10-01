@@ -31,7 +31,7 @@ public class FirebaseManager : MonoBehaviour {
 		get {
 			return instance;
 		}
-	}	
+	}
 
 	protected static FirebaseUser user;
 	public static FirebaseUser User {
@@ -101,7 +101,7 @@ public class FirebaseManager : MonoBehaviour {
 				DocumentStore statsData = initializeStatistics();
 
 				reference.Child("statistics").Child(user.UserId).SetValueAsync(statsData);
-			
+
 				callback.ConnectionFinished(CallbackResult.Success, null);
 			}
 		);
@@ -128,7 +128,7 @@ public class FirebaseManager : MonoBehaviour {
 			}
 		);
 	}
-	
+
 	public static void SaveMissionData(MissionData newData) {
 		if (user == null) {
 			Debug.LogError("A logged in user is required to save mission data");
@@ -189,16 +189,16 @@ public class FirebaseManager : MonoBehaviour {
 			Debug.Log("Initializing statistics");
 			savedData = initializeStatistics();
 		}
-	
+
 		UpdateMissionType(savedData, newData.Type);
 		UpdateTime(savedData, newData.Time);
-		
+
 		DocumentStore levelData = null;
 		if (savedData.ContainsKey(newData.LevelName)) {
 			levelData =  savedData[newData.LevelName] as DocumentStore;
 		}
 		savedData[newData.LevelName] = CommitLevel(levelData, newData);
-		
+
 		return savedData;
 	}
 

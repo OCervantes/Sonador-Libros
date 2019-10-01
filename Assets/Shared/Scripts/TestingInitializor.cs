@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class TestingInitializor : MonoBehaviour, FirebaseManager.OnFinishConnectionCallback {
+public class TestingInitializor : MonoBehaviour,
+	FirebaseManager.OnFinishConnectionCallback {
 
 	public void ConnectionFinished(FirebaseManager.CallbackResult result, string message) {
 		switch(result) {
@@ -14,9 +15,10 @@ public class TestingInitializor : MonoBehaviour, FirebaseManager.OnFinishConnect
 			case FirebaseManager.CallbackResult.Faulted:
 				Debug.LogError(message);
 				break;
+			case FirebaseManager.CallbackResult.Success:
 			default:
 				Debug.Log("Sucessfully logged on");
-				SceneManager.LoadScene ("LivingRoom");
+				SceneManager.LoadScene (4);
 				break;
 		}
 	}

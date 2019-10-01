@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Login : MonoBehaviour, FirebaseManager.OnFinishConnectionCallback {
+public class Login : MonoBehaviour,
+	FirebaseManager.OnFinishConnectionCallback {
 
 	public InputField email, pwd;
 
@@ -14,8 +15,10 @@ public class Login : MonoBehaviour, FirebaseManager.OnFinishConnectionCallback {
 			case FirebaseManager.CallbackResult.Faulted:
 				Debug.LogError(message);
 				break;
+			case FirebaseManager.CallbackResult.Success:
 			default:
-				SceneManager.LoadScene ("LivingRoom");
+				Debug.Log("Sucessfully logged on");
+				SceneManager.LoadScene (4);
 				break;
 		}
 	}

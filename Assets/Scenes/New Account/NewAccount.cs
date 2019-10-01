@@ -14,8 +14,10 @@ public class NewAccount : MonoBehaviour, FirebaseManager.OnFinishConnectionCallb
 			case FirebaseManager.CallbackResult.Faulted:
 				Debug.LogError(message);
 				break;
+			case FirebaseManager.CallbackResult.Success:
 			default:
-				SceneManager.LoadScene ("LivingRoom");
+				Debug.Log("Sucessfully created new player");
+				SceneManager.LoadScene (4);
 				break;
 		}
 	}
@@ -23,5 +25,5 @@ public class NewAccount : MonoBehaviour, FirebaseManager.OnFinishConnectionCallb
 	public void OnNewAccount() {
 		FirebaseManager.CreateNewPlayer(email.text, username.text, pwd.text, this);
 	}
-		
+
 }
