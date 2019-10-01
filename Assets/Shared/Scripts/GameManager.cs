@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-	protected static GameData data;
-	public static GameData Data {
+	protected static GameState state;
+	public static GameState State {
 		get {
-			return data;
+			return state;
 		}
 	}
 
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	protected virtual void Start() {
-		data = new GameData();
+		state = new GameState();
 	}
 
 	protected virtual void Update() {
@@ -36,30 +36,72 @@ public class GameManager : MonoBehaviour {
 
 }
 
-public class GameData {
+public class GameState {
 
-	private Vector2 mapCharPos;
-	public Vector2 MapCharPos {
+	private bool musicEnabled = true;
+	public bool MusicEnabled {
 		get {
-			return mapCharPos;
+			return musicEnabled;
 		}
 		set {
-			mapCharPos = value;
+			musicEnabled = value;
 		}
 	}
 
-	private float mapCharRot;
-	public float MapCharRot {
+	private int musicVolume = 10;
+	public int MusicVolume {
 		get {
-			return mapCharRot;
+			if (musicEnabled) {
+				return musicVolume;
+			} else {
+				return 0;
+			}
 		}
 		set {
-			mapCharRot = value;
+			musicVolume = value;
 		}
 	}
 
-	public GameData() {
-		mapCharPos = new Vector2(-3.07f, -64.22f);
-		mapCharRot = 0f;
+	private bool soundEnabled = true;
+	public bool SoundEnabled {
+		get {
+			return soundEnabled;
+		}
+		set {
+			soundEnabled = value;
+		}
 	}
+
+	private int soundVolume = 10;
+	public int SoundVolume {
+		get {
+			if (soundEnabled) {
+				return soundVolume;
+			} else {
+				return 0;
+			}
+		}
+		set {
+			soundVolume = value;
+		}
+	}
+
+	private bool subtitlesEnabled = false;
+	public bool SubtitlesEnabled {
+		get {
+			return subtitlesEnabled;
+		}
+		set {
+			subtitlesEnabled = value;
+		}
+	}
+
+	public bool ShowSubtitles {
+		get {
+			return subtitlesEnabled ||
+				soundVolume == 0;
+		}
+	}
+
+	public GameState() {}
 }
