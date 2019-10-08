@@ -2,11 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SideMenu : MonoBehaviour {
 
-	private Button menuToggle;
+	public string previousScene;
+
+	private Button menuToggle, goBack;
 	private Slider musicSlider, soundSlider;
 	private Toggle musicToggle, soundToggle, subtitlesToggle;
 	private GameObject container, sidebar, sidemenu;
@@ -29,6 +32,7 @@ public class SideMenu : MonoBehaviour {
 		sidebar = gameObjects["Sidebar"];
 		sidemenu = gameObjects["Side Menu"];
 		menuToggle = gameObjects["Menu Toggle"].GetComponent<Button>();
+		goBack = gameObjects["Back Button"].GetComponent<Button>();
 		musicSlider = gameObjects["Music Slider"].GetComponent<Slider>();
 		musicToggle = gameObjects["Music Toggle"].GetComponent<Toggle>();
 		soundSlider = gameObjects["Sound Slider"].GetComponent<Slider>();
@@ -42,6 +46,7 @@ public class SideMenu : MonoBehaviour {
 		subtitlesToggle.isOn = GameManager.State.SubtitlesEnabled;
 
 		menuToggle.onClick.AddListener(toggleSideBar);
+		goBack.onClick.AddListener(loadPreviousScene);
 		musicSlider.onValueChanged.AddListener(onMusicVolumeChanged);
 		musicToggle.onValueChanged.AddListener(onMusicValueToggled);
 		soundSlider.onValueChanged.AddListener(onSoundVolumeChanged);
@@ -79,6 +84,13 @@ public class SideMenu : MonoBehaviour {
 			buttonText.lineSpacing = 1f;
 			buttonText.text = "X";
 		}
+	}
+
+	private void loadPreviousScene() {
+		if (previousScene != null && previousScene.Trim().Length > 0)
+			SceneManager.LoadScene(previousScene);
+		else
+			Debug.LogError("Cannot load previous scene when a value was not provided");
 	}
 
 	private void onMusicVolumeChanged(float value) {

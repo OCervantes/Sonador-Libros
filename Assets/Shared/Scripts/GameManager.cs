@@ -22,9 +22,7 @@ public class GameManager : MonoBehaviour {
 	protected virtual void Awake () {
 		instance = this;
 		DontDestroyOnLoad (gameObject);
-	}
 
-	protected virtual void Start() {
 		state = new GameState();
 	}
 
