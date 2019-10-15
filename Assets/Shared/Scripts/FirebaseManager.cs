@@ -226,7 +226,7 @@ public class FirebaseManager : MonoBehaviour {
 
 		DocumentStore levelStats = null;
 		if (savedStats.ContainsKey(newStats.LevelID)) {
-			levelStats =  savedStats[newStats.LevelID] as DocumentStore;
+			levelStats = savedStats[newStats.LevelID] as DocumentStore;
 		}
 		savedStats[newStats.LevelID] = CommitLevelStats(levelStats, newStats);
 
