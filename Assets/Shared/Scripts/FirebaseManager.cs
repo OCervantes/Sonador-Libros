@@ -206,7 +206,7 @@ public class FirebaseManager : MonoBehaviour {
 		if (savedData == null) {
 			Debug.Log("Initializing Level statistics");
 			savedData = initializeStatistics();
-			savedData["tiempoPromedio"] = "0";
+			savedData["avg_time"] = "0";
 		}
 
 		UpdateMissionType(savedData, newData.Type);
@@ -217,61 +217,70 @@ public class FirebaseManager : MonoBehaviour {
 
 	private static DocumentStore UpdateTime(DocumentStore data, TimeSpan time) {
 		TimeSpan lastTime, totalTime, avgTime;
-		if (data.ContainsKey("tiempoTotal")) {
-			lastTime = TimeSpan.Parse(data["tiempoTotal"] as string);
+		if (data.ContainsKey("total_time")) {
+			lastTime = TimeSpan.Parse(data["total_time"] as string);
 			totalTime = lastTime + time;
 
-			if (data.ContainsKey("tiempoPromedio") && data.ContainsKey("nMCompletadas")) {
-				long completedMissions = ((long) data["nMCompletadas"]);
-				avgTime = TimeSpan.FromTicks(totalTime.Ticks / completedMissions);
+			if (	data.ContainsKey("avg_time") &&
+					data.ContainsKey("num_m_completed")) {
+				long completedMissions = ((long) data["num_m_completed"]);
+				avgTime =
+					TimeSpan.FromTicks(totalTime.Ticks / completedMissions);
 
-				data["tiempoPromedio"] = avgTime.ToString();
+				data["avg_time"] = avgTime.ToString();
 			}
 
-			data["tiempoTotal"] = totalTime.ToString();
+			data["total_time"] = totalTime.ToString();
 		}
 
 		return data;
 	}
 
-	private static DocumentStore UpdateMissionType(DocumentStore data, MissionType type) {
+	private static DocumentStore UpdateMissionType(DocumentStore data,
+		MissionType type) {
+		string missionType = "";
 		switch(type) {
 			case MissionType.Rejected:
-				data["nMRechazadas"] = ((long) data["nMRechazadas"]) + 1L;
+				missionType = "num_m_rejected";
 				break;
 
 			case MissionType.Began:
-				data["nMAceptadas"] = ((long) data["nMAceptadas"]) + 1L;
+				missionType = "num_m_accepted";
 				break;
 
 			case MissionType.Abandoned:
-				data["nMAbandonadas"] = ((long) data["nMAbandonadas"]) + 1L;
+				missionType = "num_m_abandoned";
 				break;
 
 			case MissionType.Failed:
-				data["nMFalladas"] = ((long) data["nMFalladas"]) + 1L;
+				missionType = "num_m_failed";
 				break;
 
 			case MissionType.Completed:
-				data["nMCompletadas"] = ((long) data["nMCompletadas"]) + 1L;;
+				missionType = "num_m_completed";;
 				break;
 
 			default:
 				Debug.LogError("Unsupported state");
-				break;
+				return data;
 		}
+
+		data[missionType] = ((long) data[missionType]) + 1L;
 
 		return data;
 	}
 
 	private static DocumentStore initializeStatistics() {
 		DocumentStore data = new DocumentStore();
-		data["nMRechazadas"] = 0L;
-		data["nMAceptadas"] = 0L;
-		data["nMAbandonadas"] = 0L;
-		data["nMFalladas"] = 0L;
-		data["nMCompletadas"] = 0L;
-		data["tiempoTotal"] = "0";
+		data["num_m_rejected"] = 0L;
+		data["num_m_accepted"] = 0L;
+		data["num_m_abandoned"] = 0L;
+		data["num_m_failed"] = 0L;
+		data["num_m_completed"] = 0L;
+		data["total_time"] = "0";
+
+		return data;
+	}
 
 		return data;
 	}
