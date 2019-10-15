@@ -75,8 +75,7 @@ public class FirebaseManager : MonoBehaviour {
 	*/
 
 	public static void CreateNewPlayer(string email, string username,
-								string password, OnFinishConnectionCallback callback)
-	{
+		string password, OnFinishConnectionCallback callback) {
 		auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(
 			task => {
 				if (task.IsCanceled) {
@@ -96,18 +95,28 @@ public class FirebaseManager : MonoBehaviour {
 				userData["last_login"] = DateTime.Now.ToShortDateString();
 				userData["username"] = username;
 
-				reference.Child("users").Child(user.UserId).SetValueAsync(userData);
+				reference
+					.Child("users")
+					.Child(user.UserId)
+					.SetValueAsync(userData);
 
-				DocumentStore statsData = initializeStatistics();
+				reference
+					.Child("statistics")
+					.Child(user.UserId)
+					.SetValueAsync(initializeStatistics());
 
-				reference.Child("statistics").Child(user.UserId).SetValueAsync(statsData);
+				reference
+					.Child("progress")
+					.Child(user.UserId)
+					.SetValueAsync(initializeProgress());
 
 				callback.ConnectionFinished(CallbackResult.Success, null);
 			}
 		);
 	}
 
-	public static void LoginPlayer(string email, string password, OnFinishConnectionCallback callback) {
+	public static void LoginPlayer(string email, string password,
+		OnFinishConnectionCallback callback) {
 		auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(
 			task => {
 				if (task.IsCanceled) {
@@ -122,24 +131,30 @@ public class FirebaseManager : MonoBehaviour {
 				}
 
 				user = task.Result;
-				reference.Child("users").Child(user.UserId).Child("last_login").SetValueAsync(DateTime.Now.ToShortDateString());
+				reference
+					.Child("users")
+					.Child(user.UserId)
+					.Child("last_login")
+					.SetValueAsync(DateTime.Now.ToShortDateString());
 
 				callback.ConnectionFinished(CallbackResult.Success, null);
 			}
 		);
 	}
 
-	public static void SaveMissionData(MissionData newData) {
+	public static void SaveMissionStats(MissionStats newStats) {
 		if (user == null) {
 			Debug.LogError("A logged in user is required to save mission data");
 			return;
 		}
 
 		reference.Child("statistics").Child(user.UserId).RunTransaction(
-			savedData => {
+			savedStats => {
 				Debug.Log("Running transaction on statistics");
-				savedData.Value = CommitMissions(savedData.Value as DocumentStore, newData);
-				return TransactionResult.Success(savedData);
+				savedStats.Value =
+					CommitMissionStats(savedStats.Value as DocumentStore, newStats);
+
+				return TransactionResult.Success(savedStats);
 			}
 		).ContinueWith(
 			task => {
@@ -151,7 +166,11 @@ public class FirebaseManager : MonoBehaviour {
 				} else if (task.IsCanceled) {
 					Debug.Log("Transaction was canceled");
 				} else {
-					Debug.LogError(task.IsFaulted + " : " + task.Exception.Message);
+					Debug.LogError(
+						task.IsFaulted +
+						" : " +
+						task.Exception.Message
+					);
 					Debug.LogError(task.Exception);
 				}
 			}
@@ -159,60 +178,73 @@ public class FirebaseManager : MonoBehaviour {
 	}
 
 	public static void GetUsername(OnFinishConnectionCallback callback) {
-		reference.Child("users").Child(user.UserId).GetValueAsync().ContinueWith(
-			task => {
-				if (task.IsCanceled) {
-					callback.ConnectionFinished(CallbackResult.Canceled,
-						"GetUsername was canceled.");
-					return;
-				}
-				if (task.IsFaulted) {
+		reference
+			.Child("users")
+			.Child(user.UserId)
+			.GetValueAsync()
+			.ContinueWith(
+				task => {
+					if (task.IsCanceled) {
+						callback.ConnectionFinished(CallbackResult.Canceled,
+							"GetUsername was canceled.");
+						return;
+					}
+					if (task.IsFaulted) {
+						callback.ConnectionFinished(
+							CallbackResult.Faulted,
+							"GetUsername encountered an error: " +
+							task.Exception
+						);
+
+						return;
+					}
+					if (task.IsCompleted) {
+						DocumentStore userData =
+							task.Result.Value as DocumentStore;
+						string username = (string) userData["username"];
+						Debug.Log("Retrieved username: " + username);
+						callback.ConnectionFinished(CallbackResult.Success,
+							username);
+						return;
+					}
+
 					callback.ConnectionFinished(CallbackResult.Faulted,
-						"GetUsername encountered an error: " + task.Exception);
-					return;
+						"Invalid task error");
 				}
-				if (task.IsCompleted) {
-					DocumentStore userData = task.Result.Value as DocumentStore;
-					string username = (string) userData["username"];
-					Debug.Log("Retrieved username: " + username);
-					callback.ConnectionFinished(CallbackResult.Success, username);
-					return;
-				}
-
-				callback.ConnectionFinished(CallbackResult.Faulted, "Invalid task error");
-			}
-		);
+			);
 	}
 
-	private static DocumentStore CommitMissions(DocumentStore savedData, MissionData newData) {
-		if (savedData == null) {
+	private static DocumentStore CommitMissionStats(DocumentStore savedStats,
+		MissionStats newStats) {
+		if (savedStats == null) {
 			Debug.Log("Initializing statistics");
-			savedData = initializeStatistics();
+			savedStats = initializeStatistics();
 		}
 
-		UpdateMissionType(savedData, newData.Type);
-		UpdateTime(savedData, newData.Time);
+		IncrementCompletionFor(savedStats, newStats.Type);
+		UpdateTime(savedStats, newStats.Time);
 
-		DocumentStore levelData = null;
-		if (savedData.ContainsKey(newData.LevelName)) {
-			levelData =  savedData[newData.LevelName] as DocumentStore;
+		DocumentStore levelStats = null;
+		if (savedStats.ContainsKey(newStats.LevelID)) {
+			levelStats =  savedStats[newStats.LevelID] as DocumentStore;
 		}
-		savedData[newData.LevelName] = CommitLevel(levelData, newData);
+		savedStats[newStats.LevelID] = CommitLevelStats(levelStats, newStats);
 
-		return savedData;
+		return savedStats;
 	}
 
-	private static DocumentStore CommitLevel(DocumentStore savedData, MissionData newData) {
-		if (savedData == null) {
+	private static DocumentStore CommitLevelStats(DocumentStore savedStats,
+		MissionStats newStats) {
+		if (savedStats == null) {
 			Debug.Log("Initializing Level statistics");
-			savedData = initializeStatistics();
-			savedData["avg_time"] = "0";
+			savedStats = initializeStatistics();
+			savedStats["avg_time"] = "0";
 		}
 
-		UpdateMissionType(savedData, newData.Type);
-		UpdateTime(savedData, newData.Time);
+		IncrementCompletionFor(savedStats, newStats.Type);
+		UpdateTime(savedStats, newStats.Time);
 
-		return savedData;
+		return savedStats;
 	}
 
 	private static DocumentStore UpdateTime(DocumentStore data, TimeSpan time) {
@@ -236,28 +268,28 @@ public class FirebaseManager : MonoBehaviour {
 		return data;
 	}
 
-	private static DocumentStore UpdateMissionType(DocumentStore data,
-		MissionType type) {
-		string missionType = "";
+	private static DocumentStore IncrementCompletionFor(DocumentStore data,
+		CompletionType type) {
+		string completionName = "";
 		switch(type) {
-			case MissionType.Rejected:
-				missionType = "num_m_rejected";
+			case CompletionType.Rejected:
+				completionName = "num_m_rejected";
 				break;
 
-			case MissionType.Began:
-				missionType = "num_m_accepted";
+			case CompletionType.Began:
+				completionName = "num_m_accepted";
 				break;
 
-			case MissionType.Abandoned:
-				missionType = "num_m_abandoned";
+			case CompletionType.Abandoned:
+				completionName = "num_m_abandoned";
 				break;
 
-			case MissionType.Failed:
-				missionType = "num_m_failed";
+			case CompletionType.Failed:
+				completionName = "num_m_failed";
 				break;
 
-			case MissionType.Completed:
-				missionType = "num_m_completed";;
+			case CompletionType.Completed:
+				completionName = "num_m_completed";;
 				break;
 
 			default:
@@ -265,7 +297,7 @@ public class FirebaseManager : MonoBehaviour {
 				return data;
 		}
 
-		data[missionType] = ((long) data[missionType]) + 1L;
+		data[completionName] = ((long) data[completionName]) + 1L;
 
 		return data;
 	}
@@ -282,6 +314,12 @@ public class FirebaseManager : MonoBehaviour {
 		return data;
 	}
 
+	private static DocumentStore initializeProgress() {
+		DocumentStore data = new DocumentStore();
+
+		data["current_level"] = 0;
+		data["has_seen_intro"] = false;
+
 		return data;
 	}
 
@@ -297,8 +335,7 @@ public class FirebaseManager : MonoBehaviour {
 
 }
 
-
-public enum MissionType {
+public enum CompletionType {
 	Rejected,
 	Began,
 	Abandoned,
@@ -306,16 +343,16 @@ public enum MissionType {
 	Completed
 }
 
-public struct MissionData {
+public struct MissionStats {
 
 	public readonly TimeSpan Time;
-	public readonly MissionType Type;
-	public readonly string LevelName;
+	public readonly CompletionType Type;
+	public readonly string LevelID;
 
-	public MissionData(TimeSpan time, MissionType type, string levelName) {
+	public MissionStats(TimeSpan time, CompletionType type, int levelID) {
 		Type = type;
 		Time = time;
-		LevelName = levelName;
+		LevelID = levelID.ToString();
 	}
 
 }
