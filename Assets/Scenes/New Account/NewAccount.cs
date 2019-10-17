@@ -17,7 +17,7 @@ public class NewAccount : MonoBehaviour, FirebaseManager.OnFinishConnectionCallb
 			case FirebaseManager.CallbackResult.Success:
 			default:
 				Debug.Log("Sucessfully created new player");
-				SceneManager.LoadScene (4);
+				SceneManager.LoadScene (5);
 				break;
 		}
 	}

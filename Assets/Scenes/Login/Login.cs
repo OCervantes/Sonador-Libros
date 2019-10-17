@@ -18,7 +18,7 @@ public class Login : MonoBehaviour,
 			case FirebaseManager.CallbackResult.Success:
 			default:
 				Debug.Log("Sucessfully logged on");
-				SceneManager.LoadScene (4);
+				SceneManager.LoadScene (5);
 				break;
 		}
 	}
