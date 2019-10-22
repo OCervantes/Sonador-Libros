@@ -21,6 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Games/Vocabulary/Instructions.unity
     guid: 09f51bef20676454091fc4e0feae089a
   - enabled: 1
-    path: Assets/Scenes/Games/Vocabulary/Redemption.unity
+    path: Assets/Scenes/Games/Vocabulary/Game.unity
     guid: d79f5483a46b5f24e87d87cb1f923860
   m_configObjects: {}
