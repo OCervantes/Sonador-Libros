@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NewAccount : MonoBehaviour, FirebaseManager.OnFinishConnectionCallback {
@@ -17,7 +16,9 @@ public class NewAccount : MonoBehaviour, FirebaseManager.OnFinishConnectionCallb
 			case FirebaseManager.CallbackResult.Success:
 			default:
 				Debug.Log("Sucessfully created new player");
-				SceneManager.LoadScene (5);
+				UnityMainThreadDispatcher
+					.Instance ()
+					.EnqueueNextScene (5);
 				break;
 		}
 	}
