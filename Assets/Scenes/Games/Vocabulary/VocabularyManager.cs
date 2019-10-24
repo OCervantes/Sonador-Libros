@@ -8,13 +8,16 @@ using UnityEngine.SceneManagement;
 public class VocabularyManager: MonoBehaviour
 {
     //Datos Miembro
-    public GameObject recibidor = null, banco = null, definition = null, prefabMovableAndSlot = null, prefabSlot = null, cameraObject = null;
-    GameObject MovAndSlotObjRef, SlotObjRef;
-    int savedIndex, cont=0;
-    string recoveredVocabWord;//, defMatriz;
-    List<string> letrasPal = new List<string>();
-    bool hasDestroyed = false,  hasDestroyedRecibidor = false, hasDestroyedBanco = false;
+    public AudioSource bounceSource, lockSource;
+    public GameObject recibidor, banco, definition,
+      prefabMovableAndSlot = null, prefabSlot = null, cameraObject = null;
     public bool butDoesItSave = false;
+
+    GameObject MovAndSlotObjRef, SlotObjRef;
+    List<string> letrasPal = new List<string>();
+    bool hasDestroyedRecibidor = false, hasDestroyedBanco = false;
+    int savedIndex;
+    string recoveredVocabWord;
 
     /* Lo tuve que volver estático porque no me permitía de otra manera.
      * Tendré que revisar que no interfiera más tarde.
@@ -167,8 +170,10 @@ public class VocabularyManager: MonoBehaviour
             MovAndSlotObjRef.GetComponentInChildren<Text>().text = System.Convert.ToString(recoveredVocabWord[i]).ToUpper();
 
             SlotObjRef = Instantiate(prefabSlot, recibidor.transform);
-            //Debug.Log(SlotObjRef.GetComponent<Slot>().slotLetter);    //El problema no es que no pueda llamar a Slot.
-            SlotObjRef.GetComponent<Slot>().slotLetter = System.Convert.ToString(recoveredVocabWord[i]).ToUpper();
+            Slot SlotObj = SlotObjRef.GetComponent<Slot>();
+            //Debug.Log(SlotObj.slotLetter);    //El problema no es que no pueda llamar a Slot.
+            SlotObj.slotLetter = System.Convert.ToString(recoveredVocabWord[i]).ToUpper();
+            SlotObj.vocabManager = this;
         }
     }
 
@@ -183,14 +188,13 @@ public class VocabularyManager: MonoBehaviour
     private void SetDefinition()
     {
         definition.GetComponent<Text>().text = matrix[savedIndex, 1];
-        // Debe variar conforme el tamaño de la palabra (recoveredVocabWord)
-        definition.GetComponent<Text>().fontSize = 30;
     }
 
     public void endWord()
     {
-        DestroyAll(recibidor);
-        DestroyAll(banco);
+        DestroyAllRecibidor();
+        DestroyAllBanco();
+        definition.GetComponent<Text>().text = "";
     }
 
     public bool dispAvailability()
@@ -233,33 +237,6 @@ public class VocabularyManager: MonoBehaviour
         newIndex = temp;
 
         return newIndex;
-    }
-
-    void TheOldSwitcharoo()
-    {
-        SlotObjRef.GetComponentInChildren<Transform>().SetAsFirstSibling();
-        Debug.Log("It's ye' ol Switccharoo!!");
-
-        //foreach (Transform child in banco.transform)
-        for (int i=0; i<banco.GetComponent<Transform>().childCount; i++)
-        {
-            //Debug.Log("Counter: " + (i+1));   //Contador sirve bien.
-            // El entero entre los corchetes se refiere al caracter del texto. Como es una sola letra, sólo puede aceptar un '0'.
-            Debug.Log("Hijo [" + i + "]: " + banco.GetComponentInChildren<Text>().text);
-        }
-    }
-
-    // Algo sucede con estos métodos. Borra no permite instanciar después :/
-    void DestroyAll(GameObject obj)
-    {
-        if (hasDestroyed == false)
-        {
-            foreach(Transform child in obj.transform)
-            {
-                GameObject.Destroy(child.gameObject);
-            }
-            hasDestroyed = true;
-        }
     }
 
     public void DestroyAllBanco()

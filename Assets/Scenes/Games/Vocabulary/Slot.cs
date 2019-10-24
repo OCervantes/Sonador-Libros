@@ -20,18 +20,7 @@ public class Slot : MonoBehaviour, IDropHandler
     int numberOfChildren;
     public bool lvlComplete = false;
     public VocabularyManager vocabManager;
-    //public GameObject btwScenesTest;
 
-    /*void Awake()
-    {
-        // "Only works on root Game Objects or their Components
-        DontDestroyOnLoad(this.gameObject);
-    }*/
-
-    void Update()
-    {
-        Debug.Log(transform.childCount);
-    }
     /* Variable de tipo GameObject llamado "item"
      * Avisa si cada Slot contiene una letra o no (null)
      */
@@ -66,8 +55,8 @@ public class Slot : MonoBehaviour, IDropHandler
         /* If we don't have an item already:
          * (If we do, we don't want to accept it/them)
          * Otherwise, check if the letter of the item matches with the one accepted by this slot.
-         */
-        /* Evita que un Movable sea trasladado a un Slot del Banco de Letras SI ES QUE NO TIENE UNA REFERENCIA TIPO 'LETTER'
+         *
+         * Evita que un Movable sea trasladado a un Slot del Banco de Letras SI ES QUE NO TIENE UNA REFERENCIA TIPO 'LETTER'
          * Sin embargo, esto termina causando errores a Unity.
          * Chance y sí sea necesario incluirle alguna letra aleatoria a los Slots del Banco de Letras, e incluir una condición donde nada más se permita hacer Drop de un 'itemB
            eingDragged' si el Slot tiene un Tag de tipo "Recibidor"
@@ -76,17 +65,33 @@ public class Slot : MonoBehaviour, IDropHandler
          * ¿Habrá alguna manera de desabilitar una referencia de acuerdo al Objeto, incluso si se comparte el mismo Script?
          */
 
-        if (item == null && DragHandeler.itemBeingDragged.GetComponentInChildren<Text>().text == slotLetter)//letter.text) //&& DragHandeler.itemBeingDragged.GetComponentInParent<Object>.tag == "Recibidor")
+        Text textComponent = DragHandeler
+            .itemBeingDragged
+            .GetComponentInChildren<Text>();
+        if (item == null &&
+           textComponent.text == slotLetter)
+           //letter.text) //&& DragHandeler.itemBeingDragged.GetComponentInParent<Object>.tag == "Recibidor")
         {
             /* Grab the static var item being dragged.
              * -> Grab its Transform, and set its Parent to the current Transfrom.
              * = Each slot, if an item's dragged over it, and it doesn't have an item already, it will grab the item it's dropped on.
              */
-            DragHandeler.itemBeingDragged.transform.SetParent(transform);
-            DragHandeler.itemBeingDragged.GetComponent<DragHandeler>().flag = true;
-            DragHandeler.itemBeingDragged.GetComponent<Image>().color = Color.green;    //CAMBIO DE COLOR EXITOSO
+            DragHandeler
+                .itemBeingDragged
+                .transform
+                .SetParent(transform);
+            DragHandeler
+                .itemBeingDragged
+                .GetComponent<DragHandeler>()
+                .flag = true;
+            DragHandeler
+                .itemBeingDragged
+                .GetComponent<Image>()
+                .color = Color.green;   //CAMBIO DE COLOR EXITOSO
 
             Slot.embeddedMovCounter++;
+
+            vocabManager.lockSource.Play();
 
             //FindObjectOfType<VocabularyManager>().Whatevs();    FUNCIONA. PROYECTA EL TEXTO DEL OBJETO <Text>
 
@@ -94,19 +99,20 @@ public class Slot : MonoBehaviour, IDropHandler
              * No permite seleccionar varios objetos con el mismo tag a la vez; ni varios componentes, para hacer el cambio de color.
              * Además, más que el Slot, sería mejor que el "Movable" sea quien cambie de color.
              * Después habrá que ver si no se puede cambiar la saturación.
-             */
-
-            /* La condición funciona. Sin embargo, en lugar de igualar a 'embeddedMovCounter' a un número fijo, debería ser al número de recibidores que haya.
+             *
+             * La condición funciona. Sin embargo, en lugar de igualar a 'embeddedMovCounter' a un número fijo, debería ser al número de recibidores que haya.
              * Ahí es donde entra <numberOfChildren>
              * Ahora hace falta cambiar el color de los Slots del Recibidor a verde una vez que haya embonado (la condición larga arriba se haya cumplido)
              */
 
             // Hace falta reiniciarlo después de cada nivel --> Static? --> No es válido.
-            numberOfChildren = GameObject.Find("Recibidor").GetComponent<Transform>().childCount; //EUREKA. FORMA SEGURA DE CONSEGUIR childCount.
+            numberOfChildren = GameObject
+                .Find("Recibidor")
+                .GetComponent<Transform>()
+                .childCount; //EUREKA. FORMA SEGURA DE CONSEGUIR childCount.
 
             if (embeddedMovCounter == numberOfChildren)
             {
-                //GetComponent<VocabularyManager>().endWord();
                 vocabManager.endWord();
                 embeddedMovCounter = 0;
             }
@@ -123,11 +129,21 @@ public class Slot : MonoBehaviour, IDropHandler
             Debug.Log(embeddedMovCounter);*/
             //check = true;
         } //return amount of children dropped
+        else if (item == null)
+        {
+            Image imageComponent = DragHandeler
+                .itemBeingDragged
+                .GetComponent<Image>();
+            imageComponent.color = Color.yellow;
+            StartCoroutine(IncorrectSlotCoroutine(imageComponent));
+        }
     }
     #endregion
 
-    public void TestCall()
-    {
-        Debug.Log("<Slot> llamado exitosamente.");
+    private IEnumerator IncorrectSlotCoroutine(Image component) {
+        vocabManager.bounceSource.Play();
+        yield return new WaitForSeconds(1);
+        component.color = new Color(1f, 1f, 1f, 0.39f);
     }
+
 }

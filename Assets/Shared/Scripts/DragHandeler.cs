@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Collections;
 /* "Really powerful"
  * Needed in order to make use of the EventSystems
- */ 
+ */
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -13,14 +13,14 @@ using UnityEngine.UI;
  * - IBeginDragHandler es justo cuando se empieza el arrastre (primer frame al arrastrar?)
  * - IDragHandler está presente durante todos los frames del arrastre.
  * - IEndDragHandler debe ser justo al acabar el arrastre.
- */ 
-public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+ */
+public class DragHandeler : MonoBehaviour, IBeginDragHandler,
+    IDragHandler, IEndDragHandler
 {
     /* 'flag' es declarado como público para ser accedido por el Script "Slot"
-     * 
-     */ 
+     *
+     */
     public bool flag;
-   // bool check = itemBeingDragged.GetComponentInParent<O>.tag;
 
     /* Game object that's being dragged
      * 'static' because the user is only allowed to drag one object at the time.
@@ -34,7 +34,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     /* Where the position is at the start(?)
      * Called at the Start of the Drag
-     */ 
+     */
     #region IBeginDragHandler implementation
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -58,7 +58,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     /* Where we acutally change the Transform position every frame
      * Called every frame of the Drag.
-     */ 
+     */
     #region IDragHandler implementation
 
     public void OnDrag(PointerEventData eventData)
@@ -74,7 +74,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     /* Where the Transform position stays once the object is dropped(?)
      * Called when we finish the Drag.
-     */ 
+     */
     #region IEndDragHandler implementation
 
     public void OnEndDrag(PointerEventData eventData)
@@ -82,42 +82,25 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         Debug.Log("DRAG CONCLUDED");
 
         if (flag) return;
-        //ALGO NO FUNCIONA
-        /*if (itemBeingDragged.transform.parent.tag.Equals("Recibidor"))
-        {
-            
-            itemBeingDragged = null;
 
-            GetComponent<CanvasGroup>().blocksRaycasts = true;
+        itemBeingDragged = null;
 
-            if (transform.parent == startParent)
-            {
-                transform.position = startPosition;
-            }
-        }*/
-        //if (itemBeingDragged.GetComponentInParent<Object>.CompareTag("Recibidor"))
-        
-        // OG
-         itemBeingDragged = null;
-         
         /* However, once the object has been dragged, Raycast is blocked once again.
          * -> Events can't pass through the item that was dragged (?)
          * Permite colisiones
          */
-        // OG
-          GetComponent<CanvasGroup>().blocksRaycasts = true;
-         
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
+
         /* If the parent has changed, -> we don't want the object to step back to its original position.
          * But instead to go to its new position
          */
-        //OG
-         if (transform.parent == startParent)
-         {
+        if (transform.parent == startParent)
+        {
             transform.position = startPosition;
-         }
-        
+        }
+
     }
 
     #endregion
-}
 
+}
