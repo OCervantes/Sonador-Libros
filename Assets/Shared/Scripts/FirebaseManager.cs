@@ -221,7 +221,50 @@ public class FirebaseManager : MonoBehaviour {
 						task.Result.Value as DocumentStore,
 						"Successfully retrieved username."
 					);
+				}
+			);
+	}
 
+	public static void GetMissionData(OnMissionDataRecievedCallback callback,
+		string missionID) {
+		reference
+			.Child("missions")
+			.Child(missionID)
+			.GetValueAsync()
+			.ContinueWith(
+				task => {
+					if (task.IsCanceled) {
+						callback.MissionDataRecieved(
+							CallbackResult.Canceled,
+							null,
+							"GetMissionData was canceled."
+						);
+						return;
+					}
+					if (task.IsFaulted) {
+						callback.MissionDataRecieved(
+							CallbackResult.Faulted,
+							null,
+							"GetMissionData encountered an error: " +
+								task.Exception
+						);
+						return;
+					}
+					if (!task.IsCompleted) {
+						callback.MissionDataRecieved(
+							CallbackResult.Invalid,
+							null,
+							"GetMissionData failed to complete."
+						);
+						return;
+					}
+					MissionData data = new MissionData(
+						task.Result.Value as DocumentStore);
+					callback.MissionDataRecieved(
+						CallbackResult.Success,
+						data,
+						"Successfully retrieved mission data."
+					);
 				}
 			);
 	}
@@ -346,6 +389,10 @@ public class FirebaseManager : MonoBehaviour {
 		void ConnectionFinished(CallbackResult result, string message);
 	}
 
+	public interface OnMissionDataRecievedCallback {
+		void MissionDataRecieved(CallbackResult result, MissionData? data,
+			string message);
+	}
 
 	public interface OnResultRecievedCallback {
 		void ResultRecieved(CallbackResult resul, DocumentStore data,
@@ -372,6 +419,33 @@ public struct MissionStats {
 		Type = type;
 		Time = time;
 		LevelID = levelID.ToString();
+	}
+
+}
+
+public struct MissionData {
+
+	public readonly string Name;
+	public readonly bool IsMath;
+	public readonly bool IsLangague;
+	public readonly string SceneId;
+	public int SceneIndex {
+		get {
+			try {
+				return Int32.Parse(SceneId);
+			} catch (FormatException e) {
+				return -1;
+			}
+		}
+	}
+	public readonly DocumentStore Data;
+
+	public MissionData(DocumentStore data) {
+		Name = (string) data["name"];
+		IsMath = (bool) data["is_math"];
+		IsLangague = (bool) data["is_language"];
+		SceneId = (string) data["scene_id"];
+		Data = data["data"] as DocumentStore;
 	}
 
 }
