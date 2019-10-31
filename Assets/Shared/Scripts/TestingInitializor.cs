@@ -9,22 +9,28 @@ using UnityEngine.UI;
 public class TestingInitializor : MonoBehaviour,
 	FirebaseManager.OnFinishConnectionCallback {
 
-	public void ConnectionFinished(FirebaseManager.CallbackResult result, string message) {
+	public void ConnectionFinished(FirebaseManager.CallbackResult result,
+		string message) {
 		switch(result) {
 			case FirebaseManager.CallbackResult.Canceled:
 			case FirebaseManager.CallbackResult.Faulted:
+			case FirebaseManager.CallbackResult.Invalid:
 				Debug.LogError(message);
 				break;
 			case FirebaseManager.CallbackResult.Success:
 			default:
-				Debug.Log("Sucessfully logged on");
+				Debug.Log(message);
 				SceneManager.LoadScene (4);
 				break;
 		}
 	}
 
 	protected virtual void Start() {
-		FirebaseManager.LoginPlayer("mau.graci@gmail.com", "Mau1214*#", this);
+		FirebaseManager.LoginPlayer(
+			"mau.graci@gmail.com",
+			"Mau1214*#",
+			this
+		);
 	}
 
 }

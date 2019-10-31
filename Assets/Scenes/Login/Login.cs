@@ -9,15 +9,17 @@ public class Login : MonoBehaviour,
 
 	public InputField email, pwd;
 
-	public void ConnectionFinished(FirebaseManager.CallbackResult result, string message) {
+	public void ConnectionFinished(FirebaseManager.CallbackResult result,
+		string message) {
 		switch(result) {
 			case FirebaseManager.CallbackResult.Canceled:
 			case FirebaseManager.CallbackResult.Faulted:
+			case FirebaseManager.CallbackResult.Invalid:
 				Debug.LogError(message);
 				break;
 			case FirebaseManager.CallbackResult.Success:
 			default:
-				Debug.Log("Sucessfully logged on");
+				Debug.Log(message);
 				SceneManager.LoadScene (4);
 				break;
 		}
