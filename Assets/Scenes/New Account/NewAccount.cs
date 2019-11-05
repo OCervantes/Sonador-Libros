@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NewAccount : MonoBehaviour,
@@ -20,7 +19,9 @@ public class NewAccount : MonoBehaviour,
 			case FirebaseManager.CallbackResult.Success:
 			default:
 				Debug.Log(message);
-				SceneManager.LoadScene (4);
+				UnityMainThreadDispatcher
+					.Instance ()
+					.EnqueueNextScene (5);
 				break;
 		}
 	}
