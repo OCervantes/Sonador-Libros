@@ -14,7 +14,7 @@ using UnityEngine.UI;
  * - IDragHandler está presente durante todos los frames del arrastre.
  * - IEndDragHandler debe ser justo al acabar el arrastre.
  */ 
-public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class MatDragHandeler: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     /* 'flag' es declarado como público para ser accedido por el Script "Slot"
      * 

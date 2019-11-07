@@ -23,4 +23,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Games/Vocabulary/Redemption.unity
     guid: d79f5483a46b5f24e87d87cb1f923860
+  - enabled: 1
+    path: "Assets/Scenes/Games/Mat_1/Introducci\xF3n.unity"
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: "Assets/Scenes/Games/Mat_1/Selecci\xF3n de Nivel.unity"
+    guid: eeb94873e55e2254c86d52afbfca626e
+  - enabled: 1
+    path: Assets/Scenes/Games/Mat_1/Juego.unity
+    guid: 1a9899175557303438cfa13143401caa
+  - enabled: 1
+    path: Assets/Scenes/Games/Mat_1/Agradecimiento.unity
+    guid: 55e9d9ebc21cc104fb2bb3896e4c0679
   m_configObjects: {}
