@@ -444,7 +444,12 @@ public struct MissionData {
 		Name = (string) data["name"];
 		IsMath = (bool) data["is_math"];
 		IsLangague = (bool) data["is_language"];
-		SceneId = (string) data["scene_id"];
+		object sceneId = data["scene_id"];
+		try {
+			SceneId = (string) sceneId;
+		} catch(Exception e) {
+			SceneId = Convert.ToInt32(sceneId) + "";
+		}
 		Data = data["data"] as DocumentStore;
 	}
 
