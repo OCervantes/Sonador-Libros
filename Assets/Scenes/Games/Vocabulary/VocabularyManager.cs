@@ -4,14 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+using DocumentStore = System.Collections.Generic.Dictionary<string, object>;
 
-public class VocabularyManager: MonoBehaviour
+public class VocabularyManager: MonoBehaviour,
+    FirebaseManager.OnMissionDataRecievedCallback
 {
     //Datos Miembro
     public AudioSource bounceSource, lockSource;
     public GameObject recibidor, banco, definition,
       prefabMovableAndSlot = null, prefabSlot = null, cameraObject = null;
     public bool butDoesItSave = false;
+    public string missionName = "hangman_1";
 
     GameObject MovAndSlotObjRef, SlotObjRef;
     List<string> letrasPal = new List<string>();
@@ -21,72 +24,30 @@ public class VocabularyManager: MonoBehaviour
 
     /* Lo tuve que volver estático porque no me permitía de otra manera.
      * Tendré que revisar que no interfiera más tarde.
+     * Esta vez, upperRNGLimit es 3 posiciones superior a lowerRNGLimit, porque al parecer el método Random.
+     * Range() es inclusivo en cuanto a su límite inferior, pero exclusivo para el superior.
      */
-     /* Esta vez, upperRNGLimit es 3 posiciones superior a lowerRNGLimit, porque al parecer el método Random.
-      * Range() es inclusivo en cuanto a su límite inferior, pero exclusivo para el superior.
-      */
     static int lowerRNGLimit = 0, upperRNGLimit = lowerRNGLimit+3;
+
     /* Declaración e Inicialización de la Matriz
      * Palabra, Definición
      * 30 elementos--3 elementos por nivel; 10 niveles.
      */
-    public string[,] matrix = { {"Mugido", "Voz del ganado vacuno."},
-                         {"Abatir", "Derribar, bajar, tumbar."},
-                         {"Ancas", "Cada una de las dos mitades laterales de la parte posterior de algunos animales."},
-                         {"Reacio", "Contrario a algo."},
-                         {"Resplandor", "Luz muy clara que arroja o despide el Sol u otro cuerpo luminoso."},
-                         {"Faena", "Trabajo que requiere un esfuerzo mental o físico."},
-                         {"Anaquel", "Estante de un armario, librería, alacena, etc."},
-                         {"Mágico", "De la magia o relacionado con ella."},
-                         {"Mecánico", "De la mecánica o relacionado con ella."},
-                         {"Nácar", "Sustancia dura, blanca, irisada que se forma en el interior de las conchas de algunos moluscos y que produce brillos y tonos de distintos colores cuando refleja la luz."},
-
-                         {"Conjunción", "Junta, unión."},
-                         {"Vaivén", "Balanceo, movimiento alternativo y sucesivo de un lado a otro."},
-                         {"Retozar", "Saltar y brincar alegremente."},
-                         {"Terciopelo", "Tela de seda muy tupida y con pelo, formada por dos urdimbres y una trama."},
-                         {"Mozo", "De la juventud o relativo a ella."},
-                         {"Extirpar", "Arrancar de cuajo o de raíz."},
-                         {"Paragüero", "Recipiente generalmente cilíndrico, parecido a un cubo, para dejar los paraguas."},
-                         {"Garrapata", "Ácaro de cuerpo oval de unos 6 mm de longitud que vive parásito sobre la piel de perros, aves y otros animales, incluido el ser humano."},
-                         {"Guiñar", "Cerrar y abrir con rapidez un ojo dejando el otro abierto, generalmente para hacer una señal."},
-                         {"Guirnalda", "Adorno consistente en una tira entretejida de flores y ramas que se coloca en forma de corona o de ondas."},
-
-                         {"Jilguero", "Pájaro cantor de unos 12 cm de longitud, pico grueso y puntiagudo, y plumaje pardo en el dorso, con la cara roja y blanca, la cola negra, las alas negras y amarillas, y una mancha negra sobre la cabeza."},
-                         {"Banquillo", "Asiento que ocupa el procesado ante el tribunal durante un juicio."},
-                         {"Chirrió", "Dar sonido agudo ciertas cosas cuando son manipuladas, como el tocino cuando se fríe."},
-                         {"Complicidad", "Participación de una persona junto con otras en la comisión de un delito o colaboración en él sin tomar parte en su ejecución material."},
-                         {"Moraleja", "Enseñanza que se deduce de algo, especialmente de un cuento o de una fábula." },
-                         {"Gentilicio", "Que expresa el origen geográfico o racial." },
-                         {"Cósmico", "Del cosmos o relacionado con él." },
-                         {"Úlcera", "Llaga o lesión que aparece en la piel o en el tejido de las mucosas a causa de una pérdida de sustancia y que no tiende a la cicatrización." },
-                         {"Codicia", "Deseo vehemente de poseer muchas cosas, especialmente riquezas o bienes." },
-                         {"Escepticismo", "Recelo, incredulidad o falta de confianza en la verdad o eficacia de una cosa." }
-                       };
+    private string[,] matrix;
 
     /* Arreglo de enteros. Posición del entero proporcional a la palabra a aparecer en aquel mismo nivel.
      * Contiene 30 enteros, equivalente a las 30 palabras almacenadas en la matriz.
      * Entero almacenado corresponde al nivel de la palabra.
      */
-    public int[] nivel = { 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10};
+    private int[] nivel;
+
     // Arreglos necesitan ser 'private'
-    private bool[] matrixIndexAvailability = new bool[30]; //= { true, true, true, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10 };
+    private bool[] matrixIndexAvailability;
+
     //Métodos
     public void Start()
     {
-        /* Inicialización del arreglo 'matrixIndexAvailability'.
-         * Resulta que una matrix tiene una longitud correspondiente al número completo de elementos almacenados--no el de columnas/filas, como tenía pensado.
-         * Va fuera del método 'inititateNewWord()', ya que, si no lo fuese, al momento de ejecutarlo, el arreglo de 'matrixIndexAvailability[]' nunca actualizaría el valor de sus contenidos.
-         */
-        for (int i=0; i<((matrix.Length)/2); i++)
-        {
-            matrixIndexAvailability[i] = true;
-        }
-
-        WordCatcher();
-        WordDecomposition();
-        WordLetterRearranger();
-        SetDefinition();
+        FirebaseManager.GetMissionData(this, missionName);
     }
 
 // Código reciclado que se encarga del ajuste adecuado de la Escala del Game View.
@@ -115,7 +76,7 @@ public class VocabularyManager: MonoBehaviour
   }
 #endif
 
-    public void initiateWord()
+    public void InitializeGame()
     {
         WordCatcher();
         WordDecomposition();
@@ -131,7 +92,7 @@ public class VocabularyManager: MonoBehaviour
         return temptativeIndex;
     }
 
-    private int IndexDeterminer(/* int loops*/)
+    private int IndexDeterminer()
     {
         int index;
         do
@@ -142,6 +103,57 @@ public class VocabularyManager: MonoBehaviour
         matrixIndexAvailability[index]=false;
 
         return index;
+    }
+
+    public void MissionDataRecieved(FirebaseManager.CallbackResult result,
+       MissionData? data, string message) {
+        switch(result) {
+            case FirebaseManager.CallbackResult.Canceled:
+            case FirebaseManager.CallbackResult.Faulted:
+            case FirebaseManager.CallbackResult.Invalid:
+                Debug.LogError(message);
+                break;
+            case FirebaseManager.CallbackResult.Success:
+            default:
+                Debug.Log(message);
+                UnityMainThreadDispatcher
+                    .Instance ()
+                    .Enqueue(WordLoaderWrapper(data));
+                break;
+        }
+    }
+
+    IEnumerator WordLoaderWrapper(MissionData? data) {
+        WordLoader(data.Value.Data);
+        yield return null;
+    }
+
+    private void WordLoader(DocumentStore data) {
+        List<string[]> listaMatrix = new List<string[]>();
+        List<int> listaNivel = new List<int>();
+        List<bool> listaMatrixIndexAvailability = new List<bool>();
+        List<object> definitions = data["definitions"] as List<object>;
+        for (int i = 1; i < definitions.Count; i++) {
+            DocumentStore levels = definitions[i] as DocumentStore;
+            foreach (KeyValuePair<string, object> level in levels) {
+                string[] pair = new string[2];
+                pair[0] = level.Key;
+                pair[1] = (string) level.Value;
+                listaMatrix.Add(pair);
+                listaNivel.Add(i);
+                listaMatrixIndexAvailability.Add(true);
+            }
+        }
+        matrix = new string[listaMatrix.Count, 2];
+        for(int i = 0; i < listaMatrix.Count; i++) {
+            string[] pair = listaMatrix[i];
+            for (int j = 0; j < 2; j++) {
+                matrix[i, j] = pair[j];
+            }
+        }
+        nivel = listaNivel.ToArray();
+        matrixIndexAvailability = listaMatrixIndexAvailability.ToArray();
+        InitializeGame();
     }
 
     private string WordCatcher()
@@ -195,6 +207,7 @@ public class VocabularyManager: MonoBehaviour
         DestroyAllRecibidor();
         DestroyAllBanco();
         definition.GetComponent<Text>().text = "";
+        InitializeGame();
     }
 
     public bool dispAvailability()
