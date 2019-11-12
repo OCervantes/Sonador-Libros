@@ -146,4 +146,9 @@ public class Slot : MonoBehaviour, IDropHandler
         component.color = new Color(1f, 1f, 1f, 0.39f);
     }
 
+    public void TestCall()
+    {
+        Debug.Log("<Slot> llamado exitosamente.");
+    }
+
 }
