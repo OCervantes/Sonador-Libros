@@ -13,9 +13,9 @@ public class Basket : MonoBehaviour, IDropHandler
      * Variable de tipo 'Text' (UI) llamado "letter".
        Es público, ya que tiene referencia directa al Text del Movable (que a su vez es del Slot).
      * Contador entero inicializado en 0.
-       Es estático, dado que si no lo fuese, 'receivedFruits' no aumentaría de 1 por cada Slot que haya recibido un Movable exitosamente. 
+       Es estático, dado que si no lo fuese, 'receivedFruits' no aumentaría de 1 por cada Slot que haya recibido un Movable exitosamente.
      * Entero: Número de Slots del Recibidor.
-     */ 
+     */
     public Text fruitsInBasketLabel;
     public static int receivedFruits = 0;
     int numberOfFruits;
@@ -29,7 +29,7 @@ public class Basket : MonoBehaviour, IDropHandler
     void Start()
     {
         // Didn't allow it other way than an Object reference.
-        numberOfFruits = 3;//fruits.numberOfFruits;           //SÓLO Para preuba        
+        numberOfFruits = 3;//fruits.numberOfFruits;           //SÓLO Para preuba
     }
 
     /*void Update()
@@ -50,9 +50,9 @@ public class Basket : MonoBehaviour, IDropHandler
 
         Debug.Log("Number of Fruits: " + numberOfFruits);
     }
- 
+
     /* Variable de tipo GameObject llamado "item"
-     * Avisa si cada Slot contiene una letra o no (null) 
+     * Avisa si cada Slot contiene una letra o no (null)
      */
 
     /*Vector3 randomCoordinates()
@@ -118,7 +118,7 @@ public class Basket : MonoBehaviour, IDropHandler
             Basket.receivedFruits++;
             fruitsInBasketLabel.text = receivedFruits.ToString();
             source.PlayOneShot(audios[(receivedFruits)-1]);
-            
+
             //FindObjectOfType<GameManager>().Whatevs();    FUNCIONA. PROYECTA EL TEXTO DEL OBJETO <Text>
 
             /* Sólo permite el cambio de color para el primer "Recibidor" de todos los que hay.

@@ -9,8 +9,8 @@ public class Animations: MonoBehaviour
     public GameObject[] personajes;
     int scene;
 
-    void Start() 
-    {        
+    void Start()
+    {
         scene = SceneManager.GetActiveScene().buildIndex;
     }
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class Animations: MonoBehaviour
             // Escena: "Introducción"
             case 6:
                 switch(dialogAndAudioMan.GetComponent<Dialog>().index)
-                { 
+                {
                     /*case 0:
                         personajes[0].SetActive(true);
                         break;*/
@@ -39,7 +39,7 @@ public class Animations: MonoBehaviour
                         personajes[3].SetActive(true);
                         break;
                 }
-                break;            
+                break;
 
             case 9:
                 switch(dialogAndAudioMan.GetComponent<Dialog>().index)
@@ -52,7 +52,7 @@ public class Animations: MonoBehaviour
                         personajes[1].SetActive(true);
                         break;
                 }
-                break;            
+                break;
         }
     }
 }

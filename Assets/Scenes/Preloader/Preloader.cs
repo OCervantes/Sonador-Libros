@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Preloader : MonoBehaviour {
-    
+
     private CanvasGroup fadeGroup;
     private float loadTime;
     // Minimum time of that scene
@@ -35,7 +35,7 @@ public class Preloader : MonoBehaviour {
                 if (FirebaseManager.User != null) {
                     SceneManager.LoadScene ("MainMap");
                 } else {
-                    SceneManager.LoadScene ("MainMenu");   
+                    SceneManager.LoadScene ("MainMenu");
                 }
             }
         }

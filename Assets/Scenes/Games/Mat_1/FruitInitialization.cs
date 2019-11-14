@@ -22,7 +22,7 @@ public class FruitInitialization : MonoBehaviour
     }
 
     /* Variable de tipo GameObject llamado "item"
-     * Avisa si cada Slot contiene una letra o no (null) 
+     * Avisa si cada Slot contiene una letra o no (null)
      */
 
     Vector3 randomCoordinates()

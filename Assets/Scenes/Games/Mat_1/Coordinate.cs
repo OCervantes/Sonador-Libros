@@ -7,7 +7,7 @@ public class Coordinate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -18,6 +18,6 @@ public class Coordinate : MonoBehaviour
 
     void OnClick()
     {
-        Debug.Log("d"); 
+        Debug.Log("d");
     }
 }
