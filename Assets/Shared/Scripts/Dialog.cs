@@ -26,7 +26,9 @@ public class Dialog : MonoBehaviour
 
         StartCoroutine(Type());        
 
-        source = GetComponent<AudioSource>();    
+        source = GetComponent<AudioSource>();
+
+        Debug.Log("audios[0]" + audios[0] + "\naudios[1]" + audios[1] + "\naudios[2]" + audios[2]);
     }
     
     private void Update() 
@@ -40,6 +42,8 @@ public class Dialog : MonoBehaviour
         {            
             if (sceneIndex == 9)
                 endgame.SetActive(true);             
+            else                
+                SceneManager.LoadScene(sceneIndex+1);
         }        
     }
 
