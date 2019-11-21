@@ -34,12 +34,14 @@ public class Dialog : MonoBehaviour
     private void Update() 
     {        
         if (UIText.text == sentences[index])
-        {
-            continueButton.SetActive(true);
+        {            
+            continueButton.SetActive(true);            
         }
 
         if (clickCounter==sentences.Length)
-        {            
+        {
+            dialogBackground.SetActive(false);
+
             if (sceneIndex == 9)
                 endgame.SetActive(true);             
             else                
@@ -60,7 +62,9 @@ public class Dialog : MonoBehaviour
     {
         clickCounter++;
        
-        source.PlayOneShot(audios[clickCounter]);
+        if (clickCounter < sentences.Length)
+            source.PlayOneShot(audios[clickCounter]);
+
         continueButton.SetActive(false);        
         
         if (index < sentences.Length - 1)
