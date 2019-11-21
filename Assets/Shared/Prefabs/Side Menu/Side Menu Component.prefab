@@ -1232,7 +1232,7 @@ GameObject:
   - component: {fileID: 8685231911677962856}
   - component: {fileID: 8685231911677962858}
   m_Layer: 5
-  m_Name: Side Menu Container
+  m_Name: Side Menu Component
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1279,6 +1279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148e275ec44d5634fb0ff00de244a581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  previousScene: 
 --- !u!95 &8685231911677962858
 Animator:
   serializedVersion: 3
@@ -2611,7 +2612,7 @@ GameObject:
   - component: {fileID: 8685231912497511874}
   - component: {fileID: 8685231912497511885}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: Subtitles Toggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2822,7 +2823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
