@@ -50,12 +50,15 @@ public class Animations: MonoBehaviour
                             break;
                         case 2:
                             // Feru stops talking.
-                            personajes[0].SetActive(false);
+                            personajes[0].SetActive(false); 
                             break;
                     }
                     break;
                 }
 
+                /* Enables and disables the animations between all characters who speak in the scene, according to the sen-
+                   tence that is currently being displayed in Dialogue Text.
+                 */
                 switch(/*dialogAndAudioMan.GetComponent<Dialog>().index*/DialogIndex)
                 { 
                     /*case 0:
@@ -76,7 +79,67 @@ public class Animations: MonoBehaviour
                         break;
                 }
                 break;            
+            
 
+            // Scene "Selección de Nivel"
+            case 7:
+
+                // Same condition as in Dialog. Checks once the sentence has finished "typing".                                   
+                if (dialogAndAudioMan.GetComponent<Dialog>().UIText.text == dialogAndAudioMan.GetComponent<Dialog>().sentences[DialogIndex])
+                {
+                    /* However, instead of displaying a button, it executes a switch().
+                     * Depending on the index, the switch() will disable the animation of the character who has finished
+                       talking.
+                     */
+                    switch (DialogIndex)
+                    {
+                        case 0:
+                            // 
+                            personajes[0].SetActive(false);
+                            personajes[1].SetActive(true);
+                            break;
+
+                        case 1:
+                            // Mati stops talking.
+                            personajes[0].SetActive(false);
+                            personajes[1].SetActive(true);
+                            break;
+
+                        /*case 2:
+                            // Feru stops talking.
+                            personajes[0].SetActive(false); 
+                            break;
+                            */
+                    }
+                    break;
+                }
+
+                /* Enables and disables the animations between all characters who speak in the scene, according to the sen-
+                   tence that is currently being displayed in Dialogue Text.
+                 */
+                switch(/*dialogAndAudioMan.GetComponent<Dialog>().index*/DialogIndex)
+                { 
+                    /*case 0:
+                        personajes[0].SetActive(true);
+                        break;*/
+                    case 1:
+                        personajes[0].SetActive(true);
+                        personajes[1].SetActive(false);
+                        break;
+                    /*case 2:
+                        personajes[1].SetActive(false);
+                        personajes[0].SetActive(true);
+                        break;
+                    case 3:
+                        personajes[0].SetActive(false);
+                        personajes[2].SetActive(false);
+                        personajes[3].SetActive(true);
+                        break;
+                    */
+                }
+                break;    
+
+            // Scene "Agradecimiento"
             case 9:
                 switch(/*dialogAndAudioMan.GetComponent<Dialog>().index*/DialogIndex)
                 {
