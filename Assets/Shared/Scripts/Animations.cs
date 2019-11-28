@@ -141,6 +141,34 @@ public class Animations: MonoBehaviour
 
             // Scene "Agradecimiento"
             case 9:
+
+                // Same condition as in Dialog. Checks once the sentence has finished "typing".                                   
+                if (dialogAndAudioMan.GetComponent<Dialog>().UIText.text == dialogAndAudioMan.GetComponent<Dialog>().sentences[DialogIndex])
+                {
+                    /* However, instead of displaying a button, it executes a switch().
+                     * Depending on the index, the switch() will disable the animation of the character who has finished
+                       talking.
+                     */
+                    switch (DialogIndex)
+                    {
+                        case 0:
+                            // Tepo stops talking and stops raising his hand.
+                            personajes[0].SetActive(false);
+                            personajes[1].SetActive(true);
+                            break;
+                        /*case 1:
+                            // Mati stops talking.
+                            personajes[1].SetActive(false);
+                            break;
+                            */
+                        /*case 2:
+                            // Feru stops talking.
+                            personajes[0].SetActive(false); 
+                            break;*/
+                    }
+                    break;
+                }
+
                 switch(/*dialogAndAudioMan.GetComponent<Dialog>().index*/DialogIndex)
                 {
                     /*case 0:
