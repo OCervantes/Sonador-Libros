@@ -27,20 +27,26 @@ public class Dialog : MonoBehaviour
         StartCoroutine(Type());
 
         source = GetComponent<AudioSource>();
+
+        Debug.Log("audios[0]" + audios[0] + "\naudios[1]" + audios[1] + "\naudios[2]" + audios[2]);
     }
 
     private void Update()
     {
         if (UIText.text == sentences[index])
-        {
-            continueButton.SetActive(true);
+        {            
+            continueButton.SetActive(true);            
         }
 
         if (clickCounter==sentences.Length)
         {
+            dialogBackground.SetActive(false);
+
             if (sceneIndex == 9)
-                endgame.SetActive(true);
-        }
+                endgame.SetActive(true);             
+            else                
+                SceneManager.LoadScene(sceneIndex+1);
+        }        
     }
 
     IEnumerator Type()
@@ -55,10 +61,12 @@ public class Dialog : MonoBehaviour
     public void NextSentence()
     {
         clickCounter++;
+       
+        if (clickCounter < sentences.Length)
+            source.PlayOneShot(audios[clickCounter]);
 
-        source.PlayOneShot(audios[clickCounter]);
-        continueButton.SetActive(false);
-
+        continueButton.SetActive(false);        
+        
         if (index < sentences.Length - 1)
         {
             index++;
