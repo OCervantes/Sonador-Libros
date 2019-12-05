@@ -35,7 +35,7 @@ public class Preloader : MonoBehaviour {
                 if (FirebaseManager.User != null) {
                     SceneManager.LoadScene ("MainMap");
                 } else {
-                    SceneManager.LoadScene ("MainMenu");
+                    SceneManager.LoadScene (10);
                 }
             }
         }

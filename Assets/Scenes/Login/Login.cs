@@ -21,7 +21,7 @@ public class Login : MonoBehaviour,
 				Debug.Log(message);
 				UnityMainThreadDispatcher
 					.Instance ()
-					.EnqueueNextScene (5);
+					.EnqueueNextScene (10);
 				break;
 		}
 	}
