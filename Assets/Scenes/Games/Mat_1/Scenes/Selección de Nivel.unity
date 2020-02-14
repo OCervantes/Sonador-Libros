@@ -168,7 +168,7 @@ PrefabInstance:
     - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
         type: 3}
       propertyPath: typingSpeed
-      value: 0.1
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
         type: 3}

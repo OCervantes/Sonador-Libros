@@ -28,7 +28,7 @@ public class Dialog : MonoBehaviour
 
         source = GetComponent<AudioSource>();
 
-        Debug.Log("audios[0]" + audios[0] + "\naudios[1]" + audios[1] + "\naudios[2]" + audios[2]);
+        //Debug.Log("audios[0]" + audios[0] + "\naudios[1]" + audios[1] + "\naudios[2]" + audios[2]);
     }
     
     private void Update() 

@@ -13,23 +13,34 @@ public class Basket : MonoBehaviour, IDropHandler
      * Variable de tipo 'Text' (UI) llamado "letter".
        Es público, ya que tiene referencia directa al Text del Movable (que a su vez es del Slot).
      * Contador entero inicializado en 0.
-       Es estático, dado que si no lo fuese, 'receivedFruits' no aumentaría de 1 por cada Slot que haya recibido un Movable exitosamente. 
+       Es estático, dado que si no lo fuese, 'totalReceivedFruits' no aumentaría de 1 por cada Slot que haya recibido un Movable exitosamente. 
      * Entero: Número de Slots del Recibidor.
      */ 
     public Text fruitsInBasketLabel;
-    public static int receivedFruits = 0;
-    int numberOfFruits;
-    public bool lvlComplete = false;
+    public static int totalReceivedFruits;// = 0;
+    public int totalFruitsToBeReceived;
+    //public bool lvlComplete;// = false;
     public FruitInitialization fruits;
     //public GameObject[] fruits;
     public AudioClip[] audios;
     public AudioSource source;
-    public GameObject endgame;
+    //public GameObject endgame;
+
+    public GameObject fruitA, fruitB;
+    public int fruitsToBeReceivedA, fruitsToBeReceivedB;
+    public static int receivedFruitsA, receivedFruitsB;
+
+    Stack stack;
 
     void Start()
     {
         // Didn't allow it other way than an Object reference.
-        numberOfFruits = 3;//fruits.numberOfFruits;           //SÓLO Para preuba        
+        totalReceivedFruits = 0;
+        receivedFruitsA = 0;
+        receivedFruitsB = 0;
+        //totalFruitsToBeReceived = 3;//fruits.totalFruitsToBeReceived;           //SÓLO Para preuba        
+        //lvlComplete = false;
+        stack = new Stack();
     }
 
     /*void Update()
@@ -40,15 +51,15 @@ public class Basket : MonoBehaviour, IDropHandler
     /* Moved to FruitInitialization
      * void Start()
     {
-        numberOfFruits = fruits.Length;
+        totalFruitsToBeReceived = fruits.Length;
 
-        for (int i=0; i<numberOfFruits; i++)
+        for (int i=0; i<totalFruitsToBeReceived; i++)
         {
             GameObject newFruit = Basket.Instantiate(fruits[i], randomCoordinates(), Quaternion.identity, transform);
             newFruit.transform.localScale = new Vector3(0.05f, 0.05f, 0.0f);
         }
 
-        Debug.Log("Number of Fruits: " + numberOfFruits);
+        Debug.Log("Number of Fruits: " + totalFruitsToBeReceived);
     }
  
     /* Variable de tipo GameObject llamado "item"
@@ -107,6 +118,9 @@ public class Basket : MonoBehaviour, IDropHandler
 
         /*if (item == null) //&& MatDragHandeler.itemBeingDragged.GetComponentInChildren<Text>().text == slotLetter)//letter.text) //&& MatDragHandeler.itemBeingDragged.GetComponentInParent<Object>.tag == "Recibidor")
         {*/
+            //Debug.Log("Tag: " + MatDragHandeler.itemBeingDragged.tag);
+            Debug.Log("Name: " + MatDragHandeler.itemBeingDragged.name);
+            //stack.Push(MatDragHandeler.itemBeingDragged.tag);
             /* Grab the static var item being dragged.
              * -> Grab its Transform, and set its Parent to the current Transfrom.
              * = Each slot, if an item's dragged over it, and it doesn't have an item already, it will grab the item it's dropped on.
@@ -115,10 +129,14 @@ public class Basket : MonoBehaviour, IDropHandler
             MatDragHandeler.itemBeingDragged.GetComponent<MatDragHandeler>().flag = true;
             //MatDragHandeler.itemBeingDragged.GetComponent<Image>().color = Color.green;    //CAMBIO DE COLOR EXITOSO
 
-            Basket.receivedFruits++;
-            fruitsInBasketLabel.text = receivedFruits.ToString();
-            source.PlayOneShot(audios[(receivedFruits)-1]);
+            /*Basket.*/totalReceivedFruits++;
+            fruitsInBasketLabel.text = totalReceivedFruits.ToString();
+            source.PlayOneShot(audios[(totalReceivedFruits)-1]);
             
+            if (MatDragHandeler.itemBeingDragged.name == fruitA.name)
+                receivedFruitsA++;
+            else
+                receivedFruitsB++;
             //FindObjectOfType<GameManager>().Whatevs();    FUNCIONA. PROYECTA EL TEXTO DEL OBJETO <Text>
 
             /* Sólo permite el cambio de color para el primer "Recibidor" de todos los que hay.
@@ -127,20 +145,23 @@ public class Basket : MonoBehaviour, IDropHandler
              * Después habrá que ver si no se puede cambiar la saturación.
              */
 
-            /* La condición funciona. Sin embargo, en lugar de igualar a 'receivedFruits' a un número fijo, debería ser al número de recibidores que haya.
-             * Ahí es donde entra <numberOfFruits>
+            /* La condición funciona. Sin embargo, en lugar de igualar a 'totalReceivedFruits' a un número fijo, debería ser al número de recibidores que haya.
+             * Ahí es donde entra <totalFruitsToBeReceived>
              * Ahora hace falta cambiar el color de los Slots del Recibidor a verde una vez que haya embonado (la condición larga arriba se haya cumplido)
              */
 
             // Hace falta reiniciarlo después de cada nivel --> Static? --> No es válido.
-            //numberOfFruits = GetComponent<Transform>().childCount; //EUREKA. FORMA SEGURA DE CONSEGUIR childCount.
+            //totalFruitsToBeReceived = GetComponent<Transform>().childCount; //EUREKA. FORMA SEGURA DE CONSEGUIR childCount.
 
-            if (receivedFruits == numberOfFruits)
+            if (totalReceivedFruits == totalFruitsToBeReceived)
             {
                 //GetComponent<TestScript>().endWord();
-                lvlComplete = true;
+                //lvlComplete = true;
                 //SceneManager.LoadScene(1);
-                receivedFruits = 0;
+                totalReceivedFruits = 0;
+
+                //Debug.Log(stack.contents());
+
                 Invoke("ChangeOfScene", 1.2f);
                 //endgame.SetActive(true);          NOTA
             }
@@ -153,8 +174,8 @@ public class Basket : MonoBehaviour, IDropHandler
              */
             //ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject, null, (x, y) => x.HasChanged());
             // Está atorado en 1...
-            /*receivedFruits = receivedFruits+1;
-            Debug.Log(receivedFruits);*/
+            /*totalReceivedFruits = totalReceivedFruits+1;
+            Debug.Log(totalReceivedFruits);*/
             //check = true;
         //} //return amount of children dropped
     }
@@ -162,8 +183,17 @@ public class Basket : MonoBehaviour, IDropHandler
 
     void ChangeOfScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        /*for (int i=0; i<stack.Count; i++)
+        {
 
+        }
+        string[] collectedFruits = stack.ToString();
+
+        if (collectedFruits[0] == "Apple" && collectedFruits[1] =="Apple" && collectedFruits[2] == "Apple")*/
+        if (receivedFruitsA == fruitsToBeReceivedA && receivedFruitsB == fruitsToBeReceivedB)
+            SceneManager.LoadScene("Agradecimiento");//SceneManager.GetActiveScene().buildIndex+1);
+        else
+            SceneManager.LoadScene("Corrección");//10);                        
     }
     /*public void TestCall()
     {

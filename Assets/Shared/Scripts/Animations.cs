@@ -14,7 +14,7 @@ public class Animations: MonoBehaviour
      * Given that it is not static (it updates continuously), it cannot be initialized at its declaration.
      * Instead, it must be assigned within Update(), due to its constant execution, once per frame.
      */
-    private int DialogIndex;// = dialogAndAudioMan.GetComponent<Dialog>().index;
+    private int DialogIndex;
 
     void Start() 
     {        
@@ -24,7 +24,7 @@ public class Animations: MonoBehaviour
     // Update is called once per frame
     void Update()
     {        
-        DialogIndex = dialogAndAudioMan.GetComponent<Dialog>().index;
+        DialogIndex = dialogAndAudioMan.GetComponent<Dialog>().index;        
 
         switch(scene)
         {
@@ -59,20 +59,20 @@ public class Animations: MonoBehaviour
                 /* Enables and disables the animations between all characters who speak in the scene, according to the sen-
                    tence that is currently being displayed in Dialogue Text.
                  */
-                switch(/*dialogAndAudioMan.GetComponent<Dialog>().index*/DialogIndex)
-                { 
-                    /*case 0:
-                        personajes[0].SetActive(true);
-                        break;*/
+                switch(DialogIndex)
+                {                                         
                     case 1:
+                        // 
                         personajes[0].SetActive(false);
                         personajes[1].SetActive(true);
                         break;
                     case 2:
+                        // 
                         personajes[1].SetActive(false);
                         personajes[0].SetActive(true);
-                        break;
+                        break;                        
                     case 3:
+                        //
                         personajes[0].SetActive(false);
                         personajes[2].SetActive(false);
                         personajes[3].SetActive(true);
@@ -103,13 +103,7 @@ public class Animations: MonoBehaviour
                             // Mati stops talking.
                             personajes[0].SetActive(false);
                             personajes[1].SetActive(true);
-                            break;
-
-                        /*case 2:
-                            // Feru stops talking.
-                            personajes[0].SetActive(false); 
-                            break;
-                            */
+                            break; 
                     }
                     break;
                 }
@@ -117,25 +111,13 @@ public class Animations: MonoBehaviour
                 /* Enables and disables the animations between all characters who speak in the scene, according to the sen-
                    tence that is currently being displayed in Dialogue Text.
                  */
-                switch(/*dialogAndAudioMan.GetComponent<Dialog>().index*/DialogIndex)
-                { 
-                    /*case 0:
-                        personajes[0].SetActive(true);
-                        break;*/
+                switch(DialogIndex)
+                {  
                     case 1:
+                        // 
                         personajes[0].SetActive(true);
                         personajes[1].SetActive(false);
-                        break;
-                    /*case 2:
-                        personajes[1].SetActive(false);
-                        personajes[0].SetActive(true);
-                        break;
-                    case 3:
-                        personajes[0].SetActive(false);
-                        personajes[2].SetActive(false);
-                        personajes[3].SetActive(true);
-                        break;
-                    */
+                        break;  
                 }
                 break;    
 
@@ -155,26 +137,18 @@ public class Animations: MonoBehaviour
                             // Tepo stops talking and stops raising his hand.
                             personajes[0].SetActive(false);
                             personajes[1].SetActive(true);
-                            break;
-                        /*case 1:
-                            // Mati stops talking.
-                            personajes[1].SetActive(false);
-                            break;
-                            */
-                        /*case 2:
-                            // Feru stops talking.
-                            personajes[0].SetActive(false); 
-                            break;*/
+                            break; 
                     }
                     break;
                 }
 
-                switch(/*dialogAndAudioMan.GetComponent<Dialog>().index*/DialogIndex)
+                /* Enables and disables the animations between all characters who speak in the scene, according to the sen-
+                   tence that is currently being displayed in Dialogue Text.
+                 */
+                switch(DialogIndex)
                 {
-                    /*case 0:
-                        personajes[0].SetActive(true);
-                        break;*/
                     case 1:
+                        // 
                         personajes[0].SetActive(false);
                         personajes[1].SetActive(true);
                         break;
