@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Personajes
+    uniqueID: 1212523569
+    locked: 0
+  - name: Extra
+    uniqueID: 3649263781
+    locked: 0
