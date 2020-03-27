@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Dialog and Audio Manager
+  - Cross_Fade
   layers:
   - Default
   - TransparentFX

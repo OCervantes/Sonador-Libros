@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class ChangeScene: MonoBehaviour
 {
     // Update is called once per frame
+    
     void Active()
     {
        Loadnextscene();
