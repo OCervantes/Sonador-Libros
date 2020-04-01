@@ -5,17 +5,21 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
-public class TriviaController : MonoBehaviour {
+using DocumentStore = System.Collections.Generic.Dictionary<string, object>;
+
+public class TriviaController : MonoBehaviour,
+	FirebaseManager.OnMissionDataRecievedCallback
+{
 	public Text questionDisplayText;
 	public Text scoreDisplayText;
 	public Text timeRemainingDisplayText;
 	public SimpleObjectPool answerButtonObjectPool;
 	public Transform answerButtonParent;
+	public String missionName = "trivia";
 
 	public GameObject questionPanel;
 	public GameObject roundEndPanel;
 
-	private DataController dataController;
 	private RoundData currentRoundData;
 	private QuestionData[] questionPool;
 
@@ -33,8 +37,74 @@ public class TriviaController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		dataController = FindObjectOfType<DataController> (); //always begin with persistent scene
-		currentRoundData = dataController.GetCurrentRoundData();
+		FirebaseManager.GetMissionData(this, missionName);
+	}//end Start
+
+	 // Called when firebase manager has a response to the API method called
+    public void MissionDataRecieved(FirebaseManager.CallbackResult result,
+       MissionData? data, string message) {
+        // Try to handle all cases
+        switch(result) {
+            // If the result is not success, just print to console as error
+            case FirebaseManager.CallbackResult.Canceled:
+            case FirebaseManager.CallbackResult.Faulted:
+            case FirebaseManager.CallbackResult.Invalid:
+                Debug.LogError(message);
+                break;
+            // If successful, use recieved mission data to populate scene
+            case FirebaseManager.CallbackResult.Success:
+            default:
+                Debug.Log(message);
+                UnityMainThreadDispatcher
+                    .Instance ()
+                    .Enqueue(RoundDataLoaderWrapper(data));
+                break;
+        }
+    }
+
+    // Wrapper function to call RoundDataLoader as an IEnumerator
+    // to work with UnityMainThreadDispatcher.
+    IEnumerator RoundDataLoaderWrapper(MissionData? data) {
+        RoundDataLoader(data.Value.Data);
+        yield return null;
+    }
+
+    // Parsed data from Firebase into data that this scene can use.
+    private void RoundDataLoader(DocumentStore data)
+	{
+		List<object> roundData = data["roundData"] as List<object>;
+		DocumentStore singleRoundData = roundData[1] as DocumentStore;
+		currentRoundData = new RoundData();
+		currentRoundData.name = singleRoundData["name"] as string;
+		Nullable<int> pointsAdedForCorrectAnswer =
+			singleRoundData["pointsAdedForCorrectAnswer"] as int?;
+		Nullable<int> timeLimitInSeconds =
+			singleRoundData["timeLimitInSeconds"] as int?;
+		currentRoundData.timeLimitInSeconds =
+			timeLimitInSeconds.GetValueOrDefault(60);
+		currentRoundData.pointsAdedForCorrectAnswer =
+			pointsAdedForCorrectAnswer.GetValueOrDefault(1);
+		List<object> questions = singleRoundData["questions"] as List<object>;
+		QuestionData[] questionsData = new QuestionData[questions.Count - 1];
+
+		for(int i = 1; i < questions.Count; i++) {
+			DocumentStore question =  questions[i] as DocumentStore;
+			QuestionData questionData = new QuestionData();
+			questionData.questionText = question["question"] as string;
+			List<object> answers = question["answers"] as List<object>;
+			Nullable<int> correct = question["correct"] as int?;
+			AnswerData[] answersData = new AnswerData[answers.Count];
+			for (int j = 0; j < answers.Count; j++) {
+				AnswerData answer = new AnswerData();
+				answer.answerText = answers[j] as string;
+				answer.isCorrect = correct.GetValueOrDefault() == j;
+				answersData[j] = answer;
+			}
+			questionData.answers = answersData;
+			questionsData[i - 1] = questionData;
+        }
+        currentRoundData.questions = questionsData;
+
 		questionPool = currentRoundData.questions;
 
 		timeRemaining = currentRoundData.timeLimitInSeconds;
@@ -45,7 +115,7 @@ public class TriviaController : MonoBehaviour {
 
 		ShowQuestion();
 		isRoundActive = true;
-	}//end Start
+	}
 
 	private void RemoveAnswerButtons(){
 		while (answerButtonGameObjects.Count > 0) {
