@@ -39,6 +39,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Game Selector/GameSelector.unity
     guid: a2798f0de3860d244be026343ed6bd92
   - enabled: 1
+    path: Assets/Scenes/Games/Trivia/Persistent.unity
+    guid: fbf2013645a1d3c43b75406195925300
+  - enabled: 1
+    path: Assets/Scenes/Games/Trivia/IntroMenu.unity
+    guid: dbf938aaa84843e4f97c6db11e2553a2
+  - enabled: 1
+    path: Assets/Scenes/Games/Trivia/Trivia.unity
+    guid: 6a4a4d59088a8f24b80137353b1d7506
+  - enabled: 1
     path: Assets/Scenes/Games/Memorama/Memoroma.unity
     guid: 8030a535b0c8fc54eab03ff630efb9bd
   m_configObjects: {}
