@@ -978,6 +978,8 @@ MonoBehaviour:
   source: {fileID: 1842899578}
   dialogBackground: {fileID: 887565866}
   endgame: {fileID: 290334753}
+  sliderText: {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &2002242957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,4 +1552,5 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 3485875582915805831, guid: 027574ae7f6e1b54abd2267b93b1ea47, type: 3}
     - {fileID: 3485875582915805830, guid: 027574ae7f6e1b54abd2267b93b1ea47, type: 3}
+    - {fileID: 2372608940284291016, guid: 027574ae7f6e1b54abd2267b93b1ea47, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 027574ae7f6e1b54abd2267b93b1ea47, type: 3}

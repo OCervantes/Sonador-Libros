@@ -2,12 +2,12 @@
 // ATTACHED TO IMAGE. Surely due to the Canvas Group Component attached (Blocks Raycasts property).
 
 using UnityEngine;
-using System.Collections;
+//using System.Collections;
 /* "Really powerful"
  * Needed in order to make use of the EventSystems
  */
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
+//using UnityEngine.UI;
 
 /* 3 interfaces implemented (from EventSystems):
  * Usados cuando se necesite arrastrar un Objeto(?) Como se intuye por sus nombres:
@@ -40,7 +40,7 @@ public class MatDragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("DRAG BEGUN");
+        //Debug.Log("DRAG BEGUN");
         if (flag) return;
         // Said object that's being dragged is assigned to current Game Object
         itemBeingDragged = gameObject;
@@ -63,7 +63,7 @@ public class MatDragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("DRAGGING");
+        //Debug.Log("DRAGGING");
 
         if (flag) return;
 
@@ -79,7 +79,7 @@ public class MatDragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("DRAG CONCLUDED");
+        //Debug.Log("DRAG CONCLUDED");
 
         if (flag) return;
         //ALGO NO FUNCIONA

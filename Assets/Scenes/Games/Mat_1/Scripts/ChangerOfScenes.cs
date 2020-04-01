@@ -8,7 +8,7 @@ public class ChangerOfScenes : MonoBehaviour
     public void Accept()
     {
         //SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex)+1);
-        Debug.Log("Pues no");
+        SceneManager.LoadScene("Juego");
         //SceneManager.Load
     }
 

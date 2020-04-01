@@ -261,7 +261,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitsInBasketLabel: {fileID: 0}
-  totalFruitsToBeReceived: 0
   fruits: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 81239f27078a3e04e8e964e9410e57f2, type: 3}
@@ -525,7 +524,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitsInBasketLabel: {fileID: 0}
-  totalFruitsToBeReceived: 0
   fruits: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 81239f27078a3e04e8e964e9410e57f2, type: 3}
@@ -907,7 +905,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a52b6d0e99a77e445ad5fa98e00babb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfFruits: 0
+  num_fruitA: 0
+  num_fruitB: 0
+  fruit_indexA: 0
+  fruit_indexB: 0
   fruits:
   - {fileID: 7345054581009748169, guid: 2e0fefdadcb0ab241853189ec185fd12, type: 3}
   - {fileID: 7345054581009748169, guid: 2e0fefdadcb0ab241853189ec185fd12, type: 3}
@@ -1884,7 +1885,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitsInBasketLabel: {fileID: 0}
-  totalFruitsToBeReceived: 0
   fruits: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 81239f27078a3e04e8e964e9410e57f2, type: 3}
@@ -2255,7 +2255,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitsInBasketLabel: {fileID: 0}
-  totalFruitsToBeReceived: 0
   fruits: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 81239f27078a3e04e8e964e9410e57f2, type: 3}
@@ -2499,7 +2498,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitsInBasketLabel: {fileID: 413954987}
-  totalFruitsToBeReceived: 3
   fruits: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 81239f27078a3e04e8e964e9410e57f2, type: 3}
@@ -2763,7 +2761,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitsInBasketLabel: {fileID: 0}
-  totalFruitsToBeReceived: 0
   fruits: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 81239f27078a3e04e8e964e9410e57f2, type: 3}
@@ -2992,7 +2989,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitsInBasketLabel: {fileID: 0}
-  totalFruitsToBeReceived: 0
   fruits: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 81239f27078a3e04e8e964e9410e57f2, type: 3}

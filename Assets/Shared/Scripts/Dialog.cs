@@ -1,70 +1,56 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-//using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 
 public class Dialog : MonoBehaviour
 {
     public Text UIText;
-    public string[] sentences;
-    public int index;
-    private int clickCounter=0, sceneIndex;
-    public float typingSpeed = 0.02f;
-    public GameObject continueButton;
-    public AudioClip[] audios;
-    public AudioSource source;
-    public GameObject dialogBackground;
-    public GameObject endgame;
+    // Public access due to reference in Animation.cs 
+    public /*static*/ string[] sentences;
+    public /*static*/ int index;
+    public GameObject continueButton, dialogBackground, endgame;
+    int sceneIndex;
+    [SerializeField] float typingSpeed;    
+    [SerializeField] AudioClip[] audios;
+    AudioSource source;  
+
+    /* More convenient to track the Slider's value from SliderNumber's printValue() than from the Slider's attribute it-
+       self, given that printValue() is the method in charge of printing the slider's value each time it has been modi-
+       ied, and trying to register the slider's value from the Slider would require being part of the Update() method.
+       Less efficient.
+     */
 
     void Start()
-    {    
-        sceneIndex = SceneManager.GetActiveScene().buildIndex;
+    {
+        typingSpeed = 0.02f;
 
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        
         dialogBackground.SetActive(true);
 
-        StartCoroutine(Type());        
+        source = GetComponent<AudioSource>();        
 
-        source = GetComponent<AudioSource>();
-
-        //Debug.Log("audios[0]" + audios[0] + "\naudios[1]" + audios[1] + "\naudios[2]" + audios[2]);
-    }
-    
-    private void Update() 
-    {        
-        if (UIText.text == sentences[index])
-        {            
-            continueButton.SetActive(true);            
-        }
-
-        if (clickCounter==sentences.Length)
-        {
-            dialogBackground.SetActive(false);
-
-            if (sceneIndex == 9)
-                endgame.SetActive(true);             
-            else                
-                SceneManager.LoadScene(sceneIndex+1);
-        }        
-    }
+        StartCoroutine(Type());                
+    } 
 
     IEnumerator Type()
     { 
+        source.PlayOneShot(audios[index]);
+
         foreach(char letter in sentences[index].ToCharArray())
         {            
             UIText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
+
+        //Debug.Log("Finished tying.");      
+        continueButton.SetActive(true);                            
     }
 
+    // Public due to it being referenced by Dialog Background's ContinueButton.
     public void NextSentence()
-    {
-        clickCounter++;
-       
-        if (clickCounter < sentences.Length)
-            source.PlayOneShot(audios[clickCounter]);
-
+    {        
         continueButton.SetActive(false);        
         
         if (index < sentences.Length - 1)
@@ -76,8 +62,12 @@ public class Dialog : MonoBehaviour
         else
         {                        
             UIText.text = "";
-            continueButton.SetActive(false);
-        }        
-    } 
+            dialogBackground.SetActive(false);
 
+            if (SceneManager.GetActiveScene().name == "Agradecimiento" || SceneManager.GetActiveScene().name == "New Corrección")
+                endgame.SetActive(true);                         
+            else
+                SceneManager.LoadScene(sceneIndex+1);
+        }                
+    } 
 }
