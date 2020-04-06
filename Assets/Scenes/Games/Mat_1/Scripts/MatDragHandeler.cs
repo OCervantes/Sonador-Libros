@@ -2,12 +2,7 @@
 // ATTACHED TO IMAGE. Surely due to the Canvas Group Component attached (Blocks Raycasts property).
 
 using UnityEngine;
-//using System.Collections;
-/* "Really powerful"
- * Needed in order to make use of the EventSystems
- */
 using UnityEngine.EventSystems;
-//using UnityEngine.UI;
 
 /* 3 interfaces implemented (from EventSystems):
  * Usados cuando se necesite arrastrar un Objeto(?) Como se intuye por sus nombres:
@@ -17,10 +12,8 @@ using UnityEngine.EventSystems;
  */
 public class MatDragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    /* 'flag' es declarado como público para ser accedido por el Script "Slot"
-     *
-     */
-    public bool flag;
+    // 'flag' es declarado como público para ser accedido por el Script "Slot"     
+    //public bool flag;
    // bool check = itemBeingDragged.GetComponentInParent<O>.tag;
 
     /* Game object that's being dragged
@@ -40,8 +33,7 @@ public class MatDragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //Debug.Log("DRAG BEGUN");
-        if (flag) return;
+        //if (flag) return;
         // Said object that's being dragged is assigned to current Game Object
         itemBeingDragged = gameObject;
         // The initial position of the Game Object.
@@ -63,10 +55,7 @@ public class MatDragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnDrag(PointerEventData eventData)
     {
-        //Debug.Log("DRAGGING");
-
-        if (flag) return;
-
+        //if (flag) return;
         transform.position = Input.mousePosition;
     }
 
@@ -79,23 +68,7 @@ public class MatDragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        //Debug.Log("DRAG CONCLUDED");
-
-        if (flag) return;
-        //ALGO NO FUNCIONA
-        /*if (itemBeingDragged.transform.parent.tag.Equals("Recibidor"))
-        {
-
-            itemBeingDragged = null;
-
-            GetComponent<CanvasGroup>().blocksRaycasts = true;
-
-            if (transform.parent == startParent)
-            {
-                transform.position = startPosition;
-            }
-        }*/
-        //if (itemBeingDragged.GetComponentInParent<Object>.CompareTag("Recibidor"))
+        //if (flag) return;        
 
         // OG
          itemBeingDragged = null;
@@ -120,4 +93,3 @@ public class MatDragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     #endregion
 }
-

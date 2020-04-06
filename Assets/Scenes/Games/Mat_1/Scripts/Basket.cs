@@ -1,68 +1,33 @@
-﻿// Basket/Slot attached to Panel. The smallest one; within the Panel which in such is within the greatest Panel.
+﻿/* Script in charge of 
+ * Basket/Slot attached to Panel. The smallest one; within the Panel which in such is within the greatest Panel.
+ */
+
 using UnityEngine;
-using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Basket : MonoBehaviour, IDropHandler
-{    
-    /* DATOS MIEMBRO
-     * Variable de tipo 'Text' (UI) llamado "letter".
-       Es público, ya que tiene referencia directa al Text del Movable (que a su vez es del Slot).
-     * Contador entero inicializado en 0.
-       Es estático, dado que si no lo fuese, 'totalReceivedFruits' no aumentaría de 1 por cada Slot que haya recibido un Movable exitosamente. 
-     * Entero: Número de Slots del Recibidor.
-     */ 
-    public Text fruitsInBasketLabel;
-    public static int totalReceivedFruits;
-    //int totalFruitsToBeReceived;    
+{        
+    public Text fruitsInBasketLabel;    
+
     [SerializeField] AudioClip[] audios;
-    AudioSource source;
-    public GameObject fruitA, fruitB;
-    [SerializeField] int fruitsToBeReceivedA, fruitsToBeReceivedB;
     [SerializeField] static int receivedFruitsA, receivedFruitsB;
+
+    AudioSource source;
+
+    // Public and Static due to their reference to FruitInitialization Script.
+    public static int totalReceivedFruits;
+    public static GameObject fruitA, fruitB;
+    public static int fruitsToBeReceivedA, fruitsToBeReceivedB;
 
     void Start()
     {
         totalReceivedFruits = 0;
-        //totalFruitsToBeReceived = fruitsToBeReceivedA + fruitsToBeReceivedB;
         receivedFruitsA = 0;
         receivedFruitsB = 0;        
         source = GetComponent<AudioSource>();
-    }
-
-    public int getFruits()
-    {
-        return totalReceivedFruits;
-    }
-
-    /* Moved to FruitInitialization
-     * void Start()
-    {
-        totalFruitsToBeReceived = fruits.Length;
-
-        for (int i=0; i<totalFruitsToBeReceived; i++)
-        {
-            GameObject newFruit = Basket.Instantiate(fruits[i], randomCoordinates(), Quaternion.identity, transform);
-            newFruit.transform.localScale = new Vector3(0.05f, 0.05f, 0.0f);
-        }
-
-        Debug.Log("Number of Fruits: " + totalFruitsToBeReceived);
-    }
- 
-    /* Variable de tipo GameObject llamado "item"
-     * Avisa si cada Slot contiene una letra o no (null) 
-     */
-
-    /*Vector3 randomCoordinates()
-    {
-        float x = Random.Range(-3, 3);
-        float y = Random.Range(1, 4);
-        float z = -2f;
-
-        return new Vector3(x, y, z);
-    }*/
+    }    
 
     public GameObject item
     {
@@ -100,7 +65,7 @@ public class Basket : MonoBehaviour, IDropHandler
              * = Each slot, if an item's dragged over it, and it doesn't have an item already, it will grab the item it's dropped on.
              */
             MatDragHandeler.itemBeingDragged.transform.SetParent(transform);
-            MatDragHandeler.itemBeingDragged.GetComponent<MatDragHandeler>().flag = true;
+            //MatDragHandeler.itemBeingDragged.GetComponent<MatDragHandeler>().flag = true;
 
             totalReceivedFruits++;
             fruitsInBasketLabel.text = totalReceivedFruits.ToString();
@@ -111,7 +76,7 @@ public class Basket : MonoBehaviour, IDropHandler
             else
                 receivedFruitsB++;            
 
-            if (totalReceivedFruits == /*totalFruitsToBeReceived*/(fruitsToBeReceivedA + fruitsToBeReceivedB))
+            if (totalReceivedFruits == (fruitsToBeReceivedA + fruitsToBeReceivedB))
             { 
                 // ÉXITO
                 // Passes value
@@ -135,8 +100,8 @@ public class Basket : MonoBehaviour, IDropHandler
     void ChangeOfScene()
     {        
         if (receivedFruitsA == fruitsToBeReceivedA && receivedFruitsB == fruitsToBeReceivedB)
-            SceneManager.LoadScene("New");//"Agradecimiento");//SceneManager.GetActiveScene().buildIndex+1);
+            SceneManager.LoadScene("New");
         else
-            SceneManager.LoadScene("New Corrección");//10);                        
+            SceneManager.LoadScene("New Corrección");
     }
 }

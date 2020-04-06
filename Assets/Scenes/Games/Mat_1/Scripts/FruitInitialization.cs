@@ -1,43 +1,87 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// Script in charge of 
+
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FruitInitialization : MonoBehaviour
 {
-    public int num_fruitA, num_fruitB, fruit_indexA, fruit_indexB;
+    public int numFruitA, numFruitB, fruitIndexA, fruitIndexB;
+    int cycles;
     public GameObject[] fruits;
+    Transform fruitAPanel, fruitBPanel;
 
-    // Start is called before the first frame update
     void Start()
     {
-        num_fruitA = Random.Range(1,10);
-        num_fruitB = Random.Range(1,10);
-        fruit_indexA = Random.Range(1, 3);
-        fruit_indexB = Random.Range(1, 3);
+        fruitAPanel = transform.GetChild(0);
+        fruitBPanel = transform.GetChild(1);
 
-        Debug.Log("Number A: " + num_fruitA + "\nNumber B: " + num_fruitB);
-        Debug.Log("Index A: " + fruit_indexA + "\nIndex B: " + fruit_indexB);
-        /*numberOfFruits = fruits.Length;
+        Debug.Log("Panel A: " + fruitAPanel.name + "\nPanel B: " + fruitBPanel.name);
 
-        for (int i = 0; i < numberOfFruits; i++)
+
+        /* Generate number of fruits to be received from each type.
+         * Total number of fruits cannot exceed 10.
+         */
+        do
         {
-            GameObject newFruit = /*Basket.Instantiate(fruits[i], randomCoordinates(), Quaternion.identity, transform);
-            newFruit.transform.localScale = new Vector3(0.10f, 0.10f, 0.0f);
-        }
+            numFruitA = Random.Range(1,10);
+            numFruitB = Random.Range(1,10);
+        } while ((numFruitA + numFruitB) > 10);
 
-        Debug.Log("Number of Fruits: " + numberOfFruits);*/
+
+        /* Specify type of fruits to be instanced.
+           1. Apple
+           2. Pear
+           3. Peach
+         */
+        do
+        {
+            fruitIndexA = Random.Range(0, 2);
+            fruitIndexB = Random.Range(0, 2);
+        } while (fruitIndexA == fruitIndexB);
+
+
+        Debug.Log("Number Fruits A: " + numFruitA + "\nNumber Fruits B: " + numFruitB);
+        Debug.Log("Index A: " + fruitIndexA + "\nIndex B: " + fruitIndexB);
+
+
+        //Instance fruits. Max number of fruits will be instanced in each tree.
+        if (numFruitB <= numFruitA)
+            cycles = numFruitA;
+        else
+            cycles = numFruitB;
+
+        
+        for (int i=0; i<cycles; i++)
+        {
+            GameObject newFruitA = Instantiate(fruits[fruitIndexA], randomCoordinates(270, 590), Quaternion.identity);            
+            newFruitA.GetComponent<Transform>().SetParent(fruitAPanel);
+            newFruitA.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+            Debug.Log("Fruit A Scale: " + newFruitA.transform.localScale + "\nFruit A Position: " + newFruitA.transform.position);
+
+            GameObject newFruitB = Instantiate(fruits[fruitIndexB], randomCoordinates(413, 1036), Quaternion.identity);
+            newFruitB.GetComponent<Transform>().SetParent(fruitBPanel);
+            newFruitB.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+            Debug.Log("Fruit B Scale: " + newFruitB.transform.localScale + "\nFruit B Position: " + newFruitB.transform.position);
+        }        
+        
+
+        // Pass values to Basket Script
+        Basket.fruitA = fruits[fruitIndexA];
+        Basket.fruitB = fruits[fruitIndexB];
+
+        Basket.fruitsToBeReceivedA = numFruitA;
+        Basket.fruitsToBeReceivedB = numFruitB;        
     }
-
-    /* Variable de tipo GameObject llamado "item"
-     * Avisa si cada Slot contiene una letra o no (null) 
+    
+    /* Generate position in which to instantiate a fruit.
+     * Missing a new condition, which will only spawn fruits within a certain radius from each Panel's center point.
      */
-
-    /*Vector3 randomCoordinates()
+    Vector3 randomCoordinates(float x1, float x2)
     {
-        float x = Random.Range(-3, 3);
-        float y = Random.Range(1, 4);
-        float z = -2f;
+        float x = Random.Range(x1, x2);
+        float y = Random.Range(352,586);
+        //float z = -2f;
 
-        return new Vector3(x, y, z);
-    }*/
+        return new Vector3(x, y, 0f);
+    }
 }
