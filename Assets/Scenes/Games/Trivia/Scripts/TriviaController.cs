@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.IO;
 
 using DocumentStore = System.Collections.Generic.Dictionary<string, object>;
 
@@ -90,7 +91,14 @@ public class TriviaController : MonoBehaviour,
 			QuestionData questionData = new QuestionData();
 			questionData.questionText = question["question"] as string;
 			List<object> answers = question["answers"] as List<object>;
+			List<object> images = null;
 			List<object> imagesBackground = null;
+			if (question.ContainsKey("images")) {
+				images = question["images"] as List<object>;
+			}
+			if (question.ContainsKey("imagesBackground")) {
+				imagesBackground = question["imagesBackground"] as List<object>;
+			}
 			int correct = Convert.ToInt32(question["correct"]);
 			AnswerData[] answersData = new AnswerData[answers.Count];
 			for (int j = 0; j < answers.Count; j++) {
@@ -103,6 +111,24 @@ public class TriviaController : MonoBehaviour,
 					if (imageBackground != null &&
 						ColorUtility.TryParseHtmlString(imageBackground, out color)) {
 						answer.background = color;
+					}
+				}
+				if (images != null) {
+					string imageName = images[j] as string;
+					if (imageName != null) {
+						string directory = Directory.GetCurrentDirectory();
+						string localpath = "/Assets/Scenes/Games/Trivia/Images/";
+						if (File.Exists(directory + localpath + imageName)) {
+							byte[] bytes = File.ReadAllBytes(directory + localpath + imageName);
+							Texture2D texture = new Texture2D(1,1);
+							texture.LoadImage(bytes);
+							Sprite sprite = Sprite.Create(
+								texture,
+								new Rect(0, 0, texture.width, texture.height),
+								new Vector2(0.5f, 0.5f)
+							);
+							answer.image = sprite;
+						}
 					}
 				}
 				answersData[j] = answer;
