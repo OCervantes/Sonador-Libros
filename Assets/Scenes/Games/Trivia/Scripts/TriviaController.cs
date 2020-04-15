@@ -90,12 +90,21 @@ public class TriviaController : MonoBehaviour,
 			QuestionData questionData = new QuestionData();
 			questionData.questionText = question["question"] as string;
 			List<object> answers = question["answers"] as List<object>;
+			List<object> imagesBackground = null;
 			int correct = Convert.ToInt32(question["correct"]);
 			AnswerData[] answersData = new AnswerData[answers.Count];
 			for (int j = 0; j < answers.Count; j++) {
 				AnswerData answer = new AnswerData();
 				answer.answerText = answers[j] as string;
 				answer.isCorrect = correct == j;
+				if (imagesBackground != null) {
+					string imageBackground = imagesBackground[j] as string;
+					Color color;
+					if (imageBackground != null &&
+						ColorUtility.TryParseHtmlString(imageBackground, out color)) {
+						answer.background = color;
+					}
+				}
 				answersData[j] = answer;
 			}
 			questionData.answers = answersData;
