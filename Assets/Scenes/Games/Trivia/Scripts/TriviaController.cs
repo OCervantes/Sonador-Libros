@@ -76,14 +76,12 @@ public class TriviaController : MonoBehaviour,
 		DocumentStore singleRoundData = roundData[1] as DocumentStore;
 		currentRoundData = new RoundData();
 		currentRoundData.name = singleRoundData["name"] as string;
-		Nullable<int> pointsAdedForCorrectAnswer =
-			singleRoundData["pointsAdedForCorrectAnswer"] as int?;
-		Nullable<int> timeLimitInSeconds =
-			singleRoundData["timeLimitInSeconds"] as int?;
-		currentRoundData.timeLimitInSeconds =
-			timeLimitInSeconds.GetValueOrDefault(60);
-		currentRoundData.pointsAdedForCorrectAnswer =
-			pointsAdedForCorrectAnswer.GetValueOrDefault(1);
+		int pointsAdedForCorrectAnswer =
+			Convert.ToInt32(singleRoundData["pointsAdedForCorrectAnswer"]);
+		int timeLimitInSeconds =
+			Convert.ToInt32(singleRoundData["timeLimitInSeconds"]);
+		currentRoundData.timeLimitInSeconds = timeLimitInSeconds;
+		currentRoundData.pointsAdedForCorrectAnswer = pointsAdedForCorrectAnswer;
 		List<object> questions = singleRoundData["questions"] as List<object>;
 		QuestionData[] questionsData = new QuestionData[questions.Count - 1];
 
@@ -92,12 +90,12 @@ public class TriviaController : MonoBehaviour,
 			QuestionData questionData = new QuestionData();
 			questionData.questionText = question["question"] as string;
 			List<object> answers = question["answers"] as List<object>;
-			Nullable<int> correct = question["correct"] as int?;
+			int correct = Convert.ToInt32(question["correct"]);
 			AnswerData[] answersData = new AnswerData[answers.Count];
 			for (int j = 0; j < answers.Count; j++) {
 				AnswerData answer = new AnswerData();
 				answer.answerText = answers[j] as string;
-				answer.isCorrect = correct.GetValueOrDefault() == j;
+				answer.isCorrect = correct == j;
 				answersData[j] = answer;
 			}
 			questionData.answers = answersData;
