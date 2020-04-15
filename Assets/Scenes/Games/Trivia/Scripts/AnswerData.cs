@@ -5,6 +5,8 @@ using System.Collections;
 
 public class AnswerData {
 	public string answerText;
+	public Sprite image;
+	public Color background;
 	public bool isCorrect;
 
 }//end AnswerData
