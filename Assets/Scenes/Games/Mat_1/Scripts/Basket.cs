@@ -9,23 +9,40 @@ using UnityEngine.SceneManagement;
 
 public class Basket : MonoBehaviour, IDropHandler
 {        
-    public Text fruitsInBasketLabel;    
-
+    public Text fruitsInBasketLabel;
+    public FruitInitialization initializer;
     [SerializeField] AudioClip[] audios;
-    [SerializeField] static int receivedFruitsA, receivedFruitsB;
+    [SerializeField] static int[] receivedFruits;
 
     AudioSource source;
+    /*public static */GameObject[] fruits;
 
-    // Public and Static due to their reference to FruitInitialization Script.
-    public static int totalReceivedFruits;
-    public static GameObject fruitA, fruitB;
-    public static int fruitsToBeReceivedA, fruitsToBeReceivedB;
+    // Static due to their reference to the Monologue and FruitInitialization Scripts, respectively.
+    /*public*/ static int totalReceivedFruits;    
+    /*public */static int[] fruitsToBeReceived;
 
     void Start()
     {
+        receivedFruits = new int[3];        
+        fruits = new GameObject[3];
+        fruitsToBeReceived = new int[3];
+
         totalReceivedFruits = 0;
-        receivedFruitsA = 0;
-        receivedFruitsB = 0;        
+        receivedFruits[0] = 0;
+        receivedFruits[1] = 0;
+        receivedFruits[2] = 0;
+        
+        fruits[0] = initializer.fruits[FruitInitialization.fruitIndexes[0]];
+        fruits[1] = initializer.fruits[FruitInitialization.fruitIndexes[1]];
+        fruits[2] = initializer.fruits[FruitInitialization.fruitIndexes[2]];
+
+        fruitsToBeReceived[0] = FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]];
+        fruitsToBeReceived[1] = FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]];
+        fruitsToBeReceived[2] = FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]];
+
+        Debug.Log("Basket fruits[0], [1], [2]: " + fruits[0] + ", " + fruits[1] + ", " + fruits[2]);
+        Debug.Log("Basket fruitsToBeReceived[0], [1], [2]: " + fruitsToBeReceived[0] + ", " + fruitsToBeReceived[1] + ", " + fruitsToBeReceived[2]);
+
         source = GetComponent<AudioSource>();
     }    
 
@@ -71,12 +88,24 @@ public class Basket : MonoBehaviour, IDropHandler
             fruitsInBasketLabel.text = totalReceivedFruits.ToString();
             source.PlayOneShot(audios[(totalReceivedFruits)-1]);
             
-            if (MatDragHandeler.itemBeingDragged.name == fruitA.name)
-                receivedFruitsA++;
+            if (MatDragHandeler.itemBeingDragged.name == fruits[0].name + "(Clone)")
+            {
+                receivedFruits[0]++;
+                Debug.Log("receivedFruits[0] = " + receivedFruits[0]);
+            }
+            else if (MatDragHandeler.itemBeingDragged.name == fruits[1].name + "(Clone)")
+            {
+                receivedFruits[1]++;
+                Debug.Log("receivedFruits[1] = " + receivedFruits[1]);
+            }   
             else
-                receivedFruitsB++;            
+            {
+                receivedFruits[2]++;
+                Debug.Log("receivedFruits[2] = " + receivedFruits[2]);    
+            }
 
-            if (totalReceivedFruits == (fruitsToBeReceivedA + fruitsToBeReceivedB))
+            Debug.Log("totalReceivedFruits = " + totalReceivedFruits);
+            if (totalReceivedFruits == (fruitsToBeReceived[0] + fruitsToBeReceived[1] + fruitsToBeReceived[2]))
             { 
                 // ÉXITO
                 // Passes value
@@ -99,7 +128,7 @@ public class Basket : MonoBehaviour, IDropHandler
 
     void ChangeOfScene()
     {        
-        if (receivedFruitsA == fruitsToBeReceivedA && receivedFruitsB == fruitsToBeReceivedB)
+        if (receivedFruits[0] == fruitsToBeReceived[0] && receivedFruits[1] == fruitsToBeReceived[1] && receivedFruits[2] == fruitsToBeReceived[2])
             SceneManager.LoadScene("New");
         else
             SceneManager.LoadScene("New Corrección");

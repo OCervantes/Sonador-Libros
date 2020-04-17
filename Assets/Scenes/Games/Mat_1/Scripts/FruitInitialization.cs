@@ -1,31 +1,39 @@
 ﻿// Script in charge of 
-
+using System;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FruitInitialization : MonoBehaviour
 {
-    public int numFruitA, numFruitB, fruitIndexA, fruitIndexB;
+    public static int[] numFruits, fruitIndexes;
     int cycles;
+    //Can't be static. 
     public GameObject[] fruits;
-    Transform fruitAPanel, fruitBPanel;
+    Transform [] fruitPanels;
 
     void Start()
     {
-        fruitAPanel = transform.GetChild(0);
-        fruitBPanel = transform.GetChild(1);
+        if (SceneManager.GetActiveScene().name == "Juego 1")
+        numFruits = new int [3];
+        fruitIndexes = new int [3];
+        fruitPanels = new Transform[3];
 
-        Debug.Log("Panel A: " + fruitAPanel.name + "\nPanel B: " + fruitBPanel.name);
-
+        fruitPanels[0] = transform.GetChild(0);
+        fruitPanels[1] = transform.GetChild(1);
+        fruitPanels[2] = transform.GetChild(2);        
 
         /* Generate number of fruits to be received from each type.
          * Total number of fruits cannot exceed 10.
          */
         do
         {
-            numFruitA = Random.Range(1,10);
-            numFruitB = Random.Range(1,10);
-        } while ((numFruitA + numFruitB) > 10);
+            /* When its arguments are integers, Random.Range has an exclusive max limit.
+             * That is to say, it well never generate its second argument.
+             */
+            numFruits[0] = UnityEngine.Random.Range(1,11);
+            numFruits[1] = UnityEngine.Random.Range(1,11);
+            numFruits[2] = UnityEngine.Random.Range(1,11);
+        } while ((numFruits[0] + numFruits[1] + numFruits[2]) > 10);
 
 
         /* Specify type of fruits to be instanced.
@@ -35,53 +43,50 @@ public class FruitInitialization : MonoBehaviour
          */
         do
         {
-            fruitIndexA = Random.Range(0, 2);
-            fruitIndexB = Random.Range(0, 2);
-        } while (fruitIndexA == fruitIndexB);
+            fruitIndexes[0] = UnityEngine.Random.Range(0, 3);
+            fruitIndexes[1] = UnityEngine.Random.Range(0, 3);
+            fruitIndexes[2] = UnityEngine.Random.Range(0, 3);
+        } while ((fruitIndexes[0] == fruitIndexes[1]) || (fruitIndexes[1] == fruitIndexes[2])  || (fruitIndexes[0] == fruitIndexes[2]));
 
 
-        Debug.Log("Number Fruits A: " + numFruitA + "\nNumber Fruits B: " + numFruitB);
-        Debug.Log("Index A: " + fruitIndexA + "\nIndex B: " + fruitIndexB);
+        Debug.Log("Number Fruits A: " + numFruits[0] + "\nNumber Fruits B: " + numFruits[1]);
+        Debug.Log("Number Fruits C: " + numFruits[2]);
+        Debug.Log("Index A: " + fruitIndexes[0] + "\nIndex B: " + fruitIndexes[1]);
+        Debug.Log("Index C: " + fruitIndexes[2]);
 
 
         //Instance fruits. Max number of fruits will be instanced in each tree.
-        if (numFruitB <= numFruitA)
-            cycles = numFruitA;
+        if (Math.Max(Math.Max(numFruits[0], numFruits[1]), numFruits[2]) == numFruits[0]) //== numFruits[0]] && Math.Max(numFruits[0]], numFruitC) == numFruits[0])//(numFruitB <= numFruits[0] && numFruits[0] >= numFruitC)
+            cycles = numFruits[0];
+        else if ((Math.Max(Math.Max(numFruits[0], numFruits[1]), numFruits[2]) == numFruits[1]))
+            cycles = numFruits[1];
         else
-            cycles = numFruitB;
+            cycles = numFruits[2];
 
         
         for (int i=0; i<cycles; i++)
         {
-            GameObject newFruitA = Instantiate(fruits[fruitIndexA], randomCoordinates(270, 590), Quaternion.identity);            
-            newFruitA.GetComponent<Transform>().SetParent(fruitAPanel);
-            newFruitA.transform.localScale = new Vector3(0.5f, 0.5f, 1);
-            Debug.Log("Fruit A Scale: " + newFruitA.transform.localScale + "\nFruit A Position: " + newFruitA.transform.position);
+            GameObject newFruitA = Instantiate(fruits[fruitIndexes[0]], randomCoordinates(227, 433), Quaternion.identity, fruitPanels[0]);                        
+            newFruitA.transform.SetParent(fruitPanels[0].transform, false);            
 
-            GameObject newFruitB = Instantiate(fruits[fruitIndexB], randomCoordinates(413, 1036), Quaternion.identity);
-            newFruitB.GetComponent<Transform>().SetParent(fruitBPanel);
-            newFruitB.transform.localScale = new Vector3(0.5f, 0.5f, 1);
-            Debug.Log("Fruit B Scale: " + newFruitB.transform.localScale + "\nFruit B Position: " + newFruitB.transform.position);
+            GameObject newFruitB = Instantiate(fruits[fruitIndexes[1]], randomCoordinates(1053, 435), Quaternion.identity, fruitPanels[1]);            
+            newFruitB.transform.SetParent(fruitPanels[1].transform, false);            
+
+            GameObject newFruitC = Instantiate(fruits[fruitIndexes[2]], randomCoordinates(640, 513), Quaternion.identity, fruitPanels[2]);            
+            newFruitC.transform.SetParent(fruitPanels[2].transform, false);            
         }        
         
-
-        // Pass values to Basket Script
-        Basket.fruitA = fruits[fruitIndexA];
-        Basket.fruitB = fruits[fruitIndexB];
-
-        Basket.fruitsToBeReceivedA = numFruitA;
-        Basket.fruitsToBeReceivedB = numFruitB;        
+        Debug.Log("Fruits[0]: " + fruits[fruitIndexes[0]] + "\nFruits[1]: " + fruits[fruitIndexes[1]]);    
     }
     
     /* Generate position in which to instantiate a fruit.
      * Missing a new condition, which will only spawn fruits within a certain radius from each Panel's center point.
      */
-    Vector3 randomCoordinates(float x1, float x2)
+    Vector2 randomCoordinates(float x, float y)
     {
-        float x = Random.Range(x1, x2);
-        float y = Random.Range(352,586);
-        //float z = -2f;
+        float resX = UnityEngine.Random.Range(x-190/*203*/, x+190/*204*/);
+        float resY = UnityEngine.Random.Range(y-110/*7*/, y+110/*8*/);        
 
-        return new Vector3(x, y, 0f);
+        return new Vector3(resX, resY);
     }
 }

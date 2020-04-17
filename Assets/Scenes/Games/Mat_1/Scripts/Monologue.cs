@@ -23,7 +23,7 @@ public class Monologue : MonoBehaviour
 
         source = GetComponent<AudioSource>();     
         
-        Debug.Log("Total Fruits: " + fruits + "\nSlider Value: " + sliderValue);
+        Debug.Log("Monologue Total Fruits: " + fruits + "\nSlider Value: " + sliderValue);
 
         StartCoroutine(Type());
     }

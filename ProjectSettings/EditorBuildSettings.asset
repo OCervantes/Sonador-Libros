@@ -29,15 +29,18 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Scenes/Games/Mat_1/Scenes/Selecci\xF3n de Nivel.unity"
     guid: eeb94873e55e2254c86d52afbfca626e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Games/Mat_1/Scenes/Juego.unity
     guid: 1a9899175557303438cfa13143401caa
+  - enabled: 1
+    path: Assets/Scenes/Games/Mat_1/Scenes/Juego 1.unity
+    guid: e46178d3cd09f1441a03d5de9d477110
   - enabled: 1
     path: Assets/Scenes/Games/Mat_1/Scenes/New.unity
     guid: 5783de19dd3b9644da57d28e5a5d55cf
   - enabled: 0
-    path: Assets/Scenes/Games/Mat_1/Scenes/Suma de las Frutas.unity
-    guid: 74fa0d565d1a7684f91082e8c5985a2d
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Games/Mat_1/Scenes/Agradecimiento.unity
     guid: 55e9d9ebc21cc104fb2bb3896e4c0679
@@ -45,6 +48,6 @@ EditorBuildSettings:
     path: "Assets/Scenes/Games/Mat_1/Scenes/New Correcci\xF3n.unity"
     guid: e6a61bcb305cb6848a9e168bfda48d21
   - enabled: 0
-    path: "Assets/Scenes/Games/Mat_1/Scenes/Correcci\xF3n.unity"
-    guid: 0e3d557acd1dca1469fa61c65e08990b
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
