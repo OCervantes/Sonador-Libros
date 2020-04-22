@@ -105,7 +105,7 @@ public class TriviaController : MonoBehaviour,
 				AnswerData answer = new AnswerData();
 				answer.answerText = answers[j] as string;
 				answer.isCorrect = correct == j;
-				if (imagesBackground != null) {
+				if (imagesBackground != null && imagesBackground.Count > j) {
 					string imageBackground = imagesBackground[j] as string;
 					Color color;
 					if (imageBackground != null &&
@@ -113,7 +113,7 @@ public class TriviaController : MonoBehaviour,
 						answer.background = color;
 					}
 				}
-				if (images != null) {
+				if (images != null  && images.Count > j) {
 					string imageName = images[j] as string;
 					if (imageName != null) {
 						string directory = Application.dataPath;
