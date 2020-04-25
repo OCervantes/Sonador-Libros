@@ -10,9 +10,11 @@ public class Levelloader : MonoBehaviour
     public float transitiontime = 1f;
     //public GameObject Lode_level;
     // Update is called once per frame
-    void Start()
+    void Update()
     {
-            
+         if(Input.GetMouseButtonDown(0)){
+             LoadNextLevel();
+         } 
     }
 
     public void LoadNextLevel()
@@ -22,7 +24,7 @@ public class Levelloader : MonoBehaviour
 
     IEnumerator LoadLevel(int levelindex){
         //Lode_level = GameObject.FindWithTag("Cross_Fade");
-        transition = GetComponent<Animator>();
+        //transition = GetComponent<Animator>();
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(transitiontime);
         SceneManager.LoadScene(levelindex);

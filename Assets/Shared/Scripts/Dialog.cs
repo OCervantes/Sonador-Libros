@@ -10,22 +10,22 @@ public class Dialog : MonoBehaviour
     public Text UIText;
     public string[] sentences;
     public int index;
-    private int clickCounter=0, sceneIndex;
+    private int clickCounter = 0, sceneIndex;
     public float typingSpeed = 0.02f;
     public GameObject continueButton;
-
-    public GameObject dialog_audio;
+    
+    public GameObject loader;
+    //public GameObject dialog_audio;
     public AudioClip[] audios;
     public AudioSource source;
     public GameObject dialogBackground;
     public GameObject endgame;
-    public Levelloader loader;
+    //public Levelloader loader;
     
 
     void Start()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
-
         dialogBackground.SetActive(true);
         //dialog_audio = GameObject.FindWithTag("Dialog and Audio Manager"); 
         //loader = dialog_audio.AddComponent<Levelloader>();
@@ -46,9 +46,7 @@ public class Dialog : MonoBehaviour
             if (sceneIndex == 9){
                  endgame.SetActive(true);
             }
-           /* else{
-                 load.LoadNextLevel();
-            }*/
+        
         }
     }
 
@@ -61,21 +59,27 @@ public class Dialog : MonoBehaviour
         }
     }
 
-    public void NextSentence()
+     public void NextSentence()
     {
+        //loader = new GameObject();
         //Levelloader loader = new Levelloader(); 
-        dialog_audio = GameObject.FindWithTag("Dialog and Audio Manager");
-        loader = dialog_audio.AddComponent<Levelloader>();
-
+        //dialog_audio = GameObject.FindWithTag("Dialog and Audio Manager");
+        //loader = dialog_audio.AddComponent<Levelloader>();
+        loader= GameObject.FindWithTag("Cross_Fade");
+        //continueButton= GameObject.FindWithTag("Button");
+        //UIText = Text.FindSceneObjectsOfType(Text);
+        //source = GetComponent<AudioSource>();
+        //source.clip = audio[];
         clickCounter++;
-        if(clickCounter <= audios.Length){
-        source.PlayOneShot(audios[clickCounter]);
         continueButton.SetActive(false);
+        if(clickCounter <= audios.Length){
+        source.PlayOneShot(audios[index]);
 
             if (index < sentences.Length - 1)
             {
                 index++;
                 UIText.text = "";
+                gameObject.SetActive(true);
                 StartCoroutine(Type());
                 Debug.Log("bueno");
             }
@@ -88,7 +92,7 @@ public class Dialog : MonoBehaviour
         }
         else{
             Debug.Log("Hola");
-            loader.LoadNextLevel();
+            loader.GetComponent<Levelloader>().LoadNextLevel();
         }
     }
 

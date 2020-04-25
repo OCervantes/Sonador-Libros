@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1625651510846429379
+--- !u!1 &3295032836448664908
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,71 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1625651510846429376}
-  - component: {fileID: 1625651510846429377}
-  - component: {fileID: 1625651510846429382}
+  - component: {fileID: 3295032836448664913}
+  - component: {fileID: 3295032836448664910}
+  - component: {fileID: 3295032836448664911}
   m_Layer: 0
-  m_Name: Dialog and Audio Manager
-  m_TagString: Untagged
+  m_Name: BackgroundMusic
+  m_TagString: Music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1625651510846429376
+--- !u!4 &3295032836448664913
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625651510846429379}
+  m_GameObject: {fileID: 3295032836448664908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 102.53604, y: 146.38309, z: -986.70184}
+  m_LocalPosition: {x: -4.320587, y: 1.6790383, z: -10.042404}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1625651510846429377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625651510846429379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f2cbb9aa0a45af448626409a3b6578f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UIText: {fileID: 130140674201998970, guid: 662127ade8d48184b927a139233bf0f3, type: 3}
-  sentences:
-  - "Chip: Tepo es un simp\xE1tico conejo pardo que vive en un bosque de pinos."
-  - 'Chip: Tepo es un  conejo pardo que vive en un bosque de pinos.'
-  index: 1
-  typingSpeed: 0.02
-  continueButton: {fileID: 1316761917518097734, guid: 7ecdee29b64ba4b4bb4ef34975fc932a,
-    type: 3}
-  loader: {fileID: 0}
-  audios:
-  - {fileID: 8300000, guid: 08b00008cb1340b408bcfc771a4bdf22, type: 3}
-  - {fileID: 8300000, guid: c2ac47757f000504e9e6a75c54f8b74c, type: 3}
-  source: {fileID: 1625651510846429382}
-  dialogBackground: {fileID: 1192717353342837550, guid: 5d71b8baf82987b4ca71ad986067d6cc,
-    type: 3}
-  endgame: {fileID: 7674168936872954028, guid: a15678a2c57dfbd4390e65f201228540, type: 3}
---- !u!82 &1625651510846429382
+--- !u!82 &3295032836448664910
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625651510846429379}
+  m_GameObject: {fileID: 3295032836448664908}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e1d6677e5b0b3324cb13ecf6f16d3c22, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -156,3 +128,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3295032836448664911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3295032836448664908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fba953c973c68594da97c19a52d50e76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

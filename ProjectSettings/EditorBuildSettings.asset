@@ -18,14 +18,26 @@ EditorBuildSettings:
     path: Assets/Scenes/Login/Login.unity
     guid: 68c00e2bb5b576b4eb186dbd8f43d3fd
   - enabled: 1
-    path: Assets/Scenes/Game Intro/GameIntro.unity
+    path: Assets/Scenes/Game Intro/1Game_Intro.unity
     guid: ab07b2fa5d160b445817fa90362e003d
   - enabled: 1
-    path: Assets/Scenes/Game Intro/Game Intro_Reto1.unity
+    path: Assets/Scenes/Game Intro/2Game Intro.unity
     guid: 799845af36e5c5c4b962b8c6e0b231f1
   - enabled: 1
-    path: Assets/Scenes/Game Intro/GameIntro_Intro1.unity
+    path: Assets/Scenes/Game Intro/3Game_Intro.unity
     guid: 12d5d2b403c02db4b9b66e0a54d3a64b
+  - enabled: 1
+    path: Assets/Scenes/Game Intro/4Game_Intro.unity
+    guid: a4e9603e21bad1a489446952cbf35bb4
+  - enabled: 1
+    path: Assets/Scenes/Game Intro/5Game_Intro.unity
+    guid: 4267c6d5cb96b0046b7fd39b675cb4ce
+  - enabled: 1
+    path: Assets/Scenes/Game Intro/6Game_Intro.unity
+    guid: aa42223d6fed53d41a8a1249884d3b71
+  - enabled: 1
+    path: Assets/Scenes/Game Intro/7Game_Intro.unity
+    guid: 0cba18b439de13640acaa3fd63049836
   - enabled: 1
     path: Assets/Scenes/Games/Vocabulary/Instructions.unity
     guid: 09f51bef20676454091fc4e0feae089a

@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Dialog and Audio Manager
   - Cross_Fade
+  - Music
+  - Background
+  - Button
+  - Text
   layers:
   - Default
   - TransparentFX
@@ -40,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 4227336937
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
