@@ -1,99 +1,77 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-//using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 
 public class Dialog : MonoBehaviour
 {
     public Text UIText;
-    public string[] sentences;
-    public int index;
-    private int clickCounter = 0, sceneIndex;
-    public float typingSpeed = 0.02f;
-    public GameObject continueButton;
-    
+    // Public access due to reference in Animation.cs 
+    public /*static*/ string[] sentences;
+    public /*static*/ int index;
+    public GameObject continueButton, dialogBackground, endgame;
+    int sceneIndex;
+
     public GameObject loader;
-    //public GameObject dialog_audio;
-    public AudioClip[] audios;
-    public AudioSource source;
-    public GameObject dialogBackground;
-    public GameObject endgame;
-    //public Levelloader loader;
-    
+    [SerializeField] float typingSpeed;    
+    [SerializeField] AudioClip[] audios;
+    AudioSource source;  
+
+    /* More convenient to track the Slider's value from SliderNumber's printValue() than from the Slider's attribute it-
+       self, given that printValue() is the method in charge of printing the slider's value each time it has been modi-
+       ied, and trying to register the slider's value from the Slider would require being part of the Update() method.
+       Less efficient.
+     */
 
     void Start()
     {
+        typingSpeed = 0.02f;
+
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        dialogBackground.SetActive(true);
-        //dialog_audio = GameObject.FindWithTag("Dialog and Audio Manager"); 
-        //loader = dialog_audio.AddComponent<Levelloader>();
-        //dialog_audio = GameObject.FindWithTag ("Dialog and Audio Manager");    
-        StartCoroutine(Type());
-        source = GetComponent<AudioSource>();
-    }
 
-    private void Update()
-    {
-        if (UIText.text == sentences[index])
-        {
-            continueButton.SetActive(true);
-        }
-
-        if (clickCounter==sentences.Length)
-        {
-            if (sceneIndex == 9){
-                 endgame.SetActive(true);
-            }
+        continueButton.SetActive(false);
         
-        }
-    }
+        dialogBackground.SetActive(true);
+
+        source = GetComponent<AudioSource>();        
+
+        StartCoroutine(Type());                
+    } 
 
     IEnumerator Type()
-    {
+    { 
+        source.PlayOneShot(audios[index]);
+
         foreach(char letter in sentences[index].ToCharArray())
-        {
+        {            
             UIText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
+
+        //Debug.Log("Finished tying.");      
+        continueButton.SetActive(true);                            
     }
 
-     public void NextSentence()
-    {
-        //loader = new GameObject();
-        //Levelloader loader = new Levelloader(); 
-        //dialog_audio = GameObject.FindWithTag("Dialog and Audio Manager");
-        //loader = dialog_audio.AddComponent<Levelloader>();
+    // Public due to it being referenced by Dialog Background's ContinueButton.
+    public void NextSentence()
+    {        
+        continueButton.SetActive(false);        
         loader= GameObject.FindWithTag("Cross_Fade");
-        //continueButton= GameObject.FindWithTag("Button");
-        //UIText = Text.FindSceneObjectsOfType(Text);
-        //source = GetComponent<AudioSource>();
-        //source.clip = audio[];
-        clickCounter++;
-        continueButton.SetActive(false);
-        if(clickCounter <= audios.Length){
-        source.PlayOneShot(audios[index]);
-
-            if (index < sentences.Length - 1)
-            {
-                index++;
-                UIText.text = "";
-                gameObject.SetActive(true);
-                StartCoroutine(Type());
-                Debug.Log("bueno");
-            }
+        if (index < sentences.Length - 1)
+        {
+            index++;
+            UIText.text = "";
+            StartCoroutine(Type());
+        }
+        else
+        {                        
+            UIText.text = "";
+            dialogBackground.SetActive(false);
+            
+            if (SceneManager.GetActiveScene().name == "Agradecimiento" || SceneManager.GetActiveScene().name == "New Corrección")
+                endgame.SetActive(true);                         
             else
-            {   
-                //Debug.Log("Hola");
-                UIText.text = "";
-                continueButton.SetActive(false);
-            }
-        }
-        else{
-            Debug.Log("Hola");
-            loader.GetComponent<Levelloader>().LoadNextLevel();
-        }
-    }
-
+                loader.GetComponent<Levelloader>().LoadNextLevel();
+        }                
+    } 
 }

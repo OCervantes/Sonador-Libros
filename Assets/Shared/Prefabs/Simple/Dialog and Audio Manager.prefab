@@ -44,22 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2cbb9aa0a45af448626409a3b6578f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIText: {fileID: 130140674201998970, guid: 662127ade8d48184b927a139233bf0f3, type: 3}
-  sentences:
-  - "Chip: Tepo es un simp\xE1tico conejo pardo que vive en un bosque de pinos."
-  - 'Chip: Tepo es un  conejo pardo que vive en un bosque de pinos.'
-  index: 1
-  typingSpeed: 0.02
-  continueButton: {fileID: 1316761917518097734, guid: 7ecdee29b64ba4b4bb4ef34975fc932a,
-    type: 3}
+  UIText: {fileID: 0}
+  sentences: []
+  index: 0
+  continueButton: {fileID: 0}
+  dialogBackground: {fileID: 0}
+  endgame: {fileID: 0}
   loader: {fileID: 0}
-  audios:
-  - {fileID: 8300000, guid: 08b00008cb1340b408bcfc771a4bdf22, type: 3}
-  - {fileID: 8300000, guid: c2ac47757f000504e9e6a75c54f8b74c, type: 3}
-  source: {fileID: 1625651510846429382}
-  dialogBackground: {fileID: 1192717353342837550, guid: 5d71b8baf82987b4ca71ad986067d6cc,
-    type: 3}
-  endgame: {fileID: 7674168936872954028, guid: a15678a2c57dfbd4390e65f201228540, type: 3}
+  typingSpeed: 0.02
+  audios: []
 --- !u!82 &1625651510846429382
 AudioSource:
   m_ObjectHideFlags: 0
