@@ -841,6 +841,57 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialog and Audio Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: audios.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: UIText
+      value: 
+      objectReference: {fileID: 134025935}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: continueButton
+      value: 
+      objectReference: {fileID: 134025934}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: dialogBackground
+      value: 
+      objectReference: {fileID: 134025933}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: loader
+      value: 
+      objectReference: {fileID: 690034072}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: sentences.Array.data[0]
+      value: "Chip: Tepo es un simp\xE1tico conejo pardo que vive en un bosque de
+        pinos."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: sentences.Array.data[1]
+      value: 'prueba 2 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: audios.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 08b00008cb1340b408bcfc771a4bdf22, type: 3}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: audios.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0cf49612c6fa9bc47a1f7a4b8611ad87, type: 3}
     - target: {fileID: 1625651510846429376, guid: e868f666308b1d54eabeafde067e59db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -896,56 +947,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: sentences.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: audios.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: UIText
-      value: 
-      objectReference: {fileID: 134025935}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: continueButton
-      value: 
-      objectReference: {fileID: 134025934}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: dialogBackground
-      value: 
-      objectReference: {fileID: 134025933}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: loader
-      value: 
-      objectReference: {fileID: 690034072}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: sentences.Array.data[0]
-      value: prueba 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: sentences.Array.data[1]
-      value: 'prueba 2 '
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: audios.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 08b00008cb1340b408bcfc771a4bdf22, type: 3}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: audios.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 0cf49612c6fa9bc47a1f7a4b8611ad87, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e868f666308b1d54eabeafde067e59db, type: 3}
 --- !u!1001 &6579174871555100000

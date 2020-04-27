@@ -9,7 +9,7 @@ public class Dialog : MonoBehaviour
     // Public access due to reference in Animation.cs 
     public /*static*/ string[] sentences;
     public /*static*/ int index;
-    public GameObject continueButton, dialogBackground, endgame;
+    public GameObject continueButton, /*gobackButton,*/ dialogBackground, endgame;
     int sceneIndex;
 
     public GameObject loader;
@@ -30,7 +30,9 @@ public class Dialog : MonoBehaviour
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         continueButton.SetActive(false);
-        
+
+        //gobackButton.SetActive(false); 
+
         dialogBackground.SetActive(true);
 
         source = GetComponent<AudioSource>();        
@@ -49,13 +51,15 @@ public class Dialog : MonoBehaviour
         }
 
         //Debug.Log("Finished tying.");      
-        continueButton.SetActive(true);                            
+        continueButton.SetActive(true);
+        //gobackButton.SetActive(true);                             
     }
 
     // Public due to it being referenced by Dialog Background's ContinueButton.
     public void NextSentence()
     {        
-        continueButton.SetActive(false);        
+        continueButton.SetActive(false); 
+        //gobackButton.SetActive(false);        
         loader= GameObject.FindWithTag("Cross_Fade");
         if (index < sentences.Length - 1)
         {
@@ -70,8 +74,9 @@ public class Dialog : MonoBehaviour
             
             if (SceneManager.GetActiveScene().name == "Agradecimiento" || SceneManager.GetActiveScene().name == "New Corrección")
                 endgame.SetActive(true);                         
-            else
+            else{
                 loader.GetComponent<Levelloader>().LoadNextLevel();
+            }
         }                
     } 
 }

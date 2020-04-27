@@ -509,6 +509,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4002510905493219054, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4002510905493219054, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 027574ae7f6e1b54abd2267b93b1ea47, type: 3}
 --- !u!1 &916941446 stripped
@@ -709,6 +719,63 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialog and Audio Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: sentences.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: audios.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: UIText
+      value: 
+      objectReference: {fileID: 916941447}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: continueButton
+      value: 
+      objectReference: {fileID: 916941446}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: loader
+      value: 
+      objectReference: {fileID: 1381586871}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: dialogBackground
+      value: 
+      objectReference: {fileID: 916941448}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: sentences.Array.data[0]
+      value: "Chip: \xA1T\xFA puedes ayudar a revivir el bosque!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: index
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: audios.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 08b00008cb1340b408bcfc771a4bdf22, type: 3}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: audios.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 08b00008cb1340b408bcfc771a4bdf22, type: 3}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: sentences.Array.data[1]
+      value: "Chip: S\xF3lo elige el letrero \"Inicio\" que sostiene Tepo y te llevar\xE1
+        a la caba\xF1a de los t\xEDos Mati y Feru, quienes tienen una rec\xE1mara
+        para ti."
+      objectReference: {fileID: 0}
     - target: {fileID: 1625651510846429376, guid: e868f666308b1d54eabeafde067e59db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -763,58 +830,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: sentences.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: audios.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: UIText
-      value: 
-      objectReference: {fileID: 916941447}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: continueButton
-      value: 
-      objectReference: {fileID: 916941446}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: loader
-      value: 
-      objectReference: {fileID: 1381586871}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: dialogBackground
-      value: 
-      objectReference: {fileID: 916941448}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: sentences.Array.data[0]
-      value: "Chip: \xA1T\xFA puedes ayudar a revivir el bosque! S\xF3lo elige el
-        letrero \"Inicio\" que sostiene Tepo y te llevar\xE1 a la caba\xF1a de los
-        t\xEDos Mati y Feru quienes tienen una rec\xE1mara para ti. "
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: index
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: audios.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 08b00008cb1340b408bcfc771a4bdf22, type: 3}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: audios.Array.data[1]
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e868f666308b1d54eabeafde067e59db, type: 3}
