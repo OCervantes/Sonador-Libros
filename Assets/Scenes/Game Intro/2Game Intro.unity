@@ -349,6 +349,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 8730906591488491513, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 464755499}
+    - target: {fileID: 8730906591488491513, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PrevSentence
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212073253037538543, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 464755499}
+    - target: {fileID: 6212073253037538543, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NextSentence
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 027574ae7f6e1b54abd2267b93b1ea47, type: 3}
 --- !u!1 &134025933 stripped
@@ -359,7 +379,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &134025934 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 263728006239638591, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+  m_CorrespondingSourceObject: {fileID: 4684087864567677439, guid: 027574ae7f6e1b54abd2267b93b1ea47,
     type: 3}
   m_PrefabInstance: {fileID: 134025932}
   m_PrefabAsset: {fileID: 0}
@@ -476,6 +496,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3023816203347078121, guid: 9732665f00173ae438066953a165503a,
     type: 3}
   m_PrefabInstance: {fileID: 690034071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &696829040 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4972963281334711130, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+    type: 3}
+  m_PrefabInstance: {fileID: 134025932}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &903752414
 GameObject:
@@ -892,6 +918,11 @@ PrefabInstance:
       propertyPath: audios.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: 0cf49612c6fa9bc47a1f7a4b8611ad87, type: 3}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: gobackButton
+      value: 
+      objectReference: {fileID: 696829040}
     - target: {fileID: 1625651510846429376, guid: e868f666308b1d54eabeafde067e59db,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -274,11 +274,37 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 8730906591488491513, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1718604565}
+    - target: {fileID: 8730906591488491513, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PrevSentence
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212073253037538543, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1718604565}
+    - target: {fileID: 6212073253037538543, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NextSentence
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 027574ae7f6e1b54abd2267b93b1ea47, type: 3}
 --- !u!1 &578410231 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 263728006239638591, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+  m_CorrespondingSourceObject: {fileID: 4684087864567677439, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+    type: 3}
+  m_PrefabInstance: {fileID: 578410230}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &578410232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4972963281334711130, guid: 027574ae7f6e1b54abd2267b93b1ea47,
     type: 3}
   m_PrefabInstance: {fileID: 578410230}
   m_PrefabAsset: {fileID: 0}
@@ -624,6 +650,51 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialog and Audio Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: audios.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: UIText
+      value: 
+      objectReference: {fileID: 1424939960}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: continueButton
+      value: 
+      objectReference: {fileID: 578410231}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: loader
+      value: 
+      objectReference: {fileID: 1387571428}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: dialogBackground
+      value: 
+      objectReference: {fileID: 1343041623}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: sentences.Array.data[0]
+      value: 'Chip: Una gran variedad de animales, pero...'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: index
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: gobackButton
+      value: 
+      objectReference: {fileID: 578410232}
     - target: {fileID: 1625651510846429376, guid: e868f666308b1d54eabeafde067e59db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -677,46 +748,6 @@ PrefabInstance:
     - target: {fileID: 1625651510846429376, guid: e868f666308b1d54eabeafde067e59db,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: sentences.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: audios.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: UIText
-      value: 
-      objectReference: {fileID: 1424939960}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: continueButton
-      value: 
-      objectReference: {fileID: 578410231}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: loader
-      value: 
-      objectReference: {fileID: 1387571428}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: dialogBackground
-      value: 
-      objectReference: {fileID: 1343041623}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: sentences.Array.data[0]
-      value: 'Chip: Una gran variedad de animales, pero...'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: index
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

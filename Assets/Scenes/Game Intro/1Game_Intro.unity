@@ -368,7 +368,7 @@ PrefabInstance:
         type: 3}
       propertyPath: continueButton
       value: 
-      objectReference: {fileID: 1462414658}
+      objectReference: {fileID: 914612204}
     - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
         type: 3}
       propertyPath: dialogBackground
@@ -395,6 +395,11 @@ PrefabInstance:
       propertyPath: audios.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: 08b00008cb1340b408bcfc771a4bdf22, type: 3}
+    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
+        type: 3}
+      propertyPath: gobackButton
+      value: 
+      objectReference: {fileID: 614399587}
     - target: {fileID: 1625651510846429376, guid: e868f666308b1d54eabeafde067e59db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -708,8 +713,19 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3295032836448664910, guid: f36e27288d5d9fa4b9983799685bd7d4,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f36e27288d5d9fa4b9983799685bd7d4, type: 3}
+--- !u!1 &614399587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4972963281334711130, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+    type: 3}
+  m_PrefabInstance: {fileID: 1462414657}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &795481738
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,6 +848,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &914612204 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4684087864567677439, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+    type: 3}
+  m_PrefabInstance: {fileID: 1462414657}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1147457888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,19 +1091,43 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 263728006239638591, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2372608940293564618, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 430
       objectReference: {fileID: 0}
+    - target: {fileID: 2173807234940969085, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -59.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2173807234940969085, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 105.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079472434303037420, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_Text
+      value: '>'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212073253037538543, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 337282094}
+    - target: {fileID: 6212073253037538543, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NextSentence
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 027574ae7f6e1b54abd2267b93b1ea47, type: 3}
---- !u!1 &1462414658 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 263728006239638591, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-    type: 3}
-  m_PrefabInstance: {fileID: 1462414657}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1462414659 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2372608940293564619, guid: 027574ae7f6e1b54abd2267b93b1ea47,

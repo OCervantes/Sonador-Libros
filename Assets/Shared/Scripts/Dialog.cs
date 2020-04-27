@@ -9,13 +9,15 @@ public class Dialog : MonoBehaviour
     // Public access due to reference in Animation.cs 
     public /*static*/ string[] sentences;
     public /*static*/ int index;
-    public GameObject continueButton, /*gobackButton,*/ dialogBackground, endgame;
+    public GameObject continueButton, gobackButton, dialogBackground, endgame;
     int sceneIndex;
 
     public GameObject loader;
     [SerializeField] float typingSpeed;    
     [SerializeField] AudioClip[] audios;
     AudioSource source;  
+
+    bool continuarpresionado = true;
 
     /* More convenient to track the Slider's value from SliderNumber's printValue() than from the Slider's attribute it-
        self, given that printValue() is the method in charge of printing the slider's value each time it has been modi-
@@ -31,7 +33,7 @@ public class Dialog : MonoBehaviour
 
         continueButton.SetActive(false);
 
-        //gobackButton.SetActive(false); 
+        gobackButton.SetActive(false); 
 
         dialogBackground.SetActive(true);
 
@@ -52,14 +54,14 @@ public class Dialog : MonoBehaviour
 
         //Debug.Log("Finished tying.");      
         continueButton.SetActive(true);
-        //gobackButton.SetActive(true);                             
+        gobackButton.SetActive(true);                             
     }
 
     // Public due to it being referenced by Dialog Background's ContinueButton.
     public void NextSentence()
     {        
         continueButton.SetActive(false); 
-        //gobackButton.SetActive(false);        
+        gobackButton.SetActive(false);        
         loader= GameObject.FindWithTag("Cross_Fade");
         if (index < sentences.Length - 1)
         {
@@ -75,7 +77,31 @@ public class Dialog : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "Agradecimiento" || SceneManager.GetActiveScene().name == "New Corrección")
                 endgame.SetActive(true);                         
             else{
-                loader.GetComponent<Levelloader>().LoadNextLevel();
+                loader.GetComponent<Levelloader>().LoadNextLevel(continuarpresionado);
+            }
+        }                
+    } 
+    public void PrevSentence()
+    {        
+        continueButton.SetActive(false); 
+        gobackButton.SetActive(false);   
+        continuarpresionado = false;     
+        loader= GameObject.FindWithTag("Cross_Fade");
+        if (index >0)
+        {
+            index--;
+            UIText.text = "";
+            StartCoroutine(Type());
+        }
+        else
+        {                        
+            UIText.text = "";
+            dialogBackground.SetActive(false);
+            
+            if (SceneManager.GetActiveScene().name == "Agradecimiento" || SceneManager.GetActiveScene().name == "New Corrección")
+                endgame.SetActive(true);                         
+            else{
+                loader.GetComponent<Levelloader>().LoadNextLevel(continuarpresionado);
             }
         }                
     } 
