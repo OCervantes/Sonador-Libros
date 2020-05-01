@@ -104,5 +104,8 @@ public class Dialog : MonoBehaviour
                 loader.GetComponent<Levelloader>().LoadNextLevel(continuarpresionado);
             }
         }                
-    } 
+    }
+    public void notstart(){
+        SceneManager.LoadScene("7Game_Intro");
+    }
 }
