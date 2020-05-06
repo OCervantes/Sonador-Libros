@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 4133538156585096553}
   m_Layer: 5
   m_Name: SkipButton
-  m_TagString: Untagged
+  m_TagString: Skip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -624,11 +624,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialogue Text
       objectReference: {fileID: 0}
-    - target: {fileID: 130140674201998970, guid: 662127ade8d48184b927a139233bf0f3,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1632747778203490143, guid: 662127ade8d48184b927a139233bf0f3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -733,6 +728,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 130140674201998970, guid: 662127ade8d48184b927a139233bf0f3,
+        type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 662127ade8d48184b927a139233bf0f3, type: 3}

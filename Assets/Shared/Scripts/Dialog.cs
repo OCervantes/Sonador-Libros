@@ -9,11 +9,11 @@ public class Dialog : MonoBehaviour
     // Public access due to reference in Animation.cs 
     public /*static*/ string[] sentences;
     public /*static*/ int index;
-    public GameObject continueButton, gobackButton, dialogBackground, endgame;
+    public GameObject continueButton, gobackButton, dialogBackground, endgame,skip;
     int sceneIndex;
-
+    private GameObject inicio ;
     public GameObject loader;
-    [SerializeField] float typingSpeed;    
+    [SerializeField] float typingSpeed = 0.02f;    
     [SerializeField] AudioClip[] audios;
     AudioSource source;  
 
@@ -27,13 +27,20 @@ public class Dialog : MonoBehaviour
 
     void Start()
     {
-        typingSpeed = 0.02f;
+        //typingSpeed = 0.02f;
 
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         continueButton.SetActive(false);
 
         gobackButton.SetActive(false); 
+
+        if (SceneManager.GetActiveScene().name == "7Game_Intro" && index == 0){
+           inicio =  GameObject.FindGameObjectWithTag("Inicio");
+           inicio.SetActive(false);
+        }
+
+        skip.SetActive(false);
 
         dialogBackground.SetActive(true);
 
@@ -51,17 +58,28 @@ public class Dialog : MonoBehaviour
             UIText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-
-        //Debug.Log("Finished tying.");      
-        continueButton.SetActive(true);
-        gobackButton.SetActive(true);                             
+        if (SceneManager.GetActiveScene().name == "7Game_Intro" && index == 1){
+            inicio.SetActive(true);
+            continueButton.SetActive(false);
+            gobackButton.SetActive(true);  
+        }
+        else{
+            skip.SetActive(true);
+            continueButton.SetActive(true);
+            gobackButton.SetActive(true);  
+        }
+        //Debug.Log("Finished tying.");                           
     }
 
     // Public due to it being referenced by Dialog Background's ContinueButton.
     public void NextSentence()
     {        
         continueButton.SetActive(false); 
-        gobackButton.SetActive(false);        
+        gobackButton.SetActive(false);  
+        skip.SetActive(false);  
+        if (SceneManager.GetActiveScene().name == "7Game_Intro" && index == 1){
+            inicio.SetActive(false);
+        }   
         loader= GameObject.FindWithTag("Cross_Fade");
         if (index < sentences.Length - 1)
         {
@@ -84,8 +102,12 @@ public class Dialog : MonoBehaviour
     public void PrevSentence()
     {        
         continueButton.SetActive(false); 
-        gobackButton.SetActive(false);   
-        continuarpresionado = false;     
+        gobackButton.SetActive(false);  
+        if (SceneManager.GetActiveScene().name == "7Game_Intro" && index == 1){
+            inicio.SetActive(false);
+        }
+        continuarpresionado = false;   
+        skip.SetActive(false);   
         loader= GameObject.FindWithTag("Cross_Fade");
         if (index >0)
         {
