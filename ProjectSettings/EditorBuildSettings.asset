@@ -47,6 +47,30 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Games/Memorama/Memoroma.unity
     guid: 8030a535b0c8fc54eab03ff630efb9bd
+  - enabled: 1
+    path: Assets/Scenes/Game Intro/1Game_Intro.unity
+    guid: ab07b2fa5d160b445817fa90362e003d
+  - enabled: 1
+    path: Assets/Scenes/Game Intro/2Game Intro.unity
+    guid: 799845af36e5c5c4b962b8c6e0b231f1
+  - enabled: 1
+    path: Assets/Scenes/Game Intro/3Game_Intro.unity
+    guid: 12d5d2b403c02db4b9b66e0a54d3a64b
+  - enabled: 1
+    path: Assets/Scenes/Game Intro/4Game_Intro.unity
+    guid: a4e9603e21bad1a489446952cbf35bb4
+  - enabled: 1
+    path: Assets/Scenes/Game Intro/5Game_Intro.unity
+    guid: 4267c6d5cb96b0046b7fd39b675cb4ce
+  - enabled: 1
+    path: Assets/Scenes/Game Intro/6Game_Intro.unity
+    guid: aa42223d6fed53d41a8a1249884d3b71
+  - enabled: 1
+    path: Assets/Scenes/Game Intro/7Game_Intro.unity
+    guid: 0cba18b439de13640acaa3fd63049836
+  - enabled: 1
+    path: Assets/Scenes/Games/Mat_1/Juego 1.unity
+    guid: 4996d55e0305afc45bbafa694ea65df2
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: d5a73a3d4695f0e44b365540abd51ad4,
       type: 2}

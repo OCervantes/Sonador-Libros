@@ -21,7 +21,7 @@ public class NewAccount : MonoBehaviour,
 				Debug.Log(message);
 				UnityMainThreadDispatcher
 					.Instance ()
-					.EnqueueNextScene (10);
+					.EnqueueNextScene (14);
 				break;
 		}
 	}

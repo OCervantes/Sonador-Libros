@@ -44,14 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2cbb9aa0a45af448626409a3b6578f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  txt: {fileID: 0}
+  UIText: {fileID: 0}
   sentences: []
-  typingSpeed: 0.02
-  videoPlayer: {fileID: 0}
+  index: 0
   continueButton: {fileID: 0}
-  audios: []
-  source: {fileID: 1625651510846429382}
   dialogBackground: {fileID: 0}
+  endgame: {fileID: 0}
+  loader: {fileID: 0}
+  typingSpeed: 0.02
+  audios: []
 --- !u!82 &1625651510846429382
 AudioSource:
   m_ObjectHideFlags: 0

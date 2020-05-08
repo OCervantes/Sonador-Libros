@@ -972,6 +972,7 @@ MonoBehaviour:
   index: 0
   typingSpeed: 0.02
   continueButton: {fileID: 887565867}
+  loader: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 9ec18ff674b55fc45a46d5440b25f61e, type: 3}
   - {fileID: 8300000, guid: 608e4f41b69ae2849850e866c7f7a1bb, type: 3}
@@ -1422,10 +1423,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialog Background Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 2372608940293564619, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+    - target: {fileID: 2372608939945383993, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1239680421546842472, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}

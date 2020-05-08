@@ -1968,11 +1968,6 @@ PrefabInstance:
       propertyPath: audios.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: 05342ba3d8e069241ae32e257fb5a352, type: 3}
-    - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
-        type: 3}
-      propertyPath: typingSpeed
-      value: 0.00005
-      objectReference: {fileID: 0}
     - target: {fileID: 1625651510846429379, guid: e868f666308b1d54eabeafde067e59db,
         type: 3}
       propertyPath: m_Name

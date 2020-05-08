@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Dialog and Audio Manager
+  - Cross_Fade
+  - Music
+  - Background
+  - Button
+  - Text
+  - Inicio
+  - Skip
   layers:
   - Default
   - TransparentFX
@@ -38,6 +46,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 4227336937
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Personajes
+    uniqueID: 1212523569
+    locked: 0
+  - name: Extra
+    uniqueID: 3649263781
     locked: 0
