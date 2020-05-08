@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 public class CreateCards : MonoBehaviour {
@@ -8,11 +11,7 @@ public class CreateCards : MonoBehaviour {
 	public GameObject prefabCard;
 	public int width;
 	public Transform ParentCards;
-	private List<GameObject> cards = new List<GameObject> ();
-
 	//public Material[] materials;
-	public Texture2D[] textures;
-	//var textures = Resources.LoadAll("Resources", typeof(Texture2D)).Cast<Texture2D>().ToArray();
 
 	public int counterClicks;
 	public Text textAttempsCounter;
@@ -24,13 +23,34 @@ public class CreateCards : MonoBehaviour {
 
 	public int foundedCouples;
 
+	private List<GameObject> cards = new List<GameObject> ();
+
+	private Texture2D[] textures;
+
 	// ---------------------------------------------------------------------
 	// ---- functions
 	// ---------------------------------------------------------------------
 
 	public void Start(){
-//		texturas = Resources.LoadAll("memorama/Artwork/ImagesGems", typeof(Texture2D));
-		//var texturas = Resources.LoadAll ("memorama/Artwork/ImagesGems");
+		 Addressables.LoadAssetsAsync<Texture2D>("memorama", null).Completed += OnSpritesLoaded;
+	}
+
+	private void OnSpritesLoaded(AsyncOperationHandle<IList<Texture2D>> result)
+	{
+		if (result.Status == AsyncOperationStatus.Succeeded)
+		{
+			if (result.Result != null || result.Result.Count > 0)
+			{
+				IList<Texture2D> list = result.Result;
+				textures = new Texture2D[list.Count];
+				list.CopyTo(textures, 0);
+			}
+			Addressables.Release<IList<Texture2D>>(result);
+		}
+		else if (result.Status == AsyncOperationStatus.Failed)
+		{
+			Debug.Log("List of Texture2D failed to load.");
+		}
 	}
 
 	public void Restart(){

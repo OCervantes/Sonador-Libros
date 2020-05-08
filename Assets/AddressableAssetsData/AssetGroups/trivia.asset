@@ -10,14 +10,76 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Packed Assets
+  m_Name: trivia
   m_EditorClassIdentifier: 
-  m_GroupName: Packed Assets
+  m_GroupName: trivia
   m_Data:
     m_SerializedData: []
   m_GUID: 296fe887df69c4d4187b4042156b0526
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 013017396d3a11044a8543ff2b12d270
+    m_Address: trivia-tree
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 103b1817fb41f4f4ca558da88ceabf97
+    m_Address: trivia-bush
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 2e31e0619ac35414cad5a5a42370c9d2
+    m_Address: trivia-strawberry
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: 2e31e0619ac35414cad5a5a42370c9d2, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 2e31e0619ac35414cad5a5a42370c9d2, type: 3}
+  - m_GUID: 564902289d1574d40bedfb8e8f2646b9
+    m_Address: trivia-deer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 575999c5af09a2c4693d6484b4c5259c
+    m_Address: trivia-duck
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 86f6107dc8f0b4a4c8ef897f455cc296
+    m_Address: trivia-rabbit
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 9875828ba2a6a8746b71afa4e11b3cf3
+    m_Address: trivia-sand
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: dee9e6f8b9ca6d74a9aba6ea0f255405
+    m_Address: trivia-hummingbird
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: efb4ac2d50543b74a9d0feab78370172
+    m_Address: trivia-whale
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: f2eb116e53e7163498392bf8327e3d15
+    m_Address: trivia-rocks
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3b5f5e3460a6e0545a66edee7dddc0b0, type: 2}
   m_SchemaSet:
-    m_Schemas: []
+    m_Schemas:
+    - {fileID: 11400000, guid: b3cdb10be0d52b540a0c2c499b57be42, type: 2}
+    - {fileID: 11400000, guid: e0493766304971344a1c0cd83b168add, type: 2}
