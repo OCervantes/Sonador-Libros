@@ -200,10 +200,16 @@ public class Animations: MonoBehaviour
                             break; 
 
                         case 2:
-                            // 
+                            // Feru stops talking.
                             personajes[0].SetActive(false);
                             finished = true;
                             //personajes[1].SetActive(true);
+                            break;
+
+                        case 3:
+                            // Mati stops talking.
+                            personajes[1].SetActive(false);
+                            finished = true;
                             break;
                     }
                     break;
@@ -217,23 +223,24 @@ public class Animations: MonoBehaviour
                     case 0:
                         personajes[0].SetActive(true);
                         break;
+
                     case 1:
                         // 
                         //personajes[0].SetActive(true);
                         personajes[1].SetActive(true);
                         break;  
+
                     case 2:
-                        // 
-                        //personajes[0].SetActive(true);
-                        if (finished == false)
-                            personajes[0].SetActive(true);
-                        else
-                            personajes[0].SetActive(false);
+                        //                         
+                        personajes[0].SetActive(true);
                         break;
-                    /*case 3:
-                        //personajes[0].SetActive(false);
-                        Destroy(personajes[0]);
-                        break;*/
+
+                    case 3:
+                        if (finished == false)
+                            personajes[1].SetActive(true);
+                        else
+                            personajes[1].SetActive(false);
+                        break;
                 }
                 break;
         }

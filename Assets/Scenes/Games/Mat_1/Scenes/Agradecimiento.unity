@@ -888,14 +888,28 @@ MonoBehaviour:
   sentences:
   - "Tepo: (Jugador), \xA1muchas gracias por habernos ayudado."
   - 'Chip: Esperamos que vuelvas pronto.'
+  maleNounsString: []
+  femaleNounsString: []
   index: 0
   continueButton: {fileID: 887565867}
   dialogBackground: {fileID: 887565866}
   endgame: {fileID: 290334753}
+  initializer: {fileID: 0}
   typingSpeed: 0.02
   audios:
   - {fileID: 8300000, guid: 9ec18ff674b55fc45a46d5440b25f61e, type: 3}
   - {fileID: 8300000, guid: 608e4f41b69ae2849850e866c7f7a1bb, type: 3}
+  maleNounsFeru: []
+  femaleNounsFeru: []
+  maleNounsMati: []
+  femaleNounsMati: []
+  un: []
+  numbersFeru: []
+  numbersMati: []
+  pluralFruitsFeru: []
+  pluralFruitsMati: []
+  singleFruitsFeru: []
+  singleFruitsMati: []
 --- !u!1 &2002242957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,6 +1339,24 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3114439103551531184, guid: ff1c7a21c33c3da419c51aa05be1908c,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4506bf6ca285b494ab0993e12703d5e6,
+        type: 3}
+    - target: {fileID: 3820966245824556330, guid: ff1c7a21c33c3da419c51aa05be1908c,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4506bf6ca285b494ab0993e12703d5e6,
+        type: 3}
+    - target: {fileID: 392707233610071750, guid: ff1c7a21c33c3da419c51aa05be1908c,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4506bf6ca285b494ab0993e12703d5e6,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 2570467495666345930, guid: ff1c7a21c33c3da419c51aa05be1908c, type: 3}
     - {fileID: 2570467495666345929, guid: ff1c7a21c33c3da419c51aa05be1908c, type: 3}

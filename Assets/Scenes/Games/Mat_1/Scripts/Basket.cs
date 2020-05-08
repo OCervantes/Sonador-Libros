@@ -85,7 +85,12 @@ public class Basket : MonoBehaviour, IDropHandler
             //MatDragHandeler.itemBeingDragged.GetComponent<MatDragHandeler>().flag = true;
 
             totalReceivedFruits++;
-            fruitsInBasketLabel.text = totalReceivedFruits.ToString();
+
+            if (totalReceivedFruits == 1)
+                fruitsInBasketLabel.text = totalReceivedFruits.ToString() + " fruta.";
+            else
+                fruitsInBasketLabel.text = totalReceivedFruits.ToString() + " frutas.";
+                
             source.PlayOneShot(audios[(totalReceivedFruits)-1]);
             
             if (MatDragHandeler.itemBeingDragged.name == fruits[0].name + "(Clone)")

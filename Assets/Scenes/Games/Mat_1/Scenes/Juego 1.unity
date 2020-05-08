@@ -338,8 +338,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 253, y: -265}
-  m_SizeDelta: {x: 207, y: 89.6}
+  m_AnchoredPosition: {x: 208.2, y: -265}
+  m_SizeDelta: {x: 296.5, y: 128.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &413954987
 MonoBehaviour:
@@ -363,7 +363,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 4506bf6ca285b494ab0993e12703d5e6, type: 3}
-    m_FontSize: 45
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -571,8 +571,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -228.09998}
-  m_SizeDelta: {x: -1060.1, y: -485.5}
+  m_AnchoredPosition: {x: -143.63493, y: -228.09998}
+  m_SizeDelta: {x: -772.82983, y: -485.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &859581256
 CanvasRenderer:
@@ -822,6 +822,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3712193905897105700, guid: 5d71b8baf82987b4ca71ad986067d6cc,
+        type: 3}
+      propertyPath: m_Text
+      value: '>'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d71b8baf82987b4ca71ad986067d6cc, type: 3}
 --- !u!224 &939201063 stripped
@@ -887,6 +892,7 @@ MonoBehaviour:
   - {fileID: 7345054581009748169, guid: 826c43d71ccd47340813b14bfd43a3b0, type: 3}
   - {fileID: 7345054581009748169, guid: 30452c16a87f120439a27fc33ed6af09, type: 3}
   - {fileID: 7345054581009748169, guid: ef558b098ae5dab4490710fcce7f4eda, type: 3}
+  fruitPanels: []
 --- !u!222 &981208432
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1004,8 +1010,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -298.6, y: 307.2}
-  m_SizeDelta: {x: 690, y: 64}
+  m_AnchoredPosition: {x: -210, y: 307.2}
+  m_SizeDelta: {x: 795, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1035556941
 MonoBehaviour:
