@@ -382,16 +382,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9135959493528249810, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4684087864567677439, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3485875582915805825, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -522,16 +512,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: NextSentence
       objectReference: {fileID: 0}
-    - target: {fileID: 4002510905493219054, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4002510905493219054, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 2372608940284291020, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: m_TagString
@@ -566,6 +546,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: NextSentence
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684087864567677439, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959493528249810, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4002510905493219054, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4002510905493219054, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 027574ae7f6e1b54abd2267b93b1ea47, type: 3}
@@ -1103,12 +1103,12 @@ PrefabInstance:
         type: 3}
       propertyPath: audios.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: e427da907751bd94791e97aa5dc702aa, type: 3}
+      objectReference: {fileID: 8300000, guid: ea44df923f62892409540cc65ece0b00, type: 3}
     - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
         type: 3}
       propertyPath: sentences.Array.data[1]
       value: "Chip: S\xF3lo haz click en el letrero \"Juegos\"  y te llevar\xE1 a
-        la caba\xF1a de los t\xEDos Mati y Feru quienes tienen divertidas opciones
+        la caba\xF1a de los t\xEDos Mati y Feru quienes tienen divertidas actividades
         para ti."
       objectReference: {fileID: 0}
     - target: {fileID: 1625651510846429377, guid: e868f666308b1d54eabeafde067e59db,
