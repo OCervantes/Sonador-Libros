@@ -1590,6 +1590,17 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 154917819}
+    - target: {fileID: 3712193905897105700, guid: 5d71b8baf82987b4ca71ad986067d6cc,
+        type: 3}
+      propertyPath: m_Text
+      value: '>'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712193905897105700, guid: 5d71b8baf82987b4ca71ad986067d6cc,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4506bf6ca285b494ab0993e12703d5e6,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 1192717353342837548, guid: 5d71b8baf82987b4ca71ad986067d6cc, type: 3}
     - {fileID: 1192717353333500975, guid: 5d71b8baf82987b4ca71ad986067d6cc, type: 3}
