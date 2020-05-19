@@ -54,6 +54,7 @@ MonoBehaviour:
   source: {fileID: 1625651510846429382}
   dialogBackground: {fileID: 0}
   endgame: {fileID: 0}
+  loader: {fileID: 0}
 --- !u!82 &1625651510846429382
 AudioSource:
   m_ObjectHideFlags: 0

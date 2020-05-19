@@ -1,22 +1,25 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Dialog : MonoBehaviour
 {
+    public static int totalFruits;
+
     public Text UIText;
-    // Public access due to reference in Animation.cs 
+    // Public access due to reference in Animation.cs
     public /*static*/ string[] sentences, maleNounsString, femaleNounsString;
     public /*static*/ int index;
-    public static int totalFruits;
-    public GameObject continueButton, dialogBackground, endgame;
+    public GameObject continueButton, gobackButton, dialogBackground, endgame, skip, loader;
     public FruitInitialization initializer;
 
+    private GameObject inicio;
     int sceneIndex;
-    [SerializeField] float typingSpeed;    
+    [SerializeField] float typingSpeed;
     [SerializeField] AudioClip[] audios, maleNounsFeru, femaleNounsFeru, maleNounsMati, femaleNounsMati, un, numbersFeru, numbersMati, pluralFruitsFeru, pluralFruitsMati, singleFruitsFeru, singleFruitsMati;
     AudioSource source, individualSource;
+    bool continuarpresionado = true;
 
     /* More convenient to track the Slider's value from SliderNumber's printValue() than from the Slider's attribute it-
        self, given that printValue() is the method in charge of printing the slider's value each time it has been modi-
@@ -26,9 +29,9 @@ public class Dialog : MonoBehaviour
 
     void Start()
     {
-        /* Éste es , Éstos son 
+        /* Éste es , Éstos son
         maleNounsString = new string[2];
-        // Ésta es , Éstas son 
+        // Ésta es , Éstas son
         femaleNounsString = new string[2];
 
         // Éste es, Éstos son
@@ -36,7 +39,7 @@ public class Dialog : MonoBehaviour
         maleNounsMati = new AudioClip[2];
 
         // Ésta es, Éstas son
-        femaleNounsFeru = new AudioClip[2];        
+        femaleNounsFeru = new AudioClip[2];
         femaleNounsMati = new AudioClip[2];
 
         // Dicho por Feru, Mati
@@ -57,14 +60,22 @@ public class Dialog : MonoBehaviour
         typingSpeed = 0.02f;
 
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        
+
         dialogBackground.SetActive(true);
+        continueButton.SetActive(false);
+        gobackButton.SetActive(false);
+        skip.SetActive(false);
+
+        if (SceneManager.GetActiveScene().name == "7Game_Intro" && index == 0){
+           inicio =  GameObject.FindGameObjectWithTag("Inicio");
+           inicio.SetActive(false);
+        }
 
         source = GetComponent<AudioSource>();
         individualSource = new AudioSource();
 
-        StartCoroutine(Type());                
-    } 
+        StartCoroutine(Type());
+    }
 
     IEnumerator Type()
     {
@@ -77,22 +88,22 @@ public class Dialog : MonoBehaviour
                     // Fruta (singular)
                     if (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]] == 1)
                     {
-                        // Masculina (Durazno)              
+                        // Masculina (Durazno)
                         if (initializer.fruits[FruitInitialization.fruitIndexes[0]].name == "Durazno")
                         {
                             // Éste es
-                            source.PlayOneShot(maleNounsFeru[0]);   
+                            source.PlayOneShot(maleNounsFeru[0]);
                             foreach(char letter in maleNounsString[0].ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
 
                             // un
-                                                        
-                            source.PlayOneShot(un[0]);                            
+
+                            source.PlayOneShot(un[0]);
                             foreach(char letter in "1 ".ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -100,7 +111,7 @@ public class Dialog : MonoBehaviour
                             // Durazno
                             source.PlayOneShot(singleFruitsFeru[2]);
                             foreach(char letter in "Durazno.".ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -112,7 +123,7 @@ public class Dialog : MonoBehaviour
                             // Ésta es
                             source.PlayOneShot(femaleNounsFeru[0]);
                             foreach(char letter in femaleNounsString[0].ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -120,15 +131,15 @@ public class Dialog : MonoBehaviour
                             // una
                             source.PlayOneShot(numbersFeru[0]);
                             foreach(char letter in "1 ".ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
 
                             // (fruta)
-                            source.PlayOneShot(singleFruitsFeru[FruitInitialization.fruitIndexes[0]]);                            
+                            source.PlayOneShot(singleFruitsFeru[FruitInitialization.fruitIndexes[0]]);
                             foreach(char letter in (initializer.fruits[FruitInitialization.fruitIndexes[0]].name + ".").ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -144,15 +155,15 @@ public class Dialog : MonoBehaviour
                             // Éstos son
                             source.PlayOneShot(maleNounsFeru[1]);
                             foreach(char letter in maleNounsString[1].ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
 
-                            // (número variable)                        
+                            // (número variable)
                             source.PlayOneShot(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]]-1]);
                             foreach(char letter in (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]].ToString() + " ").ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -160,7 +171,7 @@ public class Dialog : MonoBehaviour
                             // Duraznos
                             source.PlayOneShot(pluralFruitsFeru[2]);
                             foreach(char letter in "Duraznos.".ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -172,7 +183,7 @@ public class Dialog : MonoBehaviour
                             // Éstas son
                             source.PlayOneShot(femaleNounsFeru[1]);
                             foreach(char letter in femaleNounsString[1].ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -180,15 +191,15 @@ public class Dialog : MonoBehaviour
                             // (número variable)
                             source.PlayOneShot(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]]-1]);
                             foreach(char letter in (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]].ToString() + " ").ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
 
                             // (frutas)
-                            source.PlayOneShot(pluralFruitsFeru[FruitInitialization.fruitIndexes[0]]);                            
+                            source.PlayOneShot(pluralFruitsFeru[FruitInitialization.fruitIndexes[0]]);
                             foreach(char letter in (initializer.fruits[FruitInitialization.fruitIndexes[0]].name + "s.").ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -196,13 +207,13 @@ public class Dialog : MonoBehaviour
                     }
 
                     /*foreach(char letter in sentences[index].ToCharArray())
-                    {            
+                    {
                         UIText.text += letter;
                         yield return new WaitForSeconds(typingSpeed);
                     }
 
                     foreach(char letter in (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]].ToCharArray())
-                    {            
+                    {
                         UIText.text += letter;
                         yield return new WaitForSeconds(typingSpeed);
                     }*/
@@ -214,13 +225,13 @@ public class Dialog : MonoBehaviour
                     // Fruta (singular)
                     if (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]] == 1)
                     {
-                        // Masculina (Durazno)              
+                        // Masculina (Durazno)
                         if (initializer.fruits[FruitInitialization.fruitIndexes[1]].name == "Durazno")
                         {
                             // Éste es
-                            source.PlayOneShot(maleNounsMati[0]);   
+                            source.PlayOneShot(maleNounsMati[0]);
                             foreach(char letter in maleNounsString[0].ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -228,7 +239,7 @@ public class Dialog : MonoBehaviour
                             // un
                             source.PlayOneShot(un[1]);
                             foreach(char letter in "1 ".ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -236,7 +247,7 @@ public class Dialog : MonoBehaviour
                             // Durazno
                             source.PlayOneShot(singleFruitsMati[2]);
                             foreach(char letter in "Durazno.".ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -248,7 +259,7 @@ public class Dialog : MonoBehaviour
                             // Ésta es
                             source.PlayOneShot(femaleNounsMati[0]);
                             foreach(char letter in femaleNounsString[0].ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -256,15 +267,15 @@ public class Dialog : MonoBehaviour
                             // una
                             source.PlayOneShot(numbersMati[0]);
                             foreach(char letter in "1 ".ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
 
                             // (fruta)
-                            source.PlayOneShot(singleFruitsMati[FruitInitialization.fruitIndexes[1]]);                            
+                            source.PlayOneShot(singleFruitsMati[FruitInitialization.fruitIndexes[1]]);
                             foreach(char letter in (initializer.fruits[FruitInitialization.fruitIndexes[1]].name + ".").ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -280,15 +291,15 @@ public class Dialog : MonoBehaviour
                             // Éstos son
                             source.PlayOneShot(maleNounsMati[1]);
                             foreach(char letter in maleNounsString[1].ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
 
-                            // (número variable)                        
+                            // (número variable)
                             source.PlayOneShot(numbersMati[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]]-1]);
                             foreach(char letter in (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]].ToString() + " ").ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -296,7 +307,7 @@ public class Dialog : MonoBehaviour
                             // Duraznos
                             source.PlayOneShot(pluralFruitsMati[2]);
                             foreach(char letter in "Duraznos.".ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -308,7 +319,7 @@ public class Dialog : MonoBehaviour
                             // Éstas son
                             source.PlayOneShot(femaleNounsMati[1]);
                             foreach(char letter in femaleNounsString[1].ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -316,15 +327,15 @@ public class Dialog : MonoBehaviour
                             // (número variable)
                             source.PlayOneShot(numbersMati[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]]-1]);
                             foreach(char letter in (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]].ToString() + " ").ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
 
                             // (frutas)
-                            source.PlayOneShot(pluralFruitsMati[FruitInitialization.fruitIndexes[1]]);                            
+                            source.PlayOneShot(pluralFruitsMati[FruitInitialization.fruitIndexes[1]]);
                             foreach(char letter in (initializer.fruits[FruitInitialization.fruitIndexes[1]].name + "s.").ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -338,13 +349,13 @@ public class Dialog : MonoBehaviour
                     // Fruta (singular)
                     if (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]] == 1)
                     {
-                        // Masculina (Durazno)              
+                        // Masculina (Durazno)
                         if (initializer.fruits[FruitInitialization.fruitIndexes[2]].name == "Durazno")
                         {
                             // Éste es
-                            source.PlayOneShot(maleNounsFeru[0]);   
+                            source.PlayOneShot(maleNounsFeru[0]);
                             foreach(char letter in maleNounsString[0].ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -352,7 +363,7 @@ public class Dialog : MonoBehaviour
                             // un
                             source.PlayOneShot(un[0]);
                             foreach(char letter in "1 ".ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -360,7 +371,7 @@ public class Dialog : MonoBehaviour
                             // Durazno
                             source.PlayOneShot(singleFruitsFeru[2]);
                             foreach(char letter in "Durazno.".ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -372,7 +383,7 @@ public class Dialog : MonoBehaviour
                             // Ésta es
                             source.PlayOneShot(femaleNounsFeru[0]);
                             foreach(char letter in femaleNounsString[0].ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -380,15 +391,15 @@ public class Dialog : MonoBehaviour
                             // una
                             source.PlayOneShot(numbersFeru[0]);
                             foreach(char letter in "1 ".ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
 
                             // (fruta)
-                            source.PlayOneShot(singleFruitsFeru[FruitInitialization.fruitIndexes[2]]);                            
+                            source.PlayOneShot(singleFruitsFeru[FruitInitialization.fruitIndexes[2]]);
                             foreach(char letter in (initializer.fruits[FruitInitialization.fruitIndexes[2]].name + ".").ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -404,15 +415,15 @@ public class Dialog : MonoBehaviour
                             // Éstos son
                             source.PlayOneShot(maleNounsFeru[1]);
                             foreach(char letter in maleNounsString[1].ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
 
-                            // (número variable)                        
+                            // (número variable)
                             source.PlayOneShot(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]]-1]);
                             foreach(char letter in (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]].ToString() + " ").ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -420,7 +431,7 @@ public class Dialog : MonoBehaviour
                             // Duraznos
                             source.PlayOneShot(pluralFruitsFeru[2]);
                             foreach(char letter in "Duraznos.".ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -432,7 +443,7 @@ public class Dialog : MonoBehaviour
                             // Éstas son
                             source.PlayOneShot(femaleNounsFeru[1]);
                             foreach(char letter in femaleNounsString[1].ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -440,15 +451,15 @@ public class Dialog : MonoBehaviour
                             // (número variable)
                             source.PlayOneShot(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]]-1]);
                             foreach(char letter in (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]].ToString() + " ").ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
 
                             // (frutas)
-                            source.PlayOneShot(pluralFruitsFeru[FruitInitialization.fruitIndexes[2]]);                            
+                            source.PlayOneShot(pluralFruitsFeru[FruitInitialization.fruitIndexes[2]]);
                             foreach(char letter in (initializer.fruits[FruitInitialization.fruitIndexes[2]].name + "s.").ToCharArray())
-                            {            
+                            {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
                             }
@@ -462,7 +473,7 @@ public class Dialog : MonoBehaviour
                     // "Juntas dan..."
                     source.PlayOneShot(audios[0]);
                     foreach(char letter in sentences[0].ToCharArray())
-                    {            
+                    {
                         UIText.text += letter;
                         yield return new WaitForSeconds(typingSpeed);
                     }
@@ -470,15 +481,15 @@ public class Dialog : MonoBehaviour
                     // (total de frutas)
                     source.PlayOneShot(audios[0]);
                     foreach(char letter in ((FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]] + FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]] + FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]]).ToString() + " ").ToCharArray())
-                    {            
+                    {
                         UIText.text += letter;
                         yield return new WaitForSeconds(typingSpeed);
                     }
-                    
+
                     // "...frutas."
                     source.PlayOneShot(audios[1]);
                     foreach(char letter in sentences[1].ToCharArray())
-                    {            
+                    {
                         UIText.text += letter;
                         yield return new WaitForSeconds(typingSpeed);
                     }
@@ -493,7 +504,7 @@ public class Dialog : MonoBehaviour
                 source.PlayOneShot(audios[0]);
                 source.PlayOneShot((numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]]]) + 1);
                 source.PlayOneShot((pluralFruitsFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]]]) + 1);
-            }*/     
+            }*/
         }
 
         else
@@ -501,23 +512,39 @@ public class Dialog : MonoBehaviour
             source.PlayOneShot(audios[index]);
 
             foreach(char letter in sentences[index].ToCharArray())
-            {            
+            {
                 UIText.text += letter;
                 yield return new WaitForSeconds(typingSpeed);
             }
-        }        
-
-        //Debug.Log("Finished tying.");      
-        continueButton.SetActive(true);                            
+            if (SceneManager.GetActiveScene().name == "7Game_Intro" && index == 1){
+                inicio.SetActive(true);
+                continueButton.SetActive(false);
+                gobackButton.SetActive(true);
+            }
+            else if (sceneIndex >= 14 && sceneIndex <= 20)
+            {
+                if (sceneIndex < 20) skip.SetActive(true);
+                continueButton.SetActive(true);
+                if (sceneIndex > 14) gobackButton.SetActive(true);
+            } else {
+                continueButton.SetActive(true);
+            }
+        }
     }
 
     // Public due to it being referenced by Dialog Background's ContinueButton.
     public void NextSentence()
-    {        
-        continueButton.SetActive(false);        
-        
+    {
+        continueButton.SetActive(false);
+        gobackButton.SetActive(false);
+        skip.SetActive(false);
+
+        if (SceneManager.GetActiveScene().name == "7Game_Intro" && index == 1){
+            inicio.SetActive(false);
+        }
+        loader= GameObject.FindWithTag("Cross_Fade");
         if (SceneManager.GetActiveScene().name != "New Corrección")
-        {    
+        {
             if (index < sentences.Length - 1)
             {
                 index++;
@@ -525,12 +552,14 @@ public class Dialog : MonoBehaviour
                 StartCoroutine(Type());
             }
             else
-            {                        
+            {
                 UIText.text = "";
                 dialogBackground.SetActive(false);
 
                 if (SceneManager.GetActiveScene().name == "Agradecimiento" || SceneManager.GetActiveScene().name == "New Corrección")
-                    endgame.SetActive(true);                         
+                    endgame.SetActive(true);
+                else if (loader != null && loader.GetComponent<Levelloader>() != null)
+                    loader.GetComponent<Levelloader>().LoadNextLevel(continuarpresionado);
                 else
                     SceneManager.LoadScene(sceneIndex+1);
             }
@@ -544,15 +573,47 @@ public class Dialog : MonoBehaviour
                 StartCoroutine(Type());
             }
             else
-            {                        
+            {
                 UIText.text = "";
                 dialogBackground.SetActive(false);
 
                 if (SceneManager.GetActiveScene().name == "Agradecimiento" || SceneManager.GetActiveScene().name == "New Corrección")
-                    endgame.SetActive(true);                         
+                    endgame.SetActive(true);
                 else
                     SceneManager.LoadScene(sceneIndex+1);
             }
-        }             
-    } 
+        }
+    }
+    public void PrevSentence()
+    {
+        continueButton.SetActive(false);
+        gobackButton.SetActive(false);
+        if (SceneManager.GetActiveScene().name == "7Game_Intro" && index == 1){
+            inicio.SetActive(false);
+        }
+        continuarpresionado = false;
+        skip.SetActive(false);
+        loader= GameObject.FindWithTag("Cross_Fade");
+        if (index >0)
+        {
+            index--;
+            UIText.text = "";
+            StartCoroutine(Type());
+        }
+        else
+        {
+            UIText.text = "";
+            dialogBackground.SetActive(false);
+
+            if (SceneManager.GetActiveScene().name == "Agradecimiento" || SceneManager.GetActiveScene().name == "New Corrección")
+                endgame.SetActive(true);
+            else if (loader != null && loader.GetComponent<Levelloader>() != null)
+                loader.GetComponent<Levelloader>().LoadNextLevel(continuarpresionado);
+            else
+                SceneManager.LoadScene(sceneIndex-1);
+        }
+    }
+    public void notstart(){
+        SceneManager.LoadScene("7Game_Intro");
+    }
 }

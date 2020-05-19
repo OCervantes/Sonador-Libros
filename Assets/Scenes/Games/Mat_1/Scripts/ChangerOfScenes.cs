@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ChangerOfScenes : MonoBehaviour
-{    
+{
     public void Accept()
     {
         //SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex)+1);
@@ -14,6 +14,6 @@ public class ChangerOfScenes : MonoBehaviour
 
     public void Denied()
     {
-        Application.Quit();
+        SceneManager.LoadScene(10);
     }
 }

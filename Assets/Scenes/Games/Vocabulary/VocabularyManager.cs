@@ -31,12 +31,10 @@ public class VocabularyManager: MonoBehaviour,
 
     /* Declaración e Inicialización de la Matriz
      * Palabra, Definición
-     * 30 elementos--3 elementos por nivel; 10 niveles.
      */
     private string[,] matrix;
 
     /* Arreglo de enteros. Posición del entero proporcional a la palabra a aparecer en aquel mismo nivel.
-     * Contiene 30 enteros, equivalente a las 30 palabras almacenadas en la matriz.
      * Entero almacenado corresponde al nivel de la palabra.
      */
     private int[] nivel;
@@ -50,31 +48,31 @@ public class VocabularyManager: MonoBehaviour,
         FirebaseManager.GetMissionData(this, missionName);
     }
 
-// Código reciclado que se encarga del ajuste adecuado de la Escala del Game View.
-#if UNITY_EDITOR
-  void Awake()
-  {
-      SetGameViewScale();
-  }
+    // Código reciclado que se encarga del ajuste adecuado de la Escala del Game View.
+    #if UNITY_EDITOR
+      void Awake()
+      {
+          SetGameViewScale();
+      }
 
-  void SetGameViewScale()
-  {
-      System.Reflection.Assembly assembly = typeof(UnityEditor.EditorWindow).Assembly;
-      System.Type type = assembly.GetType("UnityEditor.GameView");
-      UnityEditor.EditorWindow v = UnityEditor.EditorWindow.GetWindow(type);
+      void SetGameViewScale()
+      {
+          System.Reflection.Assembly assembly = typeof(UnityEditor.EditorWindow).Assembly;
+          System.Type type = assembly.GetType("UnityEditor.GameView");
+          UnityEditor.EditorWindow v = UnityEditor.EditorWindow.GetWindow(type);
 
-      var defScaleField = type.GetField("m_defaultScale", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+          var defScaleField = type.GetField("m_defaultScale", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
 
-      //whatever scale you want when you click on play
-      float defaultScale = 0.37f;
+          //whatever scale you want when you click on play
+          float defaultScale = 0.37f;
 
-      var areaField = type.GetField("m_ZoomArea", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-      var areaObj = areaField.GetValue(v);
+          var areaField = type.GetField("m_ZoomArea", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+          var areaObj = areaField.GetValue(v);
 
-      var scaleField = areaObj.GetType().GetField("m_Scale", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-      scaleField.SetValue(areaObj, new Vector2(defaultScale, defaultScale));
-  }
-#endif
+          var scaleField = areaObj.GetType().GetField("m_Scale", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+          scaleField.SetValue(areaObj, new Vector2(defaultScale, defaultScale));
+      }
+    #endif
 
     public void InitializeGame()
     {
@@ -105,14 +103,18 @@ public class VocabularyManager: MonoBehaviour,
         return index;
     }
 
+    // Called when firebase manager has a response to the API method called
     public void MissionDataRecieved(FirebaseManager.CallbackResult result,
        MissionData? data, string message) {
+        // Try to handle all cases
         switch(result) {
+            // If the result is not success, just print to console as error
             case FirebaseManager.CallbackResult.Canceled:
             case FirebaseManager.CallbackResult.Faulted:
             case FirebaseManager.CallbackResult.Invalid:
                 Debug.LogError(message);
                 break;
+            // If successful, use recieved mission data to populate scene
             case FirebaseManager.CallbackResult.Success:
             default:
                 Debug.Log(message);
@@ -123,18 +125,27 @@ public class VocabularyManager: MonoBehaviour,
         }
     }
 
+    // Wrapper function to call WorldLoader as an IEnumerator
+    // to work with UnityMainThreadDispatcher.
     IEnumerator WordLoaderWrapper(MissionData? data) {
         WordLoader(data.Value.Data);
         yield return null;
     }
 
+    // Parsed data from Firebase into data that this scene can use.
     private void WordLoader(DocumentStore data) {
+        // Initialize lists to hold data for later conversiont to array
         List<string[]> listaMatrix = new List<string[]>();
         List<int> listaNivel = new List<int>();
         List<bool> listaMatrixIndexAvailability = new List<bool>();
+
         List<object> definitions = data["definitions"] as List<object>;
+
+        // Iterate over all objects found under definitions
         for (int i = 1; i < definitions.Count; i++) {
+            // Attempt to parse the object as another subpage
             DocumentStore levels = definitions[i] as DocumentStore;
+            // and iterate over all its children
             foreach (KeyValuePair<string, object> level in levels) {
                 string[] pair = new string[2];
                 pair[0] = level.Key;
@@ -144,15 +155,24 @@ public class VocabularyManager: MonoBehaviour,
                 listaMatrixIndexAvailability.Add(true);
             }
         }
+
+        // Initialize the fixed matrix once we can determine its final size
         matrix = new string[listaMatrix.Count, 2];
+
+        // Iterate over the parsed data so we can convert it into an array format
+        // the other fuctions can utilize
         for(int i = 0; i < listaMatrix.Count; i++) {
             string[] pair = listaMatrix[i];
             for (int j = 0; j < 2; j++) {
                 matrix[i, j] = pair[j];
             }
         }
+
+        // Convert from list to arrays
         nivel = listaNivel.ToArray();
         matrixIndexAvailability = listaMatrixIndexAvailability.ToArray();
+
+        // Now that we have the data & its properly parsed, initalize game.
         InitializeGame();
     }
 
