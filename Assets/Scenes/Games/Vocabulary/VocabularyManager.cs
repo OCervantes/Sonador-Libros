@@ -13,11 +13,11 @@ public class VocabularyManager: MonoBehaviour,
     public AudioSource bounceSource, lockSource;
     public GameObject recibidor, banco, definition,
       prefabMovableAndSlot = null, prefabSlot = null, cameraObject = null;
-    public bool butDoesItSave = false;
+    //public bool butDoesItSave = false;
     public string missionName = "hangman_1";
 
     GameObject MovAndSlotObjRef, SlotObjRef;
-    List<string> letrasPal = new List<string>();
+    //List<string> letrasPal = new List<string>();
     bool hasDestroyedRecibidor = false, hasDestroyedBanco = false;
     int savedIndex;
     string recoveredVocabWord;
@@ -49,7 +49,7 @@ public class VocabularyManager: MonoBehaviour,
     }
 
     // Código reciclado que se encarga del ajuste adecuado de la Escala del Game View.
-    #if UNITY_EDITOR
+    /*#if UNITY_EDITOR
       void Awake()
       {
           SetGameViewScale();
@@ -72,7 +72,7 @@ public class VocabularyManager: MonoBehaviour,
           var scaleField = areaObj.GetType().GetField("m_Scale", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
           scaleField.SetValue(areaObj, new Vector2(defaultScale, defaultScale));
       }
-    #endif
+    #endif*/
 
     public void InitializeGame()
     {
@@ -85,7 +85,8 @@ public class VocabularyManager: MonoBehaviour,
     public int RandomNumberGenerator()
     {
         int temptativeIndex;
-        temptativeIndex = (int)Random.Range(lowerRNGLimit, upperRNGLimit);
+        // upperRNGLimit+1 por ser límite exclusivo, cuando Random.Range posee enteros como argumentos.
+        temptativeIndex = Random.Range(lowerRNGLimit, upperRNGLimit+1);//(int)Random.Range(lowerRNGLimit, upperRNGLimit);
 
         return temptativeIndex;
     }
@@ -262,7 +263,7 @@ public class VocabularyManager: MonoBehaviour,
 
         do
         {
-            temp = (int)(Random.Range(0, wordLength-1));
+            temp = (Random.Range(0, wordLength));//(int)(Random.Range(0, wordLength-1));
         }
         while (characterAvailability[temp] == false);
 

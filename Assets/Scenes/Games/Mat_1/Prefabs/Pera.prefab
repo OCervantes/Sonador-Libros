@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5149603911599205575}
   - component: {fileID: 8348173700106988248}
   - component: {fileID: 2637615065326736324}
+  - component: {fileID: 4592473437855756460}
   - component: {fileID: 7345054581009748167}
   m_Layer: 0
-  m_Name: Pear
+  m_Name: Pera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,6 +89,21 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &4592473437855756460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345054581009748169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 4, y: 4}
+  m_UseGraphicAlpha: 1
 --- !u!114 &7345054581009748167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,4 +116,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3081a381d506a143a834134e56bff46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flag: 0
