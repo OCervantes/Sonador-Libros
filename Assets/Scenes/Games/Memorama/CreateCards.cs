@@ -9,8 +9,9 @@ using UnityEngine.UI;
 public class CreateCards : MonoBehaviour {
 
 	public GameObject prefabCard;
-	public int width;
-	public Transform ParentCards;
+	public int[] size = {200, 140, 100};
+	public int nSize = 0;
+	public GameObject ParentCards;
 	//public Material[] materials;
 
 	public int counterClicks;
@@ -25,27 +26,35 @@ public class CreateCards : MonoBehaviour {
 
 	private List<GameObject> cards = new List<GameObject> ();
 
-	private Texture2D[] textures;
+	private Sprite[] sprites;
 
 	// ---------------------------------------------------------------------
 	// ---- functions
 	// ---------------------------------------------------------------------
 
 	public void Start(){
-		 Addressables.LoadAssetsAsync<Texture2D>("memorama", null).Completed += OnSpritesLoaded;
+		 Addressables.LoadAssetsAsync<Sprite>("memorama", null).Completed += OnSpritesLoaded;
 	}
 
-	private void OnSpritesLoaded(AsyncOperationHandle<IList<Texture2D>> result)
+	private void OnSpritesLoaded(AsyncOperationHandle<IList<Sprite>> result)
 	{
 		if (result.Status == AsyncOperationStatus.Succeeded)
 		{
-			if (result.Result != null || result.Result.Count > 0)
+			if (result.Result != null && result.Result.Count > 0)
 			{
-				IList<Texture2D> list = result.Result;
-				textures = new Texture2D[list.Count];
-				list.CopyTo(textures, 0);
+				IList<Sprite> list = result.Result;
+				sprites = new Sprite[list.Count];
+				list.CopyTo(sprites, 0);
+				Debug.Log("Result is " + list.Count);
 			}
-			Addressables.Release<IList<Texture2D>>(result);
+			else if (result.Result == null)
+			{
+				Debug.Log("Result is null");
+			} else
+			{
+				Debug.Log("Result is 0");
+			}
+			Addressables.Release<IList<Sprite>>(result);
 		}
 		else if (result.Status == AsyncOperationStatus.Failed)
 		{
@@ -54,7 +63,7 @@ public class CreateCards : MonoBehaviour {
 	}
 
 	public void Restart(){
-		width = 0;
+		nSize = 0;
 		cards.Clear ();
 
 		GameObject[] actualCards = GameObject.FindGameObjectsWithTag ("Card");
@@ -74,28 +83,28 @@ public class CreateCards : MonoBehaviour {
 	}//end Restart
 
 	public void Create(){
-		width = userInterface.Difficulty;
+		nSize = userInterface.Difficulty;
+		ParentCards.GetComponent<GridLayoutGroup>().cellSize =
+			new Vector2(size[nSize - 3], size[nSize - 3]);
 
 		int cont = 0;
-		for(int i=0; i<width; i++){
-			for(int x=0; x<width; x++){
+		for(int i=0; i<nSize; i++){
+			for(int x=0; x<nSize; x++){
 				//float factor = 9.0f / ancho;
 				//mantener distribución de las cartas
 				Vector3 tempPosition = new Vector3(x,0,i /**factor*/);
 				//proporcionar cartas
 
-				GameObject tempCard = Instantiate(prefabCard, tempPosition,
-					Quaternion.Euler(new Vector3(0,180,0)));
+				GameObject tempCard = Instantiate(prefabCard,
+					tempPosition, Quaternion.identity);
 
 				//escalado
 				//cartaTemp.transform.localScale *= factor;
 
 				cards.Add (tempCard);
 
-				tempCard.GetComponent<Card> ().originalPosition = tempPosition;
+				//tempCard.GetComponent<Card> ().originalPosition = tempPosition;
 				//cartaTemp.GetComponent<Carta>().numCarta = cont;
-
-				tempCard.transform.parent = ParentCards;
 
 				cont++;
 			}//end for
@@ -109,9 +118,9 @@ public class CreateCards : MonoBehaviour {
 		//textures = Resources.Load("Resources", typeof(Texture2D)) as Texture2D;
 
 		//variando las texturas de las cartas
-		int[] tempArray = new int[textures.Length];
+		int[] tempArray = new int[sprites.Length];
 
-		for (int i = 0; i <= textures.Length-1; i++) {
+		for (int i = 0; i < sprites.Length; i++) {
 			tempArray [i] = i;
 		}
 
@@ -123,15 +132,15 @@ public class CreateCards : MonoBehaviour {
 		}
 
 		//int[] arrayDefinitivo = new int[(ancho * ancho)/2];
-		int[] finalArray = new int[width * width];
+		int[] finalArray = new int[nSize * nSize];
 
 		for (int i = 0; i < finalArray.Length; i++) {
 			finalArray [i] = tempArray [i];
 		}
 
-		for (int i = 0; i < finalArray.Length; i++) {
-			cards[i].GetComponent<Card>().AssignTexture(textures[(finalArray[i/2])]);
-			cards [i].GetComponent<Card> ().numCard = i / 2;
+		for (int i = 0; i < cards.Count; i++) {
+			cards[i].GetComponent<Card>().AssignSprite(sprites[(finalArray[i/2])]);
+			cards[i].GetComponent<Card>().numCard = i / 2;
 			print (i / 2); //para obtener id's por parejas
 		}
 	}//end AssignTextures
@@ -142,12 +151,14 @@ public class CreateCards : MonoBehaviour {
 		for (int i = 0; i < cards.Count; i++) {
 			randomNum = Random.Range (0, cards.Count);
 
-			cards [i].transform.position = cards [randomNum].transform.position;
-			cards [randomNum].transform.position = cards [i].GetComponent<Card> ().originalPosition;
-
-			cards [i].GetComponent<Card> ().originalPosition = cards [i].transform.position;
-			cards [randomNum].GetComponent<Card> ().originalPosition = cards [randomNum].transform.position;
+			GameObject temp = cards[i];
+			cards[i] = cards[randomNum];
+			cards[randomNum] = temp;
 		}//end for
+
+		for (int i = 0; i < cards.Count; i++) {
+			cards[i].transform.SetParent(ParentCards.transform);
+		}
 	}//end ShuffleCards
 
 	public bool CompareCards(GameObject card1, GameObject card2){
