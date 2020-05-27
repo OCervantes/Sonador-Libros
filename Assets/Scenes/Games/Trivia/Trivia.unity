@@ -1111,57 +1111,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 224721253493554904, guid: de83070d965a6ed4e83d9f83ad6b342d,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224721253493554904, guid: de83070d965a6ed4e83d9f83ad6b342d,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224721253493554904, guid: de83070d965a6ed4e83d9f83ad6b342d,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224721253493554904, guid: de83070d965a6ed4e83d9f83ad6b342d,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224721253493554904, guid: de83070d965a6ed4e83d9f83ad6b342d,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224721253493554904, guid: de83070d965a6ed4e83d9f83ad6b342d,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224721253493554904, guid: de83070d965a6ed4e83d9f83ad6b342d,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224637399767201640, guid: de83070d965a6ed4e83d9f83ad6b342d,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114263973149368476, guid: de83070d965a6ed4e83d9f83ad6b342d,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: efee20b64d1e73942a29ba61ce3379c3,
-        type: 3}
-    - target: {fileID: 114263973149368476, guid: de83070d965a6ed4e83d9f83ad6b342d,
-        type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de83070d965a6ed4e83d9f83ad6b342d, type: 3}
 --- !u!224 &1372925412 stripped
