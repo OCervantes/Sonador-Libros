@@ -141,7 +141,7 @@ public class Animations: MonoBehaviour
                 break;                
             
             // Scene "Agradecimiento"
-            case 10:
+            case 9:
 
                 // Same condition as in Dialog. Checks once the sentence has finished "typing".                                   
                 if (/*DialogText == Dialog.sentences[Dialog.index])DialogSentences[CurrentDialogIndex])*/dialogAndAudioMan.GetComponent<Dialog>().UIText.text == dialogAndAudioMan.GetComponent<Dialog>().sentences[index])

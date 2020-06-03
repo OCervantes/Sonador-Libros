@@ -511,12 +511,12 @@ PrefabInstance:
         type: 3}
       propertyPath: audios.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: ea44df923f62892409540cc65ece0b00, type: 3}
+      objectReference: {fileID: 8300000, guid: b2216477cf36b0541b609c93e2668fda, type: 3}
     - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: audios.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: c56ba399af6eddf4e8b39809bf79a0f8, type: 3}
+      objectReference: {fileID: 8300000, guid: bb96d93807a20db4b8166dd56348fe5e, type: 3}
     - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: loader
@@ -691,11 +691,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8198330572143228880, guid: 9732665f00173ae438066953a165503a,
-        type: 3}
-      propertyPath: transition
-      value: 
-      objectReference: {fileID: 1381586872}
     - target: {fileID: 3023816203347078120, guid: 9732665f00173ae438066953a165503a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -761,6 +756,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8198330572143228880, guid: 9732665f00173ae438066953a165503a,
+        type: 3}
+      propertyPath: transition
+      value: 
+      objectReference: {fileID: 1381586872}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9732665f00173ae438066953a165503a, type: 3}
 --- !u!1 &1381586871 stripped
@@ -793,7 +793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1615453355
 RectTransform:
   m_ObjectHideFlags: 0

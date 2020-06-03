@@ -232,7 +232,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: e1d6677e5b0b3324cb13ecf6f16d3c22, type: 3}
+      objectReference: {fileID: 8300000, guid: 3366c55ffd2e6a7478f1620dd6ba4393, type: 3}
     - target: {fileID: 82237344333198572, guid: de83070d965a6ed4e83d9f83ad6b342d,
         type: 3}
       propertyPath: m_Volume
@@ -570,7 +570,7 @@ PrefabInstance:
         type: 3}
       propertyPath: audios.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 67a11ebe454e1e14b9af823afe53f14d, type: 3}
+      objectReference: {fileID: 8300000, guid: 32956c1993d5a4642b3bb7d6783cbb9c, type: 3}
     - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: typingSpeed

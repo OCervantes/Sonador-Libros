@@ -1,12 +1,10 @@
 ﻿// Script que se encarga del inicio, traslado (frame por frame), y llegada a Slot de cada Movable.
 
 using UnityEngine;
-using System.Collections;
 /* "Really powerful"
  * Needed in order to make use of the EventSystems
  */
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 /* 3 interfaces implemented (from EventSystems):
  * Usados cuando se necesite arrastrar un Objeto(?) Como se intuye por sus nombres:
@@ -39,7 +37,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("DRAG BEGUN");
+        //Debug.Log("DRAG BEGUN");
 
         if (flag) return;
         // Said object that's being dragged is assigned to current Game Object
@@ -63,7 +61,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler,
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("DRAGGING");
+        //Debug.Log("DRAGGING");
 
         if (flag) return;
 
@@ -79,7 +77,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler,
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("DRAG CONCLUDED");
+        //Debug.Log("DRAG CONCLUDED");
 
         if (flag) return;
 

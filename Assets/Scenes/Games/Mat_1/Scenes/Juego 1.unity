@@ -712,6 +712,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 361713402}
     m_Modifications:
+    - target: {fileID: 1192717353342837550, guid: 5d71b8baf82987b4ca71ad986067d6cc,
+        type: 3}
+      propertyPath: m_Name
+      value: Dialogue Background
+      objectReference: {fileID: 0}
     - target: {fileID: 1192717353342837551, guid: 5d71b8baf82987b4ca71ad986067d6cc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -816,11 +821,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1192717353342837550, guid: 5d71b8baf82987b4ca71ad986067d6cc,
-        type: 3}
-      propertyPath: m_Name
-      value: Dialogue Background
       objectReference: {fileID: 0}
     - target: {fileID: 3712193905897105700, guid: 5d71b8baf82987b4ca71ad986067d6cc,
         type: 3}
@@ -1500,16 +1500,16 @@ MonoBehaviour:
   fruitsInBasketLabel: {fileID: 413954987}
   initializer: {fileID: 981208431}
   audios:
-  - {fileID: 8300000, guid: 81239f27078a3e04e8e964e9410e57f2, type: 3}
-  - {fileID: 8300000, guid: 5d5c5d8dee796bd41a2cfa5064fa362e, type: 3}
-  - {fileID: 8300000, guid: c2ac47757f000504e9e6a75c54f8b74c, type: 3}
-  - {fileID: 8300000, guid: e4b278b45951b7c438f45893f4fbe64d, type: 3}
-  - {fileID: 8300000, guid: 4d4062e54dfb2ae4caf4d9adf956bf21, type: 3}
-  - {fileID: 8300000, guid: 0a60ec3acebc4554188f34e42fb5e2c0, type: 3}
-  - {fileID: 8300000, guid: 1a88a5653898f3c4ea61e3a2c2c744e1, type: 3}
-  - {fileID: 8300000, guid: 53c4abfeb3db0e445a7f0f17d27a3f89, type: 3}
-  - {fileID: 8300000, guid: 14bc4b41e5478134fa23d6ce02e0d36c, type: 3}
-  - {fileID: 8300000, guid: 510bb942c420b454e9980a0c8d67af67, type: 3}
+  - {fileID: 8300000, guid: eb5ca04abc1f9384ab6287778d1bef6e, type: 3}
+  - {fileID: 8300000, guid: 809805860bb7b7f41a5d16bce62f653f, type: 3}
+  - {fileID: 8300000, guid: deaf7b1e20c73994a8955ba53b9239c1, type: 3}
+  - {fileID: 8300000, guid: 45ea81a61050d464380d16e12b4e8c4c, type: 3}
+  - {fileID: 8300000, guid: cb5cea488ecdbf14599a8d07a11acf1f, type: 3}
+  - {fileID: 8300000, guid: c67843ce783d6364496f37be2ae657bb, type: 3}
+  - {fileID: 8300000, guid: 17d73b58ce0f4f74fa894087da334341, type: 3}
+  - {fileID: 8300000, guid: d8f38a94fcc7b094ab11d6f00e5ce265, type: 3}
+  - {fileID: 8300000, guid: d6730e4c3f657fe49ab2ca14358a32d9, type: 3}
+  - {fileID: 8300000, guid: 1c89318bff826074db7a91d25490a52b, type: 3}
 --- !u!222 &1731219258
 CanvasRenderer:
   m_ObjectHideFlags: 0
