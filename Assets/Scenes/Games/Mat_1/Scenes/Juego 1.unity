@@ -458,6 +458,7 @@ RectTransform:
   - {fileID: 2011987925}
   - {fileID: 717707537}
   - {fileID: 222064415}
+  - {fileID: 1603666485}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -579,8 +580,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.2, y: -1.7}
-  m_SizeDelta: {x: 459.7, y: 91.8}
+  m_AnchoredPosition: {x: 9, y: -0.000012398}
+  m_SizeDelta: {x: 459.7, y: 63.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &713877019
 MonoBehaviour:
@@ -604,7 +605,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -615,8 +616,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Recoge la cantidad de frutas que te pide el texto de la izquierda, tal y
-    como te lo indica la manita.
+  m_Text: Recoge la cantidad de frutas que te piden, tal y como te lo indica la manita.
 --- !u!222 &713877020
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1264,6 +1264,10 @@ MonoBehaviour:
   - {fileID: 7345054581009748169, guid: 30452c16a87f120439a27fc33ed6af09, type: 3}
   - {fileID: 7345054581009748169, guid: ef558b098ae5dab4490710fcce7f4eda, type: 3}
   fruitPanels: []
+  Hand: {fileID: 1603666484}
+  speed: 2
+  accuracy: 0.01
+  goal: {x: 0, y: 0, z: 0}
 --- !u!222 &981208432
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1707,6 +1711,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3877618491386258639, guid: a51a8cdea986f1844822753473884b3b,
+        type: 3}
+      propertyPath: Hand
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a51a8cdea986f1844822753473884b3b, type: 3}
 --- !u!1 &1475863755
@@ -1753,6 +1762,97 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475863755}
+  m_CullTransparentMesh: 0
+--- !u!1 &1603666484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1603666485}
+  - component: {fileID: 1603666489}
+  - component: {fileID: 1603666488}
+  - component: {fileID: 1603666486}
+  m_Layer: 5
+  m_Name: Hand (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1603666485
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603666484}
+  m_LocalRotation: {x: 0, y: 0, z: -0.36827862, w: 0.92971545}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 361713402}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -43.219}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 129.85, y: -116}
+  m_SizeDelta: {x: 139.8, y: 139.8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1603666486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603666484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85e8ecb6e16d9c441a5c19bb33ee6783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basket: {x: 0, y: 0, z: 0}
+  speed: 300
+  accuracy: 2
+  fruit: {fileID: 981208431}
+--- !u!114 &1603666488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603666484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 20311c5cd85a37c498a1cda02020d276, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &1603666489
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603666484}
   m_CullTransparentMesh: 0
 --- !u!1001 &1710989130
 PrefabInstance:
@@ -1868,6 +1968,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877618491386258639, guid: a51a8cdea986f1844822753473884b3b,
+        type: 3}
+      propertyPath: Hand
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a51a8cdea986f1844822753473884b3b, type: 3}
@@ -2157,7 +2262,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2011987925
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2453,6 +2558,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877618491386258639, guid: a51a8cdea986f1844822753473884b3b,
+        type: 3}
+      propertyPath: Hand
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a51a8cdea986f1844822753473884b3b, type: 3}
