@@ -1,19 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour {
 	public int numCard = 0;
-	public Vector3 originalPosition;
-	
-	public Texture2D imageTexture;
-	public Texture2D backTexture;
+
+	public Sprite sprite;
+	public Sprite defaultSprite;
 
 	public float timeDelay;
-	public GameObject createCards;
 	public bool showing;
 
+	public GameObject createCards;
 	public GameObject userInterface;
+	private Image image;
 
 	// ---------------------------------------------------------------------
 	// ---- functions
@@ -22,22 +23,23 @@ public class Card : MonoBehaviour {
 	void Awake(){
 		createCards = GameObject.Find ("Scripts");
 		userInterface = GameObject.Find ("Scripts");
+		image = GetComponent<Image>();
 	}
 
 	void Start(){
 		HideCard ();
 	}
 
-	public void AssignTexture(Texture2D _texture){
-		imageTexture = _texture;
+	public void AssignSprite(Sprite _sprite){
+		sprite = _sprite;
 	}
 
 	public void ShowCard(){
 		if (!showing && createCards.GetComponent<CreateCards>().itCanBeShown) {
 			showing = true;
-			GetComponent<MeshRenderer>().material.mainTexture = imageTexture;
+			image.sprite = sprite;
 			//Invoke ("EsconderCarta", tiempoDelay);
-			createCards.GetComponent<CreateCards>().OnClickCard (this);	
+			createCards.GetComponent<CreateCards>().OnClickCard (this);
 		}//end if
 	}//end ShowCard
 
@@ -47,7 +49,7 @@ public class Card : MonoBehaviour {
 	}//end HideCard
 
 	void Hide(){
-		GetComponent<MeshRenderer> ().material.mainTexture = backTexture;
+		image.sprite = defaultSprite;
 		showing = false;
 		createCards.GetComponent<CreateCards> ().itCanBeShown = true;
 	}//end Hide
@@ -57,11 +59,11 @@ public class Card : MonoBehaviour {
 	// ---- buttons
 	// ---------------------------------------------------------------------
 
-	void OnMouseDown(){
+	public void OnMouseDown(){
 		print (numCard.ToString ());
 		if (!userInterface.GetComponent<UserInterface>().menuStart.activeSelf) {
 			ShowCard ();
 		}
 	}//end OnMouseDown
-		
+
 }//end Card
