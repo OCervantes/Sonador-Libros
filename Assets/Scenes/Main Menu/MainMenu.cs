@@ -10,4 +10,8 @@ public class MainMenu : MonoBehaviour {
 	public void ToNewAccount() {
 		SceneManager.LoadScene ("NewAccount");
 	}
+
+	public void ToCredits() {
+		SceneManager.LoadScene ("Credits");
+	}
 }

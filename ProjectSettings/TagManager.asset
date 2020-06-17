@@ -13,6 +13,8 @@ TagManager:
   - Text
   - Inicio
   - Skip
+  - Card
+  - Hand
   layers:
   - Default
   - TransparentFX

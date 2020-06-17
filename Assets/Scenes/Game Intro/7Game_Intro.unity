@@ -691,11 +691,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8198330572143228880, guid: 9732665f00173ae438066953a165503a,
-        type: 3}
-      propertyPath: transition
-      value: 
-      objectReference: {fileID: 1381586872}
     - target: {fileID: 3023816203347078120, guid: 9732665f00173ae438066953a165503a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -761,6 +756,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8198330572143228880, guid: 9732665f00173ae438066953a165503a,
+        type: 3}
+      propertyPath: transition
+      value: 
+      objectReference: {fileID: 1381586872}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9732665f00173ae438066953a165503a, type: 3}
 --- !u!1 &1381586871 stripped
@@ -793,7 +793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1615453355
 RectTransform:
   m_ObjectHideFlags: 0
