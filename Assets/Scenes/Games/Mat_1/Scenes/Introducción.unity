@@ -777,7 +777,7 @@ PrefabInstance:
         type: 3}
       propertyPath: audios.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: 0cf49612c6fa9bc47a1f7a4b8611ad87, type: 3}
+      objectReference: {fileID: 8300000, guid: 189558449e8b8be42bb13e80e471310b, type: 3}
     - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: audios.Array.data[2]

@@ -13,12 +13,15 @@ public class Dialog : MonoBehaviour
     public /*static*/ int index;
     public GameObject continueButton, gobackButton, dialogBackground, endgame, skip, loader;
     public FruitInitialization initializer;
+    public /*[SerializeField]*/ float typingSpeed;
 
-    private GameObject inicio;
-    int sceneIndex;
-    [SerializeField] float typingSpeed;
+    GameObject inicio, currentFruitsPanel, currentFruitsIndexesObject;
+    Text currentFruitsIndexesText;
+    int sceneIndex, firstTypeOfFruits, secondTypeOfFruits, thirdTypeOfFruits;
+    int[] typesOfFruits;
+    //public /*[SerializeField]*/ float typingSpeed;
     [SerializeField] AudioClip[] audios, maleNounsFeru, femaleNounsFeru, maleNounsMati, femaleNounsMati, un, numbersFeru, numbersMati, pluralFruitsFeru, pluralFruitsMati, singleFruitsFeru, singleFruitsMati;
-    AudioSource source, individualSource;
+    AudioSource source;//, individualSource;
     bool continuarpresionado = true;
 
     /* More convenient to track the Slider's value from SliderNumber's printValue() than from the Slider's attribute it-
@@ -29,6 +32,8 @@ public class Dialog : MonoBehaviour
 
     void Start()
     {
+        //typesOfFruits = new int[initializer.fruits.Length];
+
         /* Éste es , Éstos son
         maleNounsString = new string[2];
         // Ésta es , Éstas son
@@ -57,7 +62,8 @@ public class Dialog : MonoBehaviour
         pluralFruitsFeru = new AudioClip[3];
         pluralFruitsMati = new AudioClip[3];*/
 
-        typingSpeed = 0.02f;
+        // Commented so that it may be edited in the Inspector, given that each Scene's typing speed differs.
+        //typingSpeed = 0.02f;
 
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
 
@@ -66,13 +72,52 @@ public class Dialog : MonoBehaviour
         gobackButton.SetActive(false);
         skip.SetActive(false);
 
-        if (SceneManager.GetActiveScene().name == "7Game_Intro" && index == 0){
+        if (SceneManager.GetActiveScene().name == "7Game_Intro" && index == 0)
+        {
            inicio =  GameObject.FindGameObjectWithTag("Inicio");
            inicio.SetActive(false);
         }
 
         source = GetComponent<AudioSource>();
-        individualSource = new AudioSource();
+        //individualSource = new AudioSource();
+
+        // Scene "Corrección"
+        if (sceneIndex == 22)
+        {
+            // Declare typesOfFruits array.
+            typesOfFruits = new int[initializer.fruits.Length];
+
+            // Get total number of fruits instantiated.
+            totalFruits = 0;
+
+            for (int i=0; i<initializer.fruits.Length; i++)
+            {
+                totalFruits += FruitInitialization.numFruits[i];                
+            }        
+
+            // Reference Panel displaying current fruits
+            currentFruitsPanel = GameObject.Find("Current Fruits Panel");
+            //currentFruitsPanel.name = "Pat";
+
+            /* Reference Text object which indicates the indexes of each fruit currently displayed in the Current Fruits
+               Panel.
+             */
+            //currentFruitsIndexesObject = GameObject.Find("Fruit Indexes");
+            currentFruitsIndexesText = GameObject.Find("Fruit Indexes")
+                                                .GetComponent<Text>();//currentFruitsIndexesObject.GetComponent<Text>();
+
+            // Get number of fruits belonging to the first fruit index.
+            for (int i=0; i<initializer.fruits.Length; i++)
+            {
+                typesOfFruits[i] = FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]];
+            }
+        }
+        
+        /*
+        firstTypeOfFruits = FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]];
+        secondTypeOfFruits = FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]];
+        thirdTypeOfFruits = FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]];
+        */
 
         StartCoroutine(Type());
     }
@@ -81,15 +126,35 @@ public class Dialog : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "New Corrección")
         {
+            //int totalFruits = 0;                        
             switch(index)
             {
                 // Feru
-                case 0:
+                case 0:                                                              
+                    //Debug.Log("First Fruits Number: " + firstTypeOfFruits);
+
+                    // Set all other of the instantiated Fruit Panels' visibility to false.                    
+                    for (int i=typesOfFruits[0]; i<totalFruits; i++)
+                    {
+                        currentFruitsPanel.transform
+                                          .GetChild(i)
+                                          .gameObject
+                                          .SetActive(false);
+                    }                    
+
+                    // Set Text of the Current Fruits Indexes Object to the current number of fruits displayed.
+                    currentFruitsIndexesText.text = " 1";
+
+                    for (int i=2; i<=typesOfFruits[0]; i++)
+                    {
+                        currentFruitsIndexesText.text += "     " + i;
+                    }
+
                     // Fruta (singular)
                     if (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]] == 1)
                     {
                         // Masculina (Durazno)
-                        if (initializer.fruits[FruitInitialization.fruitIndexes[0]].name == "Durazno")
+                        if (initializer.fruits[FruitInitialization.fruitIndexes[0]].name == "durazno")
                         {
                             // Éste es
                             source.PlayOneShot(maleNounsFeru[0]);
@@ -100,7 +165,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // un
-
+                            yield return new WaitForSeconds(un[0].length);
                             source.PlayOneShot(un[0]);
                             foreach(char letter in "1 ".ToCharArray())
                             {
@@ -109,8 +174,9 @@ public class Dialog : MonoBehaviour
                             }
 
                             // Durazno
+                            yield return new WaitForSeconds(singleFruitsFeru[2].length);
                             source.PlayOneShot(singleFruitsFeru[2]);
-                            foreach(char letter in "Durazno.".ToCharArray())
+                            foreach(char letter in "durazno.".ToCharArray())
                             {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
@@ -129,6 +195,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // una
+                            yield return new WaitForSeconds(numbersFeru[0].length);
                             source.PlayOneShot(numbersFeru[0]);
                             foreach(char letter in "1 ".ToCharArray())
                             {
@@ -137,6 +204,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // (fruta)
+                            yield return new WaitForSeconds(singleFruitsFeru[FruitInitialization.fruitIndexes[0]].length);
                             source.PlayOneShot(singleFruitsFeru[FruitInitialization.fruitIndexes[0]]);
                             foreach(char letter in (initializer.fruits[FruitInitialization.fruitIndexes[0]].name + ".").ToCharArray())
                             {
@@ -150,7 +218,7 @@ public class Dialog : MonoBehaviour
                     else
                     {
                         // Masculinas (Duraznos)
-                        if (initializer.fruits[FruitInitialization.fruitIndexes[0]].name == "Durazno")
+                        if (initializer.fruits[FruitInitialization.fruitIndexes[0]].name == "durazno")
                         {
                             // Éstos son
                             source.PlayOneShot(maleNounsFeru[1]);
@@ -161,6 +229,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // (número variable)
+                            yield return new WaitForSeconds(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]]-1].length);
                             source.PlayOneShot(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]]-1]);
                             foreach(char letter in (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]].ToString() + " ").ToCharArray())
                             {
@@ -169,8 +238,9 @@ public class Dialog : MonoBehaviour
                             }
 
                             // Duraznos
+                            yield return new WaitForSeconds(pluralFruitsFeru[2].length);
                             source.PlayOneShot(pluralFruitsFeru[2]);
-                            foreach(char letter in "Duraznos.".ToCharArray())
+                            foreach(char letter in "duraznos.".ToCharArray())
                             {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
@@ -189,6 +259,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // (número variable)
+                            yield return new WaitForSeconds(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]]-1].length);
                             source.PlayOneShot(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]]-1]);
                             foreach(char letter in (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]].ToString() + " ").ToCharArray())
                             {
@@ -197,6 +268,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // (frutas)
+                            yield return new WaitForSeconds(pluralFruitsFeru[FruitInitialization.fruitIndexes[0]].length);
                             source.PlayOneShot(pluralFruitsFeru[FruitInitialization.fruitIndexes[0]]);
                             foreach(char letter in (initializer.fruits[FruitInitialization.fruitIndexes[0]].name + "s.").ToCharArray())
                             {
@@ -222,11 +294,40 @@ public class Dialog : MonoBehaviour
 
                 // Mati
                 case 1:
+                    // Activate all fruits.
+                    ActivateChildren();
+
+                    // Set all other of the instantiated Fruit Panels' visibility to false.                    
+                    for (int i=0; i<typesOfFruits[0]; i++)
+                    {
+                        currentFruitsPanel.transform
+                                          .GetChild(i)
+                                          .gameObject
+                                          .SetActive(false);
+                    }                    
+
+                    
+                    for (int i=typesOfFruits[0] + typesOfFruits[1]; i<totalFruits; i++)
+                    {
+                        currentFruitsPanel.transform
+                                          .GetChild(i)
+                                          .gameObject
+                                          .SetActive(false);
+                    }                    
+
+                    // Set Text of the Current Fruits Indexes Object to the current number of fruits displayed.
+                    currentFruitsIndexesText.text =  "1";
+
+                    for (int i=2; i<=typesOfFruits[1]; i++)
+                    {
+                        currentFruitsIndexesText.text += "     " + i;
+                    }
+
                     // Fruta (singular)
                     if (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]] == 1)
                     {
                         // Masculina (Durazno)
-                        if (initializer.fruits[FruitInitialization.fruitIndexes[1]].name == "Durazno")
+                        if (initializer.fruits[FruitInitialization.fruitIndexes[1]].name == "durazno")
                         {
                             // Éste es
                             source.PlayOneShot(maleNounsMati[0]);
@@ -237,6 +338,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // un
+                            yield return new WaitForSeconds(un[1].length);
                             source.PlayOneShot(un[1]);
                             foreach(char letter in "1 ".ToCharArray())
                             {
@@ -245,8 +347,9 @@ public class Dialog : MonoBehaviour
                             }
 
                             // Durazno
+                            yield return new WaitForSeconds(singleFruitsMati[2].length);
                             source.PlayOneShot(singleFruitsMati[2]);
-                            foreach(char letter in "Durazno.".ToCharArray())
+                            foreach(char letter in "durazno.".ToCharArray())
                             {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
@@ -265,6 +368,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // una
+                            yield return new WaitForSeconds(numbersMati[0].length);
                             source.PlayOneShot(numbersMati[0]);
                             foreach(char letter in "1 ".ToCharArray())
                             {
@@ -273,6 +377,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // (fruta)
+                            yield return new WaitForSeconds(singleFruitsMati[FruitInitialization.fruitIndexes[1]].length);
                             source.PlayOneShot(singleFruitsMati[FruitInitialization.fruitIndexes[1]]);
                             foreach(char letter in (initializer.fruits[FruitInitialization.fruitIndexes[1]].name + ".").ToCharArray())
                             {
@@ -286,7 +391,7 @@ public class Dialog : MonoBehaviour
                     else
                     {
                         // Masculinas (Duraznos)
-                        if (initializer.fruits[FruitInitialization.fruitIndexes[1]].name == "Durazno")
+                        if (initializer.fruits[FruitInitialization.fruitIndexes[1]].name == "durazno")
                         {
                             // Éstos son
                             source.PlayOneShot(maleNounsMati[1]);
@@ -297,6 +402,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // (número variable)
+                            yield return new WaitForSeconds(numbersMati[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]]-1].length);
                             source.PlayOneShot(numbersMati[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]]-1]);
                             foreach(char letter in (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]].ToString() + " ").ToCharArray())
                             {
@@ -305,8 +411,9 @@ public class Dialog : MonoBehaviour
                             }
 
                             // Duraznos
+                            yield return new WaitForSeconds(pluralFruitsMati[2].length);
                             source.PlayOneShot(pluralFruitsMati[2]);
-                            foreach(char letter in "Duraznos.".ToCharArray())
+                            foreach(char letter in "duraznos.".ToCharArray())
                             {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
@@ -325,6 +432,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // (número variable)
+                            yield return new WaitForSeconds(numbersMati[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]]-1].length);
                             source.PlayOneShot(numbersMati[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]]-1]);
                             foreach(char letter in (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]].ToString() + " ").ToCharArray())
                             {
@@ -333,6 +441,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // (frutas)
+                            yield return new WaitForSeconds(pluralFruitsMati[FruitInitialization.fruitIndexes[1]].length);
                             source.PlayOneShot(pluralFruitsMati[FruitInitialization.fruitIndexes[1]]);
                             foreach(char letter in (initializer.fruits[FruitInitialization.fruitIndexes[1]].name + "s.").ToCharArray())
                             {
@@ -346,11 +455,44 @@ public class Dialog : MonoBehaviour
 
                 // Feru
                 case 2:
+                    // Activate all fruits.
+                    ActivateChildren();
+
+                    // Set all other of the instantiated Fruit Panels' visibility to false.                    
+                    for (int i=0; i<typesOfFruits[0] + typesOfFruits[1]; i++)
+                    {
+                        currentFruitsPanel.transform
+                                          .GetChild(i)
+                                          .gameObject
+                                          .SetActive(false);
+                    }                    
+
+                    /*
+                    for (int i=typesOfFruits[0] + typesOfFruits[1]; i<totalFruits; i++)
+                    {
+                        currentFruitsPanel.transform
+                                          .GetChild(i)
+                                          .gameObject
+                                          .SetActive(false);
+                    }
+                    */
+
+                    // Set Text of the Current Fruits Indexes Object to the current number of fruits displayed.
+                    currentFruitsIndexesText.text =  " 1";
+
+                    for (int i=2; i<=typesOfFruits[2]; i++)
+                    {
+                        currentFruitsIndexesText.text += "     " + i;
+
+                        if (i==10)
+                            currentFruitsIndexesText.text += "    " + i;
+                    }
+
                     // Fruta (singular)
                     if (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]] == 1)
                     {
                         // Masculina (Durazno)
-                        if (initializer.fruits[FruitInitialization.fruitIndexes[2]].name == "Durazno")
+                        if (initializer.fruits[FruitInitialization.fruitIndexes[2]].name == "durazno")
                         {
                             // Éste es
                             source.PlayOneShot(maleNounsFeru[0]);
@@ -361,6 +503,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // un
+                            yield return new WaitForSeconds(un[0].length);
                             source.PlayOneShot(un[0]);
                             foreach(char letter in "1 ".ToCharArray())
                             {
@@ -369,8 +512,9 @@ public class Dialog : MonoBehaviour
                             }
 
                             // Durazno
+                            yield return new WaitForSeconds(singleFruitsFeru[2].length);
                             source.PlayOneShot(singleFruitsFeru[2]);
-                            foreach(char letter in "Durazno.".ToCharArray())
+                            foreach(char letter in "durazno.".ToCharArray())
                             {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
@@ -389,6 +533,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // una
+                            yield return new WaitForSeconds(numbersFeru[0].length);
                             source.PlayOneShot(numbersFeru[0]);
                             foreach(char letter in "1 ".ToCharArray())
                             {
@@ -397,6 +542,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // (fruta)
+                            yield return new WaitForSeconds(singleFruitsFeru[FruitInitialization.fruitIndexes[2]].length);
                             source.PlayOneShot(singleFruitsFeru[FruitInitialization.fruitIndexes[2]]);
                             foreach(char letter in (initializer.fruits[FruitInitialization.fruitIndexes[2]].name + ".").ToCharArray())
                             {
@@ -410,7 +556,7 @@ public class Dialog : MonoBehaviour
                     else
                     {
                         // Masculinas (Duraznos)
-                        if (initializer.fruits[FruitInitialization.fruitIndexes[2]].name == "Durazno")
+                        if (initializer.fruits[FruitInitialization.fruitIndexes[2]].name == "durazno")
                         {
                             // Éstos son
                             source.PlayOneShot(maleNounsFeru[1]);
@@ -421,6 +567,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // (número variable)
+                            yield return new WaitForSeconds(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]]-1].length);
                             source.PlayOneShot(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]]-1]);
                             foreach(char letter in (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]].ToString() + " ").ToCharArray())
                             {
@@ -429,8 +576,9 @@ public class Dialog : MonoBehaviour
                             }
 
                             // Duraznos
+                            yield return new WaitForSeconds(pluralFruitsFeru[2].length);
                             source.PlayOneShot(pluralFruitsFeru[2]);
-                            foreach(char letter in "Duraznos.".ToCharArray())
+                            foreach(char letter in "duraznos.".ToCharArray())
                             {
                                 UIText.text += letter;
                                 yield return new WaitForSeconds(typingSpeed);
@@ -449,6 +597,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // (número variable)
+                            yield return new WaitForSeconds(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]]-1].length);
                             source.PlayOneShot(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]]-1]);
                             foreach(char letter in (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]].ToString() + " ").ToCharArray())
                             {
@@ -457,6 +606,7 @@ public class Dialog : MonoBehaviour
                             }
 
                             // (frutas)
+                            yield return new WaitForSeconds(pluralFruitsFeru[FruitInitialization.fruitIndexes[2]].length);
                             source.PlayOneShot(pluralFruitsFeru[FruitInitialization.fruitIndexes[2]]);
                             foreach(char letter in (initializer.fruits[FruitInitialization.fruitIndexes[2]].name + "s.").ToCharArray())
                             {
@@ -470,6 +620,38 @@ public class Dialog : MonoBehaviour
 
                 // Mati
                 case 3:
+                    // Activate all fruits.
+                    ActivateChildren();
+
+                    // Set all other of the instantiated Fruit Panels' visibility to false.                    
+                    /*
+                    for (int i=0; i<typesOfFruits[0] + typesOfFruits[1]; i++)
+                    {
+                        currentFruitsPanel.transform
+                                          .GetChild(i)
+                                          .gameObject
+                                          .SetActive(false);
+                    }
+                    */                    
+
+                    /*
+                    for (int i=typesOfFruits[0] + typesOfFruits[1]; i<totalFruits; i++)
+                    {
+                        currentFruitsPanel.transform
+                                          .GetChild(i)
+                                          .gameObject
+                                          .SetActive(false);
+                    }
+                    */
+
+                    // Set Text of the Current Fruits Indexes Object to the current number of fruits displayed.
+                    currentFruitsIndexesText.text =  " 1";
+
+                    for (int i=2; i<=totalFruits; i++)
+                    {
+                        currentFruitsIndexesText.text += "     " + i;
+                    }
+
                     // "Juntas dan..."
                     source.PlayOneShot(audios[0]);
                     foreach(char letter in sentences[0].ToCharArray())
@@ -479,7 +661,8 @@ public class Dialog : MonoBehaviour
                     }
 
                     // (total de frutas)
-                    source.PlayOneShot(audios[0]);
+                    yield return new WaitForSeconds(numbersMati[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]] + FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]] + FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]]-1].length);
+                    source.PlayOneShot(numbersMati[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]] + FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]] + FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]]-1]);
                     foreach(char letter in ((FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]] + FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]] + FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]]).ToString() + " ").ToCharArray())
                     {
                         UIText.text += letter;
@@ -487,13 +670,25 @@ public class Dialog : MonoBehaviour
                     }
 
                     // "...frutas."
+                    yield return new WaitForSeconds(audios[1].length);
                     source.PlayOneShot(audios[1]);
                     foreach(char letter in sentences[1].ToCharArray())
                     {
                         UIText.text += letter;
                         yield return new WaitForSeconds(typingSpeed);
                     }
+
+                    //Debug.Log("Can you see this?");
                     break;
+
+                /*
+                case 4:
+                    currentFruitsPanel.gameObject.SetActive(false);
+                    currentFruitsIndexesText.gameObject.SetActive(false);
+                    //currentFruitsIndexesObject.SetActive(false);
+                    //endgame.SetActive(true);
+                    break;  
+                */                  
             }
 
             continueButton.SetActive(true);
@@ -556,7 +751,7 @@ public class Dialog : MonoBehaviour
                 UIText.text = "";
                 dialogBackground.SetActive(false);
 
-                if (SceneManager.GetActiveScene().name == "Agradecimiento" || SceneManager.GetActiveScene().name == "New Corrección")
+                if (SceneManager.GetActiveScene().name == "Agradecimiento"/* || SceneManager.GetActiveScene().name == "New Corrección"*/)
                     endgame.SetActive(true);
                 else if (loader != null && loader.GetComponent<Levelloader>() != null)
                     loader.GetComponent<Levelloader>().LoadNextLevel(continuarpresionado);
@@ -577,10 +772,17 @@ public class Dialog : MonoBehaviour
                 UIText.text = "";
                 dialogBackground.SetActive(false);
 
-                if (SceneManager.GetActiveScene().name == "Agradecimiento" || SceneManager.GetActiveScene().name == "New Corrección")
+                currentFruitsPanel.gameObject.SetActive(false);
+                currentFruitsIndexesText.gameObject.SetActive(false);
+                    //currentFruitsIndexesObject.SetActive(false);
+                endgame.SetActive(true);
+
+                /*if (SceneManager.GetActiveScene().name == "Agradecimiento"/* || SceneManager.GetActiveScene().name == "New Corrección")
                     endgame.SetActive(true);
                 else
                     SceneManager.LoadScene(sceneIndex+1);
+                */
+
             }
         }
     }
@@ -605,7 +807,7 @@ public class Dialog : MonoBehaviour
             UIText.text = "";
             dialogBackground.SetActive(false);
 
-            if (SceneManager.GetActiveScene().name == "Agradecimiento" || SceneManager.GetActiveScene().name == "New Corrección")
+            if (SceneManager.GetActiveScene().name == "Agradecimiento"/* || SceneManager.GetActiveScene().name == "New Corrección"*/)
                 endgame.SetActive(true);
             else if (loader != null && loader.GetComponent<Levelloader>() != null)
                 loader.GetComponent<Levelloader>().LoadNextLevel(continuarpresionado);
@@ -615,5 +817,16 @@ public class Dialog : MonoBehaviour
     }
     public void notstart(){
         SceneManager.LoadScene("7Game_Intro");
+    }
+
+    void ActivateChildren()
+    {
+        for (int i=0; i<totalFruits; i++)
+        {
+            currentFruitsPanel.transform
+                              .GetChild(i)
+                              .gameObject
+                              .SetActive(true);
+        }
     }
 }

@@ -540,11 +540,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2372608940293564619, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: sentences.Array.size
@@ -574,7 +569,12 @@ PrefabInstance:
     - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: typingSpeed
-      value: 0.06
+      value: 0.03825
+      objectReference: {fileID: 0}
+    - target: {fileID: 2372608940293564619, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 027574ae7f6e1b54abd2267b93b1ea47, type: 3}

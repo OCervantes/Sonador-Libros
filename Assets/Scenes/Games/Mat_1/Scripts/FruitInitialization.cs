@@ -12,17 +12,17 @@ public class FruitInitialization : MonoBehaviour
     Transform[] treePanels;
     public Transform[] fruitPanels;
 
-    void Start()
+    void Awake()//Start()
     {
         if (SceneManager.GetActiveScene().name == "Juego 1")
         {
-            DeclareFruits();
+            InitializeFruits();
 
             treePanels[0] = transform.GetChild(0);
             treePanels[1] = transform.GetChild(1);
             treePanels[2] = transform.GetChild(2);
 
-            GameInitialization();
+            InstantiateFruits();
         }
 
         else //if (SceneManager.GetActiveScene().name == "New")        
@@ -44,6 +44,11 @@ public class FruitInitialization : MonoBehaviour
                 /*GameObject newFruitPanelA = */Instantiate(fruitPanels[fruitIndexes[2]], gameObject.transform);
 
             }
+
+            /*if (gameObject.name == "Panel")
+            {
+                
+            }*/
 
             //Debug.Log("Fruit A: " + fruits[fruitIndexes[0]] + ", Amount: " + numFruits[fruitIndexes[0]]);
             //Debug.Log("Fruit B: " + fruits[fruitIndexes[1]] + ", Amount: " + numFruits[fruitIndexes[1]]);
@@ -128,7 +133,7 @@ public class FruitInitialization : MonoBehaviour
         return new Vector3(resX, resY);
     }
 
-    void DeclareFruits()
+    void InitializeFruits()
     {
         // Number of fruits to be instantiated for each fruit type.
         numFruits = new int [3];
@@ -142,7 +147,7 @@ public class FruitInitialization : MonoBehaviour
         do
         {
             /* When its arguments are integers, Random.Range has an exclusive max limit.
-             * That is to say, it well never generate its second argument.
+             * That is to say, it will never generate its second argument.
              */
             numFruits[0] = UnityEngine.Random.Range(1,11);
             numFruits[1] = UnityEngine.Random.Range(1,11);
@@ -162,7 +167,7 @@ public class FruitInitialization : MonoBehaviour
         } while ((fruitIndexes[0] == fruitIndexes[1]) || (fruitIndexes[1] == fruitIndexes[2])  || (fruitIndexes[0] == fruitIndexes[2]));
     }
 
-    void GameInitialization()
+    void InstantiateFruits()
     {
         //Instance fruits. Max number of fruits will be instanced in each tree.
         if (Math.Max(Math.Max(numFruits[0], numFruits[1]), numFruits[2]) == numFruits[0]) //== numFruits[0]] && Math.Max(numFruits[0]], numFruitC) == numFruits[0])//(numFruitB <= numFruits[0] && numFruits[0] >= numFruitC)

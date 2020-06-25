@@ -124,12 +124,14 @@ public class VocabularyManager: MonoBehaviour,
         {            
             int indexOfLetter;
 
-            // Generate another random number. This time, to represent each MovAndSlot's new position in banco.
+            /* Generate another random number. This time, to represent each MovAndSlot's new position in banco.
+             * It is important that said random number is different from the current MovAndSlot's origiaal position.
+             */
             do
             {
                 indexOfLetter = Random.Range(0, recoveredVocabWord.Length);                
             }
-            while (letterIndexes.Contains(indexOfLetter));
+            while (letterIndexes.Contains(indexOfLetter) && indexOfLetter != m);
 
             Debug.Log("Random Letter Index: " + indexOfLetter);
 
