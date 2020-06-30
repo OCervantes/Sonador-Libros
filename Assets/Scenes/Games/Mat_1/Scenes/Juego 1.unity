@@ -1264,9 +1264,6 @@ MonoBehaviour:
   - {fileID: 7345054581009748169, guid: 30452c16a87f120439a27fc33ed6af09, type: 3}
   - {fileID: 7345054581009748169, guid: ef558b098ae5dab4490710fcce7f4eda, type: 3}
   fruitPanels: []
-  Hand: {fileID: 1603666484}
-  speed: 2
-  accuracy: 0.01
   goal: {x: 0, y: 0, z: 0}
 --- !u!222 &981208432
 CanvasRenderer:

@@ -20,8 +20,11 @@ public class Dialog : MonoBehaviour
     private Image myImage;
     int sceneIndex;
     [SerializeField] float typingSpeed;
-    [SerializeField] AudioClip[] audios, maleNounsFeru, femaleNounsFeru, maleNounsMati, femaleNounsMati, un, numbersFeru, numbersMati, pluralFruitsFeru, pluralFruitsMati, singleFruitsFeru, singleFruitsMati;
-    AudioSource source, individualSource;
+    [SerializeField] AudioClip[]  maleNounsFeru, femaleNounsFeru, maleNounsMati, femaleNounsMati, un, numbersFeru, numbersMati, pluralFruitsFeru, pluralFruitsMati, singleFruitsFeru, singleFruitsMati;
+    AudioSource individualSource; 
+    public AudioSource source; //Mauricio Tenorio se hizo pulico
+
+    [SerializeField] public AudioClip[] audios;//Mauriico Tenorio se hizo público.
     bool continuarpresionado = true;
 
     public GameObject Manzana1, Manzana2, Durazno1, Durazno2, Pera;
@@ -72,7 +75,7 @@ public class Dialog : MonoBehaviour
         skip.SetActive(false);
         
 
-        if (SceneManager.GetActiveScene().name == "Tutorial" && index == 0){
+        if (SceneManager.GetActiveScene().name == "Tutorial" && index == 0){//Tutorial de conteo
            handanimation =  GameObject.FindGameObjectWithTag("Hand");
            handanimation.SetActive(false);
            Pera.SetActive(false);
@@ -537,11 +540,11 @@ public class Dialog : MonoBehaviour
                 continueButton.SetActive(false);
                 gobackButton.SetActive(true);
             }
-            else if (sceneIndex >= 14 && sceneIndex <= 20)
+            else if (sceneIndex >= 15 && sceneIndex <= 21)
             {
-                if (sceneIndex < 20) skip.SetActive(true);
+                if (sceneIndex < 21) skip.SetActive(true);
                 continueButton.SetActive(true);
-                if (sceneIndex > 14) gobackButton.SetActive(true);
+                if (sceneIndex > 15) gobackButton.SetActive(true);
             }
             else if(SceneManager.GetActiveScene().name == "Tutorial"){
                 if(index == 0){
@@ -580,9 +583,6 @@ public class Dialog : MonoBehaviour
                 Durazno1.SetActive(true);
                 Durazno2.SetActive(true);
                 source.enabled = false;
-                /*myImage = dialogBackground.GetComponent<Image>();
-                UIText.enabled = false;
-                myImage.enabled = false;*/
                 handanimation.SetActive(true);
                 dialogBackground.SetActive(false);
                 
@@ -604,9 +604,6 @@ public class Dialog : MonoBehaviour
 
                 if (SceneManager.GetActiveScene().name == "Agradecimiento" || SceneManager.GetActiveScene().name == "New Corrección")
                     endgame.SetActive(true);
-                else if(SceneManager.GetActiveScene().name == "Tutorial" && index == 2){
-                    SceneManager.LoadScene("Juego 1");
-                }
                 else if (loader != null && loader.GetComponent<Levelloader>() != null)
                     loader.GetComponent<Levelloader>().LoadNextLevel(continuarpresionado);
                 else
@@ -674,17 +671,4 @@ public class Dialog : MonoBehaviour
     public void repitScene(){
         SceneManager.LoadScene("Tutorial");
     }
-
-    /*void Update() {
-        if(handanimation.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1){
-                    Debug.Log("not playing");
-                    myImage.enabled = true;
-                    UIText.enabled = true;
-                    continueButton.SetActive(true);
-                    handanimation.SetActive(false);
-        }
-        else{
-                    Debug.Log("playing");
-        } 
-    }*/
 }

@@ -14,6 +14,8 @@ public class FinishAnimation : MonoBehaviour
         dialogo.dialogBackground.SetActive(true);
         dialogo.handanimation.SetActive(false);
         dialogo.continueButton.SetActive(true);
+        dialogo.source.enabled = true;
+        dialogo.source.PlayOneShot(dialogo.audios[2]);
     }
 
 }
