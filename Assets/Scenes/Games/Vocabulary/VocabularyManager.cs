@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 using DocumentStore = System.Collections.Generic.Dictionary<string, object>;
 
@@ -11,104 +10,185 @@ public class VocabularyManager: MonoBehaviour,
 {
     //Datos Miembro
     public AudioSource bounceSource, lockSource;
-    public GameObject recibidor, banco, definition,
-      prefabMovableAndSlot = null, prefabSlot = null, cameraObject = null;
-    //public bool butDoesItSave = false;
-    public string missionName = "hangman_1";
+    public GameObject recibidor, banco, definition, prefabMovableAndSlot, prefabSlot;    
+    /*public*/ string missionName;
 
-    GameObject MovAndSlotObjRef, SlotObjRef;
-    //List<string> letrasPal = new List<string>();
-    bool hasDestroyedRecibidor = false, hasDestroyedBanco = false;
-    int savedIndex;
     string recoveredVocabWord;
+    int correctChildCount;
 
     /* Lo tuve que volver estático porque no me permitía de otra manera.
      * Tendré que revisar que no interfiera más tarde.
-     * Esta vez, upperRNGLimit es 3 posiciones superior a lowerRNGLimit, porque al parecer el método Random.
-     * Range() es inclusivo en cuanto a su límite inferior, pero exclusivo para el superior.
      */
-    static int lowerRNGLimit = 0, upperRNGLimit = lowerRNGLimit+3;
+    static int lowerRNGLimit, upperRNGLimit;    
 
-    /* Declaración e Inicialización de la Matriz
-     * Palabra, Definición
-     */
-    private string[,] matrix;
-
-    /* Arreglo de enteros. Posición del entero proporcional a la palabra a aparecer en aquel mismo nivel.
-     * Entero almacenado corresponde al nivel de la palabra.
-     */
-    private int[] nivel;
-
-    // Arreglos necesitan ser 'private'
-    private bool[] matrixIndexAvailability;
+    IDictionary<int, string> indexedDictionary;
+    IDictionary<string, string> dictionary;
+    Stack wordsAlreadyDisplayed;
 
     //Métodos
     public void Start()
-    {
+    {        
+        missionName = "hangman_1";        
+        lowerRNGLimit = 1;
+        upperRNGLimit = lowerRNGLimit + 2;
+
+        indexedDictionary = new Dictionary<int, string>();
+        dictionary = new Dictionary<string, string>();
+        wordsAlreadyDisplayed = new Stack();
+
         FirebaseManager.GetMissionData(this, missionName);
-    }
+    }    
 
-    // Código reciclado que se encarga del ajuste adecuado de la Escala del Game View.
-    /*#if UNITY_EDITOR
-      void Awake()
-      {
-          SetGameViewScale();
-      }
-
-      void SetGameViewScale()
-      {
-          System.Reflection.Assembly assembly = typeof(UnityEditor.EditorWindow).Assembly;
-          System.Type type = assembly.GetType("UnityEditor.GameView");
-          UnityEditor.EditorWindow v = UnityEditor.EditorWindow.GetWindow(type);
-
-          var defScaleField = type.GetField("m_defaultScale", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-
-          //whatever scale you want when you click on play
-          float defaultScale = 0.37f;
-
-          var areaField = type.GetField("m_ZoomArea", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-          var areaObj = areaField.GetValue(v);
-
-          var scaleField = areaObj.GetType().GetField("m_Scale", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-          scaleField.SetValue(areaObj, new Vector2(defaultScale, defaultScale));
-      }
-    #endif*/
-
+    // Function called once data from Firebase has been received.
     public void InitializeGame()
-    {
-        WordCatcher();
-        WordDecomposition();
-        WordLetterRearranger();
-        SetDefinition();
+    {        
+        int i = 0;
+
+        // indexedDictionary initialized with data: pairs of <index, word>
+        foreach(KeyValuePair<string, string> pair in dictionary)
+        {
+            i++;
+
+            indexedDictionary.Add(i, pair.Key);            
+        }
+
+        // Once both Dictionaries have been initialized, build the game.
+        BuildGame();        
     }
 
-    public int RandomNumberGenerator()
-    {
-        int temptativeIndex;
-        // upperRNGLimit+1 por ser límite exclusivo, cuando Random.Range posee enteros como argumentos.
-        temptativeIndex = Random.Range(lowerRNGLimit, upperRNGLimit+1);//(int)Random.Range(lowerRNGLimit, upperRNGLimit);
 
-        return temptativeIndex;
+    void BuildGame()
+    {    
+        // If the game hasn't yet displayed the words within the range defined by [lowerRNGLimit, upperRNGLimit], do so.
+        if (!(wordsAlreadyDisplayed.Contains(lowerRNGLimit) && wordsAlreadyDisplayed.Contains(lowerRNGLimit+1) && wordsAlreadyDisplayed.Contains(lowerRNGLimit+2)))
+        {            
+            InstanceGameObjects();
+        }
+
+        // If the game HAS displayed the words within said range, adjust it so that it may consider the next 3 words.
+        else
+        {
+            lowerRNGLimit = lowerRNGLimit + 3;
+            upperRNGLimit = lowerRNGLimit + 2;
+            
+            InstanceGameObjects();
+        }
     }
 
-    private int IndexDeterminer()
+    /* Fetch a random word from the dictionaries, instantiate all Slot and MovAndSlot Objects necessary for said word,
+       and display said word's definition.     
+     */
+    void InstanceGameObjects()
     {
-        int index;
+        int randomlyGeneratedIndex;
+
+        // Generate a random number in range of lowerRNGLimit (initially 1) and upperRNGLimit (initially 3)
         do
         {
-            index = RandomNumberGenerator();
-        } while (matrixIndexAvailability[index]==false);
+            randomlyGeneratedIndex = Random.Range(lowerRNGLimit, upperRNGLimit+1);
+        }
+        while (wordsAlreadyDisplayed.Contains(randomlyGeneratedIndex));
+        
 
-        matrixIndexAvailability[index]=false;
+        // Pick word from dictionary corresponding to said random number.        
+        recoveredVocabWord = indexedDictionary[randomlyGeneratedIndex];
+        Debug.Log("Index: " + randomlyGeneratedIndex + "\nRecovered Vocab Word: " + recoveredVocabWord);
 
-        return index;
-    }
+        /* Add randomly generated number to Stack, to know which index --> word has already been displayed, in order to
+           not display it again.
+         */
+        wordsAlreadyDisplayed.Push(randomlyGeneratedIndex);
+
+        // Instantiate all necessary MovAndSlot and Slot objects.
+        for (int n=0; n<(recoveredVocabWord.Length); n++)
+        {
+            GameObject MovAndSlotObjRef = Instantiate(prefabMovableAndSlot, banco.transform);
+            MovAndSlotObjRef.GetComponentInChildren<Text>().text = System.Convert.ToString(recoveredVocabWord[n]).ToUpper();
+
+            GameObject SlotObjRef = Instantiate(prefabSlot, recibidor.transform);
+            Slot SlotObj = SlotObjRef.GetComponent<Slot>();            
+            SlotObj.slotLetter = System.Convert.ToString(recoveredVocabWord[n]).ToUpper();
+            SlotObj.vocabManager = this;
+        }
+
+        Stack letterIndexes = new Stack();
+
+        /* Displays the number of children 
+         * Curiously, from the second word onwards, it returns the current number of children + the previous iteration's
+           number of children.
+         */
+        Debug.Log("Number of children: " + banco.transform.childCount);        
+
+        // Rearrange position of MovAndSlot objects.
+        for (int m=0; m<(recoveredVocabWord.Length); m++)
+        {            
+            int indexOfLetter;
+
+            /* Generate another random number. This time, to represent each MovAndSlot's new position in banco.
+             * It is important that said random number is different from the current MovAndSlot's origiaal position.
+             */
+            do
+            {
+                indexOfLetter = Random.Range(0, recoveredVocabWord.Length);                
+            }
+            while (letterIndexes.Contains(indexOfLetter) && indexOfLetter != m);
+
+            Debug.Log("Random Letter Index: " + indexOfLetter);
+
+            /* If this is the first word in the game, get each of banco's children, and assign it's new position to the
+               randomly generated number.
+             */
+            if (wordsAlreadyDisplayed.Count == 1)
+            {
+                if (banco.transform
+                         .GetChild(m)
+                         .GetComponentInChildren<Text>() != null)
+                    Debug.Log("Child: " + m + "\nLetter: " + banco.transform
+                                                                  .GetChild(m)
+                                                                  .GetChild(0)
+                                                                  .GetComponentInChildren<Text>()
+                                                                  .text);
+                
+                banco.transform
+                     .GetChild(m)
+                     .GetComponent<Slot>()
+                     .transform
+                     .SetSiblingIndex(indexOfLetter);
+            }
+            /* If this is the 2nd+ word in the game, 
+             */
+            else
+            {
+                if (banco.transform
+                         .GetChild(m+correctChildCount)
+                         .GetComponentInChildren<Text>() != null)
+                    Debug.Log("Child: " + (m+correctChildCount) + "\nLetter: " + banco.transform
+                                                                                      .GetChild(m+correctChildCount)
+                                                                                      .GetChild(0)
+                                                                                      .GetComponentInChildren<Text>()
+                                                                                      .text);
+
+                banco.transform
+                     .GetChild(m+correctChildCount)
+                     .GetComponent<Slot>()
+                     .transform
+                     .SetSiblingIndex(indexOfLetter);                    
+            }     
+            
+            letterIndexes.Push(indexOfLetter);             
+        }                
+
+        // Display corresponding word's definition.
+        definition.GetComponent<Text>().text = dictionary[recoveredVocabWord];
+    }    
 
     // Called when firebase manager has a response to the API method called
     public void MissionDataRecieved(FirebaseManager.CallbackResult result,
-       MissionData? data, string message) {
+       MissionData? data, string message) 
+    {
         // Try to handle all cases
-        switch(result) {
+        switch(result) 
+        {
             // If the result is not success, just print to console as error
             case FirebaseManager.CallbackResult.Canceled:
             case FirebaseManager.CallbackResult.Faulted:
@@ -128,174 +208,59 @@ public class VocabularyManager: MonoBehaviour,
 
     // Wrapper function to call WorldLoader as an IEnumerator
     // to work with UnityMainThreadDispatcher.
-    IEnumerator WordLoaderWrapper(MissionData? data) {
+    IEnumerator WordLoaderWrapper(MissionData? data) 
+    {
         WordLoader(data.Value.Data);
         yield return null;
     }
 
     // Parsed data from Firebase into data that this scene can use.
-    private void WordLoader(DocumentStore data) {
-        // Initialize lists to hold data for later conversiont to array
-        List<string[]> listaMatrix = new List<string[]>();
-        List<int> listaNivel = new List<int>();
-        List<bool> listaMatrixIndexAvailability = new List<bool>();
+    private void WordLoader(DocumentStore data) 
+    {        
 
         List<object> definitions = data["definitions"] as List<object>;
 
         // Iterate over all objects found under definitions
-        for (int i = 1; i < definitions.Count; i++) {
+        for (int i = 1; i < definitions.Count; i++) 
+        {
             // Attempt to parse the object as another subpage
             DocumentStore levels = definitions[i] as DocumentStore;
             // and iterate over all its children
-            foreach (KeyValuePair<string, object> level in levels) {
+            foreach (KeyValuePair<string, object> level in levels) 
+            {
                 string[] pair = new string[2];
                 pair[0] = level.Key;
                 pair[1] = (string) level.Value;
-                listaMatrix.Add(pair);
-                listaNivel.Add(i);
-                listaMatrixIndexAvailability.Add(true);
+
+                // dictionary initialized with data: pairs of <word, definition>                 
+                dictionary.Add(pair[0], pair[1]);
             }
-        }
-
-        // Initialize the fixed matrix once we can determine its final size
-        matrix = new string[listaMatrix.Count, 2];
-
-        // Iterate over the parsed data so we can convert it into an array format
-        // the other fuctions can utilize
-        for(int i = 0; i < listaMatrix.Count; i++) {
-            string[] pair = listaMatrix[i];
-            for (int j = 0; j < 2; j++) {
-                matrix[i, j] = pair[j];
-            }
-        }
-
-        // Convert from list to arrays
-        nivel = listaNivel.ToArray();
-        matrixIndexAvailability = listaMatrixIndexAvailability.ToArray();
+        }        
 
         // Now that we have the data & its properly parsed, initalize game.
         InitializeGame();
     }
-
-    private string WordCatcher()
+    
+    public void EndWord()
     {
-        /*  Necesario guardar el valor obtenido en IndexDeterminer(), ya que llamar la función repetidas
-            veces produciría números diferentes con cada iteración.
-         */
-        savedIndex = IndexDeterminer();
-        recoveredVocabWord = matrix[savedIndex, 0];
-
-        Debug.Log("Índice: " + savedIndex + "\nPalabra Recuperada: " + recoveredVocabWord + "\nDefinición Correspondiente: " + matrix[savedIndex, 1]);
-
-        return recoveredVocabWord;
-    }
-
-    private void WordDecomposition()
-    {
-        // ¿Será necesario esta parte? Siento que ya quedaría guardado el String desde el método anterior.
-        //recoveredVocabWord = WordCatcher();
-
-        Debug.Log("Palabra original: " + recoveredVocabWord);
-
-        for (int i=0; i<(recoveredVocabWord.Length); i++)
+        foreach (Transform child in banco.transform)
         {
-            MovAndSlotObjRef = Instantiate(prefabMovableAndSlot, banco.transform);
-            MovAndSlotObjRef.GetComponentInChildren<Text>().text = System.Convert.ToString(recoveredVocabWord[i]).ToUpper();
-
-            SlotObjRef = Instantiate(prefabSlot, recibidor.transform);
-            Slot SlotObj = SlotObjRef.GetComponent<Slot>();
-            //Debug.Log(SlotObj.slotLetter);    //El problema no es que no pueda llamar a Slot.
-            SlotObj.slotLetter = System.Convert.ToString(recoveredVocabWord[i]).ToUpper();
-            SlotObj.vocabManager = this;
+            GameObject.Destroy(child.gameObject);
+            Transform.Destroy(child);
         }
-    }
 
-    private void WordLetterRearranger()
-    {
-        for (int i=0; i<(recoveredVocabWord.Length); i++)
+        foreach (Transform child in recibidor.transform)
         {
-            banco.GetComponentInChildren<Slot>().GetComponentInChildren<Transform>().SetSiblingIndex(IndexArranger(recoveredVocabWord.Length));
+            GameObject.Destroy(child.gameObject);
+            Transform.Destroy(child);
         }
-    }
 
-    private void SetDefinition()
-    {
-        definition.GetComponent<Text>().text = matrix[savedIndex, 1];
-    }
-
-    public void endWord()
-    {
-        DestroyAllRecibidor();
-        DestroyAllBanco();
         definition.GetComponent<Text>().text = "";
-        InitializeGame();
-    }
 
-    public bool dispAvailability()
-    {
-        bool anyAvailableSpaces = false;
-
-        // Habrá que cambiar ese límite de 30 a 'upperRNGLimit'. E inicializar el índice a partir de 'lowerRNGLimit'.
-        for (int i=0; i<30; i++)
-        {
-            if (matrixIndexAvailability[i] == true)
-            {
-                anyAvailableSpaces = true;
-            }
-        }
-
-        return anyAvailableSpaces;
-    }
-
-    /* No funciona como quisiera--no siempre regresa números diferentes--pero ha de servir para mis pro-
-     * pósitos de revolver los índices de las Objetos Hijos del Banco de Letras.
-     */
-    public int IndexArranger(int wordLength)
-    {
-        int newIndex, temp;
-        bool [] characterAvailability = new bool[wordLength];
-        //bool enableCycle = true;
-
-        for (int i=0; i<wordLength; i++)
-        {
-            characterAvailability[i] = true;
-        }
-
-        do
-        {
-            temp = (Random.Range(0, wordLength));//(int)(Random.Range(0, wordLength-1));
-        }
-        while (characterAvailability[temp] == false);
-
-        characterAvailability[temp] = false;
-        newIndex = temp;
-
-        return newIndex;
-    }
-
-    public void DestroyAllBanco()
-    {
-        if (hasDestroyedBanco == false)
-        {
-            foreach (Transform child in banco.transform)
-            {
-                GameObject.Destroy(child.gameObject);
-            }
-            // Necesita volverse 'false' una vez que se haya completado un nivel.
-            hasDestroyedBanco = true;
-        }
-    }
-
-    public void DestroyAllRecibidor()
-    {
-        if (hasDestroyedRecibidor == false)
-        {
-            foreach (Transform child in recibidor.transform)
-            {
-                GameObject.Destroy(child.gameObject);
-            }
-            // Necesita volverse 'false' una vez que se haya completado un nivel.
-            hasDestroyedRecibidor = true;
-        }
-    }
+        correctChildCount = banco.transform.childCount;
+        Debug.Log("Number of children AFTER EndWord(): " + banco.transform.childCount);
+        //correctChildCount = banco.transform.childCount;
+        
+        BuildGame();
+    }    
 }

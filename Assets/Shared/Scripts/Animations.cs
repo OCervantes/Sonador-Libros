@@ -141,7 +141,7 @@ public class Animations: MonoBehaviour
                 break;                
             
             // Scene "Agradecimiento"
-            case 10:
+            case 9:
 
                 // Same condition as in Dialog. Checks once the sentence has finished "typing".                                   
                 if (/*DialogText == Dialog.sentences[Dialog.index])DialogSentences[CurrentDialogIndex])*/dialogAndAudioMan.GetComponent<Dialog>().UIText.text == dialogAndAudioMan.GetComponent<Dialog>().sentences[index])
@@ -175,11 +175,11 @@ public class Animations: MonoBehaviour
                 break;   
 
             // Scene "New Corrección"
-            case 11:
+            case 22:
                 bool finished = false;
 
                 // Same condition as in Dialog. Checks once the sentence has finished "typing".                                   
-                if (/*DialogText == Dialog.sentences[Dialog.index])DialogSentences[CurrentDialogIndex])*/dialogAndAudioMan.GetComponent<Dialog>().UIText.text == dialogAndAudioMan.GetComponent<Dialog>().sentences[index])
+                if (/*DialogText == Dialog.sentences[Dialog.index])DialogSentences[CurrentDialogIndex])*/dialogAndAudioMan.GetComponent<Dialog>().UIText.text.EndsWith(".")) // == dialogAndAudioMan.GetComponent<Dialog>().sentences[index])
                 {
                     /* However, instead of displaying a button, it executes a switch().
                      * Depending on the index, the switch() will disable the animation of the character who has finished

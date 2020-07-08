@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Slot : MonoBehaviour, IDropHandler
 {
-    public static Slot sceneSclot;
+    //public static Slot sceneSclot;
 
     /* DATOS MIEMBRO
      * Variable de tipo 'Text' (UI) llamado "letter".
@@ -14,12 +14,17 @@ public class Slot : MonoBehaviour, IDropHandler
        Es estático, dado que si no lo fuese, 'embeddedMovCounter' no aumentaría de 1 por cada Slot que haya recibido un Movable exitosamente.
      * Entero: Número de Slots del Recibidor.
      */
-    public Text letter;
+    //public Text letter;
     public string slotLetter;
     public static int embeddedMovCounter = 0;
     int numberOfChildren;
-    public bool lvlComplete = false;
-    public VocabularyManager vocabManager;
+    //public bool lvlComplete = false;
+    public VocabularyManager vocabManager;    
+
+    void Start() 
+    {
+        embeddedMovCounter = 0;
+    }
 
     /* Variable de tipo GameObject llamado "item"
      * Avisa si cada Slot contiene una letra o no (null)
@@ -68,6 +73,7 @@ public class Slot : MonoBehaviour, IDropHandler
         Text textComponent = DragHandeler
             .itemBeingDragged
             .GetComponentInChildren<Text>();
+
         if (item == null &&
            textComponent.text == slotLetter)
            //letter.text) //&& DragHandeler.itemBeingDragged.GetComponentInParent<Object>.tag == "Recibidor")
@@ -89,7 +95,7 @@ public class Slot : MonoBehaviour, IDropHandler
                 .GetComponent<Image>()
                 .color = Color.green;   //CAMBIO DE COLOR EXITOSO
 
-            Slot.embeddedMovCounter++;
+            /*Slot.*/embeddedMovCounter++;
 
             vocabManager.lockSource.Play();
 
@@ -111,9 +117,11 @@ public class Slot : MonoBehaviour, IDropHandler
                 .GetComponent<Transform>()
                 .childCount; //EUREKA. FORMA SEGURA DE CONSEGUIR childCount.
 
+            //Debug.Log("Number of children in Recibidor: " + numberOfChildren);
+
             if (embeddedMovCounter == numberOfChildren)
             {
-                vocabManager.endWord();
+                vocabManager.EndWord();
                 embeddedMovCounter = 0;
             }
 
@@ -140,15 +148,11 @@ public class Slot : MonoBehaviour, IDropHandler
     }
     #endregion
 
-    private IEnumerator IncorrectSlotCoroutine(Image component) {
+    private IEnumerator IncorrectSlotCoroutine(Image component) 
+    {
         vocabManager.bounceSource.Play();
         yield return new WaitForSeconds(1);
         component.color = new Color(1f, 1f, 1f, 0.39f);
-    }
-
-    public void TestCall()
-    {
-        Debug.Log("<Slot> llamado exitosamente.");
-    }
+    }    
 
 }

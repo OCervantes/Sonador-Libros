@@ -232,8 +232,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: e1d6677e5b0b3324cb13ecf6f16d3c22, type: 3}
-    - target: {fileID: 3295032836448664910, guid: de83070d965a6ed4e83d9f83ad6b342d,
+      objectReference: {fileID: 8300000, guid: 3366c55ffd2e6a7478f1620dd6ba4393, type: 3}
+    - target: {fileID: 82237344333198572, guid: de83070d965a6ed4e83d9f83ad6b342d,
         type: 3}
       propertyPath: m_Volume
       value: 0.147
@@ -571,6 +571,37 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: audios.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: loader
+      value: 
+      objectReference: {fileID: 3023816203499144237}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: sentences.Array.data[0]
+      value: "\xA1BIENVENIDO! \xBFListo para empezar tu aventura? Entonces, presiona
+        click en la flecha."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: audios.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 32956c1993d5a4642b3bb7d6783cbb9c, type: 3}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: typingSpeed
+      value: 0.03825
       objectReference: {fileID: 0}
     - target: {fileID: 2372608940293564619, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
