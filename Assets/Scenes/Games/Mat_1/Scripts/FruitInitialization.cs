@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class FruitInitialization : MonoBehaviour
 {
     public static int[] numFruits, fruitIndexes;
+    public static bool playerCollectedCorrectAmountOfFruits = true;
     int cycles;
     //Can't be static. 
     public GameObject[] fruits;
@@ -13,10 +14,13 @@ public class FruitInitialization : MonoBehaviour
     public Transform[] fruitPanels;
 
     void Awake()//Start()
-    {
+    {        
         if (SceneManager.GetActiveScene().name == "Juego 1")
         {
-            InitializeFruits();
+            treePanels = new Transform[3];
+
+            if (playerCollectedCorrectAmountOfFruits)
+                InitializeFruits();
 
             treePanels[0] = transform.GetChild(0);
             treePanels[1] = transform.GetChild(1);
@@ -43,85 +47,22 @@ public class FruitInitialization : MonoBehaviour
             {
                 /*GameObject newFruitPanelA = */Instantiate(fruitPanels[fruitIndexes[2]], gameObject.transform);
 
-            }
-
-            /*if (gameObject.name == "Panel")
-            {
-                
-            }*/
-
-            //Debug.Log("Fruit A: " + fruits[fruitIndexes[0]] + ", Amount: " + numFruits[fruitIndexes[0]]);
-            //Debug.Log("Fruit B: " + fruits[fruitIndexes[1]] + ", Amount: " + numFruits[fruitIndexes[1]]);
-            //Debug.Log("Fruit C: " + fruits[fruitIndexes[2]] + ", Amount: " + numFruits[fruitIndexes[2]]);
-
-            //Debug.Log("Total Fruits: " + (numFruits[0] + numFruits[1] + numFruits[2]));
-        }
-        /*numFruits = new int [3];
-        fruitIndexes = new int [3];
-        treePanels = new Transform[3];*/
-
-        /*treePanels[0] = transform.GetChild(0);
-        treePanels[1] = transform.GetChild(1);
-        treePanels[2] = transform.GetChild(2);*/
-
-        /* Generate number of fruits to be received from each type.
-         * Total number of fruits cannot exceed 10.
-         */
-        /*do
-        {
-            /* When its arguments are integers, Random.Range has an exclusive max limit.
-             * That is to say, it well never generate its second argument.
-             */
-            /*numFruits[0] = UnityEngine.Random.Range(1,11);
-            numFruits[1] = UnityEngine.Random.Range(1,11);
-            numFruits[2] = UnityEngine.Random.Range(1,11);
-        } while ((numFruits[0] + numFruits[1] + numFruits[2]) > 10);*/
-
-
-        /* Specify type of fruits to be instanced.
-           1. Apple
-           2. Pear
-           3. Peach
-         */
-        /*do
-        {
-            fruitIndexes[0] = UnityEngine.Random.Range(0, 3);
-            fruitIndexes[1] = UnityEngine.Random.Range(0, 3);
-            fruitIndexes[2] = UnityEngine.Random.Range(0, 3);
-        } while ((fruitIndexes[0] == fruitIndexes[1]) || (fruitIndexes[1] == fruitIndexes[2])  || (fruitIndexes[0] == fruitIndexes[2]));
-        */
-
-
+            }                        
+        }        
         Debug.Log("Number Fruits A: " + numFruits[0] + "\nNumber Fruits B: " + numFruits[1]);
         Debug.Log("Number Fruits C: " + numFruits[2]);
         Debug.Log("Index A: " + fruitIndexes[0] + "\nIndex B: " + fruitIndexes[1]);
         Debug.Log("Index C: " + fruitIndexes[2]);
-
-
-        //Instance fruits. Max number of fruits will be instanced in each tree.
-        /*if (Math.Max(Math.Max(numFruits[0], numFruits[1]), numFruits[2]) == numFruits[0])
-            cycles = numFruits[0];
-        else if ((Math.Max(Math.Max(numFruits[0], numFruits[1]), numFruits[2]) == numFruits[1]))
-            cycles = numFruits[1];
-        else
-            cycles = numFruits[2];
-
-        
-        for (int i=0; i<cycles; i++)
-        {
-            GameObject newFruitA = Instantiate(fruits[fruitIndexes[0]], randomCoordinates(227, 433), Quaternion.identity, treePanels[0]);                        
-            newFruitA.transform.SetParent(treePanels[0].transform, false);            
-
-            GameObject newFruitB = Instantiate(fruits[fruitIndexes[1]], randomCoordinates(1053, 435), Quaternion.identity, treePanels[1]);            
-            newFruitB.transform.SetParent(treePanels[1].transform, false);            
-
-            GameObject newFruitC = Instantiate(fruits[fruitIndexes[2]], randomCoordinates(640, 513), Quaternion.identity, treePanels[2]);            
-            newFruitC.transform.SetParent(treePanels[2].transform, false);            
-        } */
-        
-        //Debug.Log("Fruits[0]: " + fruits[fruitIndexes[0]].name + "\nFruits[1]: " + fruits[fruitIndexes[1]].name);        
     }
     
+    /* Setter method which determines if new fruits shall be initialized in the game (the Player collected the correct a-
+       mount of fruits), or not.
+     */
+    public void SetFruitInitializationFlag(bool value)
+    {
+        playerCollectedCorrectAmountOfFruits = value;
+    }
+
     /* Generate position in which to instantiate a fruit.
      * Missing a new condition, which will only spawn fruits within a certain radius from each Panel's center point.
      */
@@ -139,7 +80,7 @@ public class FruitInitialization : MonoBehaviour
         numFruits = new int [3];
         // Indexes corresponding to the type of fruit to be instantiated.
         fruitIndexes = new int [3];
-        treePanels = new Transform[3];
+        //treePanels = new Transform[3];
 
         /* Generate number of fruits to be received from each type.
          * Total number of fruits cannot exceed 10.
