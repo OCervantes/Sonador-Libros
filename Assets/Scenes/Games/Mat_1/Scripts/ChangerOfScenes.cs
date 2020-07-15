@@ -14,6 +14,6 @@ public class ChangerOfScenes : MonoBehaviour
 
     public void Denied()
     {
-        SceneManager.LoadScene(10);
+        SceneManager.LoadScene("GameSelector");
     }
 }

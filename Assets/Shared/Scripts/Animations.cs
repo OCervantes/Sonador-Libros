@@ -13,13 +13,14 @@ public class Animations: MonoBehaviour
      * Given that it is not static (it updates continuously), it cannot be initialized at its declaration.
      * Instead, it must be assigned within Update(), due to its constant execution, once per frame.
      */
-    int scene, index;//InitialDialogIndex, CurrentDialogIndex;
+    string scene;
+    int index;//InitialDialogIndex, CurrentDialogIndex;
     string DialogText;
     string[] DialogSentences;    
 
     void Start() 
     {
-        scene = SceneManager.GetActiveScene().buildIndex;
+        scene = SceneManager.GetActiveScene().name;
         /*InitialDialogIndex = dialogAndAudioMan.GetComponent<Dialog>().index;
         CurrentDialogIndex = InitialDialogIndex;
         DialogText = dialogAndAudioMan.GetComponent<Dialog>().UIText.text;
@@ -48,7 +49,7 @@ public class Animations: MonoBehaviour
         switch(scene)
         {
             // Escena: "Introducción"
-            case 6:
+            case "Introducción":
 
                 // Same condition as in Dialog. Checks once the sentence has finished "typing".                                   
                 if (/*DialogText == /*Dialog.sentences[Dialog.index])DialogSentences[CurrentDialogIndex])*/dialogAndAudioMan.GetComponent<Dialog>().UIText.text == dialogAndAudioMan.GetComponent<Dialog>().sentences[index])
@@ -101,7 +102,7 @@ public class Animations: MonoBehaviour
             
 
             // Scene "Selección de Nivel"
-            case 7:
+            case "Selección de Nivel":
 
                 // Same condition as in Dialog. Checks once the sentence has finished "typing".                                   
                 if (/*DialogText == Dialog.sentences[Dialog.index])DialogSentences[CurrentDialogIndex])*/dialogAndAudioMan.GetComponent<Dialog>().UIText.text == dialogAndAudioMan.GetComponent<Dialog>().sentences[index])
@@ -141,7 +142,7 @@ public class Animations: MonoBehaviour
                 break;                
             
             // Scene "Agradecimiento"
-            case 9:
+            case "Agradecimiento":
 
                 // Same condition as in Dialog. Checks once the sentence has finished "typing".                                   
                 if (/*DialogText == Dialog.sentences[Dialog.index])DialogSentences[CurrentDialogIndex])*/dialogAndAudioMan.GetComponent<Dialog>().UIText.text == dialogAndAudioMan.GetComponent<Dialog>().sentences[index])
@@ -175,7 +176,7 @@ public class Animations: MonoBehaviour
                 break;   
 
             // Scene "New Corrección"
-            case 22:
+            case "New Corrección":
                 bool finished = false;
 
                 // Same condition as in Dialog. Checks once the sentence has finished "typing".                                   
