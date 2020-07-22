@@ -1,4 +1,20 @@
 <projectSettings>
+  <projectSetting name="com.google.external-dependency-managerAnalyticsCookie" value="32ff17d0a65e456190ab618373cf4bab" />
+  <projectSetting name="com.google.external-dependency-managerAnalyticsEnabled" value="True" />
+  <projectSetting name="com.google.firebaseAnalyticsCookie" value="6f89bd1721484c21b68da395c877c721" />
+  <projectSetting name="com.google.firebaseAnalyticsEnabled" value="True" />
+  <projectSetting name="Google.IOSResolver.VerboseLoggingEnabled" value="False" />
+  <projectSetting name="Google.PackageManagerResolver.VerboseLoggingEnabled" value="False" />
+  <projectSetting name="Google.VersionHandler.VerboseLoggingEnabled" value="False" />
+  <projectSetting name="GooglePlayServices.AndroidPackageInstallationEnabled" value="True" />
+  <projectSetting name="GooglePlayServices.AutoResolutionDisabledWarning" value="True" />
+  <projectSetting name="GooglePlayServices.AutoResolveOnBuild" value="True" />
+  <projectSetting name="GooglePlayServices.AutoResolverEnabled" value="True" />
+  <projectSetting name="GooglePlayServices.ExplodeAars" value="True" />
+  <projectSetting name="GooglePlayServices.PatchAndroidManifest" value="True" />
+  <projectSetting name="GooglePlayServices.PatchMainTemplateGradle" value="True" />
   <projectSetting name="GooglePlayServices.PromptBeforeAutoResolution" value="False" />
+  <projectSetting name="GooglePlayServices.UseGradleDaemon" value="False" />
   <projectSetting name="GooglePlayServices.UseJetifier" value="True" />
+  <projectSetting name="GooglePlayServices.VerboseLogging" value="False" />
 </projectSettings>
