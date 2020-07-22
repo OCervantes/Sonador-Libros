@@ -9,7 +9,7 @@ public class IntroMenuController : MonoBehaviour {
 	}
 
 	public void QuitGame(){
-		SceneManager.LoadScene(10);
+		SceneManager.LoadScene("GameSelector");
 	}
 
 }//end IntroMenuController

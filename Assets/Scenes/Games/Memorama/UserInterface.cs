@@ -88,7 +88,7 @@ public class UserInterface : MonoBehaviour {
 	}
 
 	public void ExitMemorama(){
-		SceneManager.LoadScene (10); // map
+		SceneManager.LoadScene ("GameSelector"); // map
 	}
 
 }//end UserInterface
