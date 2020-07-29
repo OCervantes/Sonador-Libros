@@ -15,15 +15,16 @@ public class Dialog : MonoBehaviour
     public FruitInitialization initializer;
     public /*[SerializeField]*/ float typingSpeed;
 
-    [SerializeField] AudioClip[] audios, maleNounsFeru, femaleNounsFeru, maleNounsMati, femaleNounsMati, un, numbersFeru, numbersMati, pluralFruitsFeru, pluralFruitsMati, singleFruitsFeru, singleFruitsMati;
+    [SerializeField] AudioClip[] /* audios, */ maleNounsFeru, femaleNounsFeru, maleNounsMati, femaleNounsMati, un, numbersFeru, numbersMati, pluralFruitsFeru, pluralFruitsMati, singleFruitsFeru, singleFruitsMati;
 
     Image myImage;
     GameObject inicio, currentFruitsPanel, currentFruitsIndexesObject;
     Text currentFruitsIndexesText;
     int sceneIndex, firstTypeOfFruits, secondTypeOfFruits, thirdTypeOfFruits;
     int[] typesOfFruits;        
-    AudioSource source;
-    bool continuarpresionado = true;   
+    public AudioSource source;
+    bool continuarpresionado = true;
+    public AudioClip[] audios;
 
     void Start()
     {                        
@@ -58,7 +59,7 @@ public class Dialog : MonoBehaviour
         //individualSource = new AudioSource();
 
         // Scene "Corrección"
-        if (sceneIndex == 22)
+        if (sceneIndex == /*22*/23)
         {
             // Declare typesOfFruits array.
             typesOfFruits = new int[initializer.fruits.Length];

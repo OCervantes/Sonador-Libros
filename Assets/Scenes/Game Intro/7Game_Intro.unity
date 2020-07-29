@@ -365,6 +365,62 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialog Background Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: sentences.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: audios.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: femaleNounsFeru.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: sentences.Array.data[0]
+      value: "\xA1T\xFA puedes ayudar a revivir el bosque!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: sentences.Array.data[1]
+      value: "S\xF3lo haz click en el letrero \"Juegos\"  y te llevar\xE1 a la caba\xF1a
+        de los t\xEDos Mati y Feru quienes tienen divertidas actividades para ti."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: typingSpeed
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: femaleNounsFeru.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: ea44df923f62892409540cc65ece0b00, type: 3}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: audios.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: b2216477cf36b0541b609c93e2668fda, type: 3}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: audios.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: bb96d93807a20db4b8166dd56348fe5e, type: 3}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: loader
+      value: 
+      objectReference: {fileID: 1381586871}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: endgame
+      value: 
+      objectReference: {fileID: 1615453354}
     - target: {fileID: 3485875582915805825, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -470,63 +526,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: sentences.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: audios.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: femaleNounsFeru.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: sentences.Array.data[0]
-      value: "Chip: \xA1T\xFA puedes ayudar a revivir el bosque!"
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: sentences.Array.data[1]
-      value: "Chip: S\xF3lo haz click en el letrero \"Juegos\"  y te llevar\xE1 a
-        la caba\xF1a de los t\xEDos Mati y Feru quienes tienen divertidas actividades
-        para ti."
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: typingSpeed
-      value: 0.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: femaleNounsFeru.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: ea44df923f62892409540cc65ece0b00, type: 3}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: audios.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: b2216477cf36b0541b609c93e2668fda, type: 3}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: audios.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: bb96d93807a20db4b8166dd56348fe5e, type: 3}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: loader
-      value: 
-      objectReference: {fileID: 1381586871}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: endgame
-      value: 
-      objectReference: {fileID: 1615453354}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 027574ae7f6e1b54abd2267b93b1ea47, type: 3}
 --- !u!1 &966176058

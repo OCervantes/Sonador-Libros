@@ -33,7 +33,7 @@ public class FruitInitialization : MonoBehaviour
             goal =  InstantiateFruits();                       
         }
 
-        else //if (SceneManager.GetActiveScene().name == "New")        
+        else if (SceneManager.GetActiveScene().name != "Tutorial")//== "New")        
         {
             for (int i=0; i<numFruits[fruitIndexes[0]]; i++)
             {

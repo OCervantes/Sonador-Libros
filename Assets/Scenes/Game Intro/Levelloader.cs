@@ -20,7 +20,7 @@ public class Levelloader : MonoBehaviour
     public void LoadNextLevel(bool continuarpresionado)
     {
         if (continuarpresionado == true && SceneManager.GetActiveScene().name == "7Game_Intro") {
-            SceneManager.LoadScene(10);
+            SceneManager.LoadScene(11/*10*/);
         }
         else if(continuarpresionado == true){
             StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
