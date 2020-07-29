@@ -21,7 +21,7 @@ public class TestingInitializor : MonoBehaviour,
 				Debug.Log(message);
 				UnityMainThreadDispatcher
 					.Instance ()
-					.EnqueueNextScene (/*14*/15);
+					.EnqueueNextScene (15);
 				break;
 		}
 	}
