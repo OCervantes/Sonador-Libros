@@ -3826,7 +3826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 1868626864}
-  sec: 5
+  sec: 3
 --- !u!1 &1882532949
 GameObject:
   m_ObjectHideFlags: 0

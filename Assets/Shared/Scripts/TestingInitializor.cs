@@ -27,11 +27,11 @@ public class TestingInitializor : MonoBehaviour,
 	}
 
 	protected virtual void Start() {
-		FirebaseManager.LoginPlayer(
+		/*FirebaseManager.LoginPlayer(
 			"mau.graci@gmail.com",
 			"Mau1214*#",
 			this
-		);
+		);*/
 	}
 
 }

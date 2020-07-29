@@ -33,7 +33,7 @@ public class FruitInitialization : MonoBehaviour
             goal =  InstantiateFruits();                       
         }
 
-        else if (SceneManager.GetActiveScene().name != "Tutorial")//== "New")        
+        else if (SceneManager.GetActiveScene().name != "Tutorial")        
         {
             for (int i=0; i<numFruits[fruitIndexes[0]]; i++)
             {
@@ -51,12 +51,13 @@ public class FruitInitialization : MonoBehaviour
             {
                 /*GameObject newFruitPanelA = */Instantiate(fruitPanels[fruitIndexes[2]], gameObject.transform);
 
-            }                        
-        }        
-        Debug.Log("Number Fruits A: " + numFruits[0] + "\nNumber Fruits B: " + numFruits[1]);
+            }  
+            Debug.Log("Number Fruits A: " + numFruits[0] + "\nNumber Fruits B: " + numFruits[1]);
         Debug.Log("Number Fruits C: " + numFruits[2]);
         Debug.Log("Index A: " + fruitIndexes[0] + "\nIndex B: " + fruitIndexes[1]);
-        Debug.Log("Index C: " + fruitIndexes[2]);
+        Debug.Log("Index C: " + fruitIndexes[2]);                      
+        }      
+        
     }
     
     /* Setter method which determines if new fruits shall be initialized in the game (the Player collected the correct a-
