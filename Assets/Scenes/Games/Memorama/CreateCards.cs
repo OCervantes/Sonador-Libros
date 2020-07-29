@@ -26,15 +26,15 @@ public class CreateCards : MonoBehaviour {
 
 	private List<GameObject> cards = new List<GameObject> ();
 
-	private Sprite[] sprites;
+	public Sprite[] sprites;
 
 	// ---------------------------------------------------------------------
 	// ---- functions
 	// ---------------------------------------------------------------------
 
 	public void Start(){
-		 Addressables.LoadAssetsAsync<Sprite>("memorama", null).Completed += OnSpritesLoaded;
-	}
+       Addressables.LoadAssetsAsync<Sprite>("memorama", null).Completed += OnSpritesLoaded;
+    }
 
 	private void OnSpritesLoaded(AsyncOperationHandle<IList<Sprite>> result)
 	{
@@ -54,7 +54,7 @@ public class CreateCards : MonoBehaviour {
 			{
 				Debug.Log("Result is 0");
 			}
-			Addressables.Release<IList<Sprite>>(result);
+			//Addressables.Release<IList<Sprite>>(result);
 		}
 		else if (result.Status == AsyncOperationStatus.Failed)
 		{
