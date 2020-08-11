@@ -72,7 +72,7 @@ public class UserInterface : MonoBehaviour {
 
 	public void ChangeDifficulty (float value){
 		difficulty = (int) value;
-		textDifficulty.text = "Dificultad: " + difficulty + "x" + difficulty;
+		textDifficulty.text = "Dificultad: " + difficulty + "x" + (difficulty != 4 ? difficulty + 1 : difficulty );
 	}
 
 	public void ActivateChronometer(){

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -89,7 +89,7 @@ public class CreateCards : MonoBehaviour {
 
 		int cont = 0;
 		for(int i=0; i<nSize; i++){
-			for(int x=0; x<nSize; x++){
+			for(int x=0; x< (nSize != 4 ? nSize + 1 : nSize); x++){
 				//float factor = 9.0f / ancho;
 				//mantener distribución de las cartas
 				Vector3 tempPosition = new Vector3(x,0,i /**factor*/);

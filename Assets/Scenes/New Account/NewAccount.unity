@@ -241,7 +241,7 @@ PrefabInstance:
     - target: {fileID: 114613510811189284, guid: ac79bdb001524594f953e06908ca05fb,
         type: 3}
       propertyPath: m_Text
-      value: "Volve a Men\xFA Principal"
+      value: "Volver a Men\xFA Principal"
       objectReference: {fileID: 0}
     - target: {fileID: 224220482398415374, guid: ac79bdb001524594f953e06908ca05fb,
         type: 3}
