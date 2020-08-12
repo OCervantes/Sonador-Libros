@@ -824,7 +824,7 @@ public class Dialog : MonoBehaviour
             SceneManager.LoadScene("Juego 1");
         }
         else{
-            SceneManager.LoadScene("7Game_Intro");
+            SceneManager.LoadScene("GameSelector");
         }
     }
 
