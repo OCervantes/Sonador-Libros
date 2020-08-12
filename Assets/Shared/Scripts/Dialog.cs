@@ -681,6 +681,7 @@ public class Dialog : MonoBehaviour
 
         else
         {
+            source.Stop();
             source.PlayOneShot(audios[index]);
 
             foreach(char letter in sentences[index].ToCharArray())

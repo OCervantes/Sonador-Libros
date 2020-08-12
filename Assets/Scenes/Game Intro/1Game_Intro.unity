@@ -450,6 +450,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1014055807 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 956856643333706175, guid: aae3a189388a0ff488330ea92b360859,
+    type: 3}
+  m_PrefabInstance: {fileID: 956856644441295877}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1014055812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014055807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fba953c973c68594da97c19a52d50e76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1462414657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -731,6 +749,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SliderMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706175, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_TagString
+      value: Music
+      objectReference: {fileID: 0}
     - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -835,6 +858,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956058739599433490, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 955742872614874536, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aae3a189388a0ff488330ea92b360859, type: 3}
