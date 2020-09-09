@@ -124,36 +124,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialog Background Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: sentences.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: audios.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: loader
-      value: 
-      objectReference: {fileID: 1387571428}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: typingSpeed
-      value: 0.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: sentences.Array.data[0]
-      value: Una gran variedad de animales, pero...
-      objectReference: {fileID: 0}
-    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
-        type: 3}
-      propertyPath: audios.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: f04d308435fb9f64aa1ade41ce23e850, type: 3}
     - target: {fileID: 3485875582915805825, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -279,6 +249,36 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: audios.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: loader
+      value: 
+      objectReference: {fileID: 1387571428}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: typingSpeed
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: sentences.Array.data[0]
+      value: Una gran variedad de animales.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
+        type: 3}
+      propertyPath: audios.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f04d308435fb9f64aa1ade41ce23e850, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 027574ae7f6e1b54abd2267b93b1ea47, type: 3}
 --- !u!1 &775247806

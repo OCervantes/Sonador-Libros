@@ -432,6 +432,125 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!1001 &328074317
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 956856643333706175, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_Name
+      value: SliderMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 956856643333706171, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aae3a189388a0ff488330ea92b360859, type: 3}
 --- !u!1 &406086394
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,7 +814,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Salir del juego
+  m_Text: Ir a otro Juego
 --- !u!222 &454801355
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1529,7 +1648,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Repetir
+  m_Text: Jugar de Nuevo
 --- !u!222 &642160084
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2008,6 +2127,10 @@ PrefabInstance:
     - target: {fileID: 1102087072712216, guid: de83070d965a6ed4e83d9f83ad6b342d, type: 3}
       propertyPath: m_Name
       value: toggleMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1102087072712216, guid: de83070d965a6ed4e83d9f83ad6b342d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224721799882588980, guid: de83070d965a6ed4e83d9f83ad6b342d,
         type: 3}
@@ -3271,9 +3394,9 @@ RectTransform:
   m_Father: {fileID: 270335681}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175, y: -60}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 306.3, y: 0}
   m_SizeDelta: {x: 325, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1534608300
@@ -3710,7 +3833,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Salir del juego
+  m_Text: Ir a otro juego
 --- !u!222 &1825735156
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4394,7 +4517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1998559463
 RectTransform:
   m_ObjectHideFlags: 0
