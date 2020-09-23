@@ -19,15 +19,12 @@ public class Levelloader : MonoBehaviour
 
     public void LoadNextLevel(bool continuarpresionado)
     {
-        if (continuarpresionado == true && SceneManager.GetActiveScene().name == "7Game_Intro") {
-            SceneManager.LoadScene("GameSelector");
-        }
-        else if(continuarpresionado == true){
-            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
-        }
-        else{
-            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex - 1));
-        }
+        if (continuarpresionado == true && SceneManager.GetActiveScene().name == "7Game_Intro")
+            SceneManager.LoadScene("GameSelector");        
+        else if(continuarpresionado == true)
+            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));        
+        else
+            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex - 1));        
     }
 
     IEnumerator LoadLevel(int levelindex){

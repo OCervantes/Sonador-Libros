@@ -60,5 +60,3 @@ public class Preloader : MonoBehaviour {
     }//end Update
 
 }//end Preloader
-
-
