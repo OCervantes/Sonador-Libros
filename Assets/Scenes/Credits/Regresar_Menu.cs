@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Regresar_Menu : MonoBehaviour
 {
     // Start is called before the first frame update
-    void RegrsarMainMenu()
+    void RegresarMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
     }

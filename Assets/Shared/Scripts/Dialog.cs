@@ -11,7 +11,7 @@ public class Dialog : MonoBehaviour
     // Public access due to reference in Animation.cs
     public /*static*/ string[] sentences, maleNounsString, femaleNounsString;
     public /*static*/ int index;
-    public GameObject continueButton, gobackButton, dialogBackground, endgame, skip, loader, handanimation = null, repetir = null, Manzana1, Manzana2, Durazno1, Durazno2, Pera;
+    public GameObject ReturntoFirstScene, continueButton, gobackButton, dialogBackground, endgame, skip, loader, handanimation = null, repetir = null, Manzana1, Manzana2, Durazno1, Durazno2, Pera;
     public FruitInitialization initializer;
     public /*[SerializeField]*/ float typingSpeed;
 
@@ -25,7 +25,7 @@ public class Dialog : MonoBehaviour
     int[] typesOfFruits;        
     public AudioSource source;
     bool continuarpresionado = true;   
-
+    string SceneState; //Helps telling in which part of the game we are
     void Start()
     {                        
         // Commented so that it may be edited in the Inspector, given that each Scene's typing speed differs.
@@ -37,7 +37,9 @@ public class Dialog : MonoBehaviour
         continueButton.SetActive(false);
         gobackButton.SetActive(false);
         skip.SetActive(false);
+        ReturntoFirstScene.SetActive(false);
         
+
 
         if (SceneManager.GetActiveScene().name == "Tutorial" && index == 0){//Tutorial de conteo
            handanimation =  GameObject.FindGameObjectWithTag("Hand");
@@ -681,6 +683,7 @@ public class Dialog : MonoBehaviour
 
         else
         {
+            source.Stop();
             source.PlayOneShot(audios[index]);
 
             foreach(char letter in sentences[index].ToCharArray())
@@ -688,16 +691,21 @@ public class Dialog : MonoBehaviour
                 UIText.text += letter;
                 yield return new WaitForSeconds(typingSpeed);
             }
-            if (SceneManager.GetActiveScene().name == "7Game_Intro" && index == 1){
+            if (SceneManager.GetActiveScene().name == "7Game_Intro"){
                 inicio.SetActive(true);
-                continueButton.SetActive(false);
-                gobackButton.SetActive(true);
-            }
-            else if (sceneIndex >= 15 && sceneIndex <= 21)
-            {
-                if (sceneIndex < 21) skip.SetActive(true);
                 continueButton.SetActive(true);
-                if (sceneIndex > 15) gobackButton.SetActive(true);
+                gobackButton.SetActive(true);
+                ReturntoFirstScene.SetActive(true);
+                skip.SetActive(true);
+            }
+            else if (sceneIndex >= 15 && sceneIndex <= 21) //This chooses in which scenes activate the buttons in Game Intro.
+            {
+                ReturntoFirstScene.SetActive(true);
+               // if (sceneIndex < 21)
+                skip.SetActive(true);
+                continueButton.SetActive(true);
+                gobackButton.SetActive(true);
+                //if (sceneIndex > 15) gobackButton.SetActive(true);
             }
             else if(SceneManager.GetActiveScene().name == "Tutorial"){
                 if(index == 0){
@@ -713,6 +721,9 @@ public class Dialog : MonoBehaviour
             }
             else {
                 continueButton.SetActive(true);
+                ReturntoFirstScene.SetActive(true);
+                gobackButton.SetActive(true);
+                skip.SetActive(true);
             }
         }
     }
@@ -723,6 +734,7 @@ public class Dialog : MonoBehaviour
         continueButton.SetActive(false);
         gobackButton.SetActive(false);
         skip.SetActive(false);
+        ReturntoFirstScene.SetActive(false);
 
         if (SceneManager.GetActiveScene().name == "7Game_Intro" && index == 1){
             inicio.SetActive(false);
@@ -794,6 +806,7 @@ public class Dialog : MonoBehaviour
     {
         continueButton.SetActive(false);
         gobackButton.SetActive(false);
+        ReturntoFirstScene.SetActive(false);
         if (SceneManager.GetActiveScene().name == "7Game_Intro" && index == 1){
             inicio.SetActive(false);
         }
@@ -823,13 +836,25 @@ public class Dialog : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "Tutorial"){
             SceneManager.LoadScene("Juego 1");
         }
+        else if (sceneIndex >= 15 && sceneIndex <= 21){
+            SceneManager.LoadScene("GameSelector");
+        }
         else{
-            SceneManager.LoadScene("7Game_Intro");
+            SceneManager.LoadScene("Juego 1");
         }
     }
 
     public void repitScene(){
         SceneManager.LoadScene("Tutorial");
+    }
+
+    public void ReturntoFirstSceneofGame(){
+       if (sceneIndex >= 15 && sceneIndex <= 21){
+           SceneManager.LoadScene("1Game_Intro");
+       }
+       else{
+           SceneManager.LoadScene("Introducción");
+       }
     }
 
     void ActivateChildren()

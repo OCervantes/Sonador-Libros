@@ -119,6 +119,7 @@ public class TriviaController : MonoBehaviour,
 						string directory = Application.dataPath;
 						string localpath = "/Scenes/Games/Trivia/Images/";
 						if (File.Exists(directory + localpath + imageName)) {
+							Debug.Log("The file exists!!!");
 							byte[] bytes = File.ReadAllBytes(directory + localpath + imageName);
 							Texture2D texture = new Texture2D(1,1);
 							texture.LoadImage(bytes);
