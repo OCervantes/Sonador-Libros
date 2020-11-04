@@ -488,12 +488,12 @@ PrefabInstance:
         type: 3}
       propertyPath: audios.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 5ac58520a02862a4886201b41ac7e03f, type: 3}
+      objectReference: {fileID: 8300000, guid: 9b7632c026598e641acbca6146ae17ef, type: 3}
     - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: audios.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: 5ac58520a02862a4886201b41ac7e03f, type: 3}
+      objectReference: {fileID: 8300000, guid: 7c1029cce36fba644920ac93088ce9e7, type: 3}
     - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: sentences.Array.data[0]

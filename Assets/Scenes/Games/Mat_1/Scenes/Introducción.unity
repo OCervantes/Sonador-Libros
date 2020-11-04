@@ -807,7 +807,7 @@ PrefabInstance:
         type: 3}
       propertyPath: audios.Array.data[3]
       value: 
-      objectReference: {fileID: 8300000, guid: 05342ba3d8e069241ae32e257fb5a352, type: 3}
+      objectReference: {fileID: 8300000, guid: 98dc2c36b4156e145ad16ffaba4731ff, type: 3}
     - target: {fileID: 7023697530995584774, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: m_Color.a
