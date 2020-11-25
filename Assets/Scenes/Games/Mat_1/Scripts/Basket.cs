@@ -85,14 +85,7 @@ public class Basket : MonoBehaviour, IDropHandler
         
         // Set the Basket as its parent.
         // NOT ANYMORE. WE WANT PANELS, NOT THE OBJECTS MatDragHandeler.itemBeingDragged.transform.SetParent(transform);
-        //MatDragHandeler.itemBeingDragged.GetComponent<MatDragHandeler>().flag = true;
-
-
-        /* Increment the counter of total fruits collected, print it in console, adjust the label of fruits collected,
-           and play corresponding audio.
-         */
-        totalReceivedFruits++;
-        Debug.Log("totalReceivedFruits = " + totalReceivedFruits);
+        //MatDragHandeler.itemBeingDragged.GetComponent<MatDragHandeler>().flag = true;        
         
         /*
         if (totalReceivedFruits == 1)
@@ -106,33 +99,95 @@ public class Basket : MonoBehaviour, IDropHandler
 
         // Depending on the specific fruit that was dragged to the basket, increment its specific counter.
         if (MatDragHandeler.itemBeingDragged.name == fruits[0].name + "(Clone)")
-        {
-            receivedFruits[0]++;
-            Debug.Log("receivedFruits[0] = " + receivedFruits[0]);
-            /* Instantiate Fruit Panel within corresponding Panel
-            */
-            GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[0]], tableclothPanel.transform);
-            newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
+        {            
+            if (receivedFruits[0] >= fruitsToBeReceived[0])
+            {
+                Debug.Log("Uh Oh!");
+                Popup popup = UIController.instance.CreatePopup();
+
+                popup.ShowPopup(UIController.instance.mainCanvas, "Uh Oh!");
+            }
+            else
+            {
+                receivedFruits[0]++;
+                Debug.Log("receivedFruits[0] = " + receivedFruits[0]);
+
+                /* Instantiate Fruit Panel within corresponding Panel
+                */
+                GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[0]], tableclothPanel.transform);
+                newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
+
+                /* Increment the counter of total fruits collected, print it in console, adjust the label of fruits collected,
+                and play corresponding audio.
+                */
+                totalReceivedFruits++;
+                Debug.Log("totalReceivedFruits = " + totalReceivedFruits);
+            }
+                        
             //newFruitPanel.tra
         }
         else if (MatDragHandeler.itemBeingDragged.name == fruits[1].name + "(Clone)")
         {
-            receivedFruits[1]++;
+            /*receivedFruits[1]++;
             Debug.Log("receivedFruits[1] = " + receivedFruits[1]);
+            */
+            
+            if (receivedFruits[1] >= fruitsToBeReceived[1])
+            {
+                Debug.Log("Uh Oh!");
+                Popup popup = UIController.instance.CreatePopup();
+
+                popup.ShowPopup(UIController.instance.mainCanvas, "Uh Oh!");
+            }
+            else
+            {
+                receivedFruits[1]++;
+                Debug.Log("receivedFruits[1] = " + receivedFruits[1]);
+
+                /* Instantiate Fruit Panel within corresponding Panel
+                */
+                GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[1]], tableclothPanel.transform);
+                newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
+
+                /* Increment the counter of total fruits collected, print it in console, adjust the label of fruits collected,
+                and play corresponding audio.
+                */
+                totalReceivedFruits++;
+                Debug.Log("totalReceivedFruits = " + totalReceivedFruits);
+            }
+
             /* Instantiate Fruit Panel within corresponding Panel
             */
-            GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[1]], tableclothPanel.transform);
-            newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
+            //GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[1]], tableclothPanel.transform);
+            //newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
             //newFruitPanel.tra
         }   
         else
-        {
-            receivedFruits[2]++;
-            Debug.Log("receivedFruits[2] = " + receivedFruits[2]);    
-            /* Instantiate Fruit Panel within corresponding Panel
-            */
-            GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[2]], tableclothPanel.transform);
-            newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
+        {                       
+            if (receivedFruits[2] >= fruitsToBeReceived[2])
+            {
+                Debug.Log("Uh Oh!");
+                Popup popup = UIController.instance.CreatePopup();
+
+                popup.ShowPopup(UIController.instance.mainCanvas, "Uh Oh!");
+            }
+            else
+            {
+                receivedFruits[2]++;
+                Debug.Log("receivedFruits[2] = " + receivedFruits[2]);
+
+                /* Instantiate Fruit Panel within corresponding Panel
+                */
+                GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[2]], tableclothPanel.transform);
+                newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
+
+                /* Increment the counter of total fruits collected, print it in console, adjust the label of fruits collected,
+                and play corresponding audio.
+                */
+                totalReceivedFruits++;
+                Debug.Log("totalReceivedFruits = " + totalReceivedFruits);
+            }
+            
         }
         
         /* Once all the requested AMOUNT of fruits has been collected:

@@ -50,9 +50,12 @@ public class Popup : MonoBehaviour
         GetComponent<RectTransform>().offsetMin = Vector2.zero;
         GetComponent<RectTransform>().offsetMax = Vector2.zero;
 
+        gameObject.SetActive(true);
+
         closePopupButton.onClick.AddListener(() => 
         {
-            GameObject.Destroy(this.gameObject);            
+            gameObject.SetActive(false);            
+            //GameObject.Destroy(this.gameObject);            
         });
     }
 }
