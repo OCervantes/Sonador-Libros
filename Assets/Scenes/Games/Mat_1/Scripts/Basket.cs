@@ -9,12 +9,14 @@ using UnityEngine.SceneManagement;
 
 public class Basket : MonoBehaviour, IDropHandler
 {        
-    public Text fruitsInBasketLabel;
+    //public Text fruitsInBasketLabel;
     public FruitInitialization initializer;
-    [SerializeField] AudioClip[] audios;
+    public GameObject[] fruitPanels;
+    public GameObject tableclothPanel;
+    //[SerializeField] AudioClip[] audios;
     [SerializeField] static int[] receivedFruits;
 
-    AudioSource source;
+    //AudioSource //source;
     /*public static */GameObject[] fruits;
 
     // Static due to their reference to the Monologue and FruitInitialization Scripts, respectively.
@@ -43,7 +45,7 @@ public class Basket : MonoBehaviour, IDropHandler
         Debug.Log("Basket fruits[0], [1], [2]: " + fruits[0] + ", " + fruits[1] + ", " + fruits[2]);
         Debug.Log("Basket fruitsToBeReceived[0], [1], [2]: " + fruitsToBeReceived[0] + ", " + fruitsToBeReceived[1] + ", " + fruitsToBeReceived[2]);
 
-        source = GetComponent<AudioSource>();
+        //source = GetComponent<AudioSource>();
     }    
 
     /*
@@ -82,7 +84,7 @@ public class Basket : MonoBehaviour, IDropHandler
         Debug.Log("Name: " + MatDragHandeler.itemBeingDragged.name);
         
         // Set the Basket as its parent.
-        MatDragHandeler.itemBeingDragged.transform.SetParent(transform);
+        // NOT ANYMORE. WE WANT PANELS, NOT THE OBJECTS MatDragHandeler.itemBeingDragged.transform.SetParent(transform);
         //MatDragHandeler.itemBeingDragged.GetComponent<MatDragHandeler>().flag = true;
 
 
@@ -92,12 +94,14 @@ public class Basket : MonoBehaviour, IDropHandler
         totalReceivedFruits++;
         Debug.Log("totalReceivedFruits = " + totalReceivedFruits);
         
+        /*
         if (totalReceivedFruits == 1)
             fruitsInBasketLabel.text = totalReceivedFruits.ToString() + " fruta.";
         else
             fruitsInBasketLabel.text = totalReceivedFruits.ToString() + " frutas.";
+        */
                 
-        source.PlayOneShot(audios[(totalReceivedFruits)-1]);
+        //source.PlayOneShot(audios[(totalReceivedFruits)-1]);
         
 
         // Depending on the specific fruit that was dragged to the basket, increment its specific counter.
@@ -105,16 +109,30 @@ public class Basket : MonoBehaviour, IDropHandler
         {
             receivedFruits[0]++;
             Debug.Log("receivedFruits[0] = " + receivedFruits[0]);
+            /* Instantiate Fruit Panel within corresponding Panel
+            */
+            GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[0]], tableclothPanel.transform);
+            newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
+            //newFruitPanel.tra
         }
         else if (MatDragHandeler.itemBeingDragged.name == fruits[1].name + "(Clone)")
         {
             receivedFruits[1]++;
             Debug.Log("receivedFruits[1] = " + receivedFruits[1]);
+            /* Instantiate Fruit Panel within corresponding Panel
+            */
+            GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[1]], tableclothPanel.transform);
+            newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
+            //newFruitPanel.tra
         }   
         else
         {
             receivedFruits[2]++;
             Debug.Log("receivedFruits[2] = " + receivedFruits[2]);    
+            /* Instantiate Fruit Panel within corresponding Panel
+            */
+            GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[2]], tableclothPanel.transform);
+            newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
         }
         
         /* Once all the requested AMOUNT of fruits has been collected:
@@ -132,6 +150,8 @@ public class Basket : MonoBehaviour, IDropHandler
 
             Invoke("SwitchScene", 1.2f);
         }
+
+        
 
         /* ExecuteHierarchy calls EVERY Game Object above the one called along, until it finds something that can actually handle.
             * Pass "IHasChanged" interface.
