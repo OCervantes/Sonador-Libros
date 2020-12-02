@@ -7,6 +7,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 using DocumentStore = System.Collections.Generic.Dictionary<string, object>;
 
@@ -143,6 +144,15 @@ public class FirebaseManager : MonoBehaviour {
 			);
 	}
 
+	//This Function is call when the Logout of the current user. But is doing somethings really strange so don use it
+	/*public void Logout(){
+		if (FirebaseAuth.DefaultInstance.CurrentUser != null){
+			Debug.Log("Successfully logged Out");
+			SceneManager.LoadScene("MainMenu");
+			FirebaseAuth.DefaultInstance.SignOut();
+		}
+	}*/
+
 	public static void SaveMissionStats(MissionStats newStats) {
 		if (user == null) {
 			Debug.LogError("A logged in user is required to save mission data.");
@@ -223,6 +233,59 @@ public class FirebaseManager : MonoBehaviour {
 					);
 				}
 			);
+	}
+
+	public static void SaveProgressStats(ProgressData newdata) {
+		if (user == null) {
+			Debug.LogError("A logged in user is required to save progress data.");
+			return;
+		}
+
+		reference
+			.Child("progress")
+			.Child(user.UserId)
+			.RunTransaction(
+				savedStats => {
+					Debug.Log("Running transaction on progress.");
+					//DocumentStore userData = new DocumentStore();
+					savedStats.Value = CommitProgressData(savedStats.Value as DocumentStore, newdata);
+					
+
+					return TransactionResult.Success(savedStats);
+				}
+			).ContinueWith(
+				task => {
+					if (task.IsCanceled) {
+						Debug.Log("Transaction was canceled.");
+						return;
+					}
+					if (task.IsFaulted) {
+						Debug.LogError(
+							"Transaction fault : " +
+							task.Exception.Message
+						);
+						Debug.LogError(task.Exception);
+						return;
+					}
+					if (!task.IsCompleted) {
+						Debug.LogError("Transaction failed to complete.");
+						return;
+					}
+					Debug.Log("Transaction complete.");
+				}
+			);
+	}
+
+	private static DocumentStore CommitProgressData(DocumentStore userData,
+		ProgressData newdata) {
+		if (userData == null) {
+			Debug.Log("Initializing statistics");
+			userData = initializeProgress();
+		}
+			userData["current_level"] = newdata.currentLevel;
+			userData["has_seen_intro"] = newdata.hasSeenIntro;
+
+		return userData;
 	}
 
 	public static void GetMissionData(OnMissionDataRecievedCallback callback,
@@ -451,6 +514,15 @@ public struct MissionData {
 			SceneId = Convert.ToInt32(sceneId) + "";
 		}
 		Data = data["data"] as DocumentStore;
-	}
+	}	
+}
 
+public struct ProgressData{
+	public readonly int currentLevel;
+	public readonly bool hasSeenIntro;
+	
+	public ProgressData(DocumentStore data){
+		hasSeenIntro = (bool) data["has_seen_intro"];
+		currentLevel = (int) data["current_level"];
+	}
 }
