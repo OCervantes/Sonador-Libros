@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 629006466}
   - component: {fileID: 629006465}
   - component: {fileID: 3207152680695534321}
+  - component: {fileID: 8612942335942578624}
   m_Layer: 0
   m_Name: ScriptBotones
   m_TagString: Untagged
@@ -55,6 +56,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad720997870b4ad479f8465ec8777e42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8612942335942578624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629006464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19d6422683cfb4a4e934e6406e544104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &487387639055743520
@@ -750,7 +763,7 @@ GameObject:
   - component: {fileID: 956856643479472961}
   - component: {fileID: 956856643479472966}
   m_Layer: 5
-  m_Name: VolverMenuPrincipal
+  m_Name: LogOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -853,8 +866,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 629006465}
-        m_MethodName: ReturnToMainMenu
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

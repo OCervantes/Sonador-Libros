@@ -21,12 +21,12 @@ public class NewAccount : MonoBehaviour,
 				Debug.Log(message);
 				UnityMainThreadDispatcher
 					.Instance ()
-					.EnqueueNextScene ("1Game_Intro");
+					.EnqueueNextScene ("1Game_Intro"); //Goes to the First scene
 				break;
 		}
 	}
 
-	public void OnNewAccount() {
+	public void OnNewAccount() { 
 		FirebaseManager.CreateNewPlayer(
 			email.text,
 			username.text,

@@ -21,7 +21,7 @@ public class TestingInitializor : MonoBehaviour,
 				Debug.Log(message);
 				UnityMainThreadDispatcher
 					.Instance ()
-					.EnqueueNextScene (15);
+					.EnqueueNextScene ("1Game_Intro"); //TODO: The scene number will be loaded from the database. 
 				break;
 		}
 	}

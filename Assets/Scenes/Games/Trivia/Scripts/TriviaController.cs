@@ -180,8 +180,12 @@ public class TriviaController : MonoBehaviour,
 		questionPanel.SetActive (false);
 		roundEndPanel.SetActive (true);
 		TimeSpan totalTime = TimeSpan.FromSeconds(initialTime - timeRemaining);
+		//DocumentStore userData = new DocumentStore();
+		//userData["current_level"] = 1;
+		//userData["has_seen_intro"] = true;
 		FirebaseManager.SaveMissionStats(
 			new MissionStats(totalTime, CompletionType.Completed, 9));
+		//FirebaseManager.SaveProgressStats(new ProgressData(userData));
 	}//end EndRound
 
 	public void UpdateTimeRemainingDisplay(){
