@@ -497,8 +497,8 @@ PrefabInstance:
     - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
       propertyPath: sentences.Array.data[0]
-      value: "(Jugador), los t\xEDos Feru y Mati me han pedido ayuda para buscar por
-        el bosque esta cantidad de frutas."
+      value: "Los t\xEDos Feru y Mati me han pedido ayuda para buscar por el bosque
+        esta cantidad de frutas."
       objectReference: {fileID: 0}
     - target: {fileID: 1625651511971557805, guid: 027574ae7f6e1b54abd2267b93b1ea47,
         type: 3}
