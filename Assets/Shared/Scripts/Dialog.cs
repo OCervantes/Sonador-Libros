@@ -133,7 +133,7 @@ public class Dialog : MonoBehaviour
                     if (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]] == 1)
                     {
                         // Masculina (Durazno)
-                        if (initializer.fruits[FruitInitialization.fruitIndexes[0]].name == "durazno")
+                        if (initializer.fruits[FruitInitialization.fruitIndexes[0]].name == "Durazno")
                         {
                             // Éste es
                             source.PlayOneShot(maleNounsFeru[0]);
@@ -197,7 +197,7 @@ public class Dialog : MonoBehaviour
                     else
                     {
                         // Masculinas (Duraznos)
-                        if (initializer.fruits[FruitInitialization.fruitIndexes[0]].name == "durazno")
+                        if (initializer.fruits[FruitInitialization.fruitIndexes[0]].name == "Durazno")
                         {
                             // Éstos son
                             source.PlayOneShot(maleNounsFeru[1]);
@@ -306,7 +306,7 @@ public class Dialog : MonoBehaviour
                     if (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]] == 1)
                     {
                         // Masculina (Durazno)
-                        if (initializer.fruits[FruitInitialization.fruitIndexes[1]].name == "durazno")
+                        if (initializer.fruits[FruitInitialization.fruitIndexes[1]].name == "Durazno")
                         {
                             // Éste es
                             source.PlayOneShot(maleNounsMati[0]);
@@ -370,7 +370,7 @@ public class Dialog : MonoBehaviour
                     else
                     {
                         // Masculinas (Duraznos)
-                        if (initializer.fruits[FruitInitialization.fruitIndexes[1]].name == "durazno")
+                        if (initializer.fruits[FruitInitialization.fruitIndexes[1]].name == "Durazno")
                         {
                             // Éstos son
                             source.PlayOneShot(maleNounsMati[1]);
@@ -471,7 +471,7 @@ public class Dialog : MonoBehaviour
                     if (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]] == 1)
                     {
                         // Masculina (Durazno)
-                        if (initializer.fruits[FruitInitialization.fruitIndexes[2]].name == "durazno")
+                        if (initializer.fruits[FruitInitialization.fruitIndexes[2]].name == "Durazno")
                         {
                             // Éste es
                             source.PlayOneShot(maleNounsFeru[0]);
@@ -535,7 +535,7 @@ public class Dialog : MonoBehaviour
                     else
                     {
                         // Masculinas (Duraznos)
-                        if (initializer.fruits[FruitInitialization.fruitIndexes[2]].name == "durazno")
+                        if (initializer.fruits[FruitInitialization.fruitIndexes[2]].name == "Durazno")
                         {
                             // Éstos son
                             source.PlayOneShot(maleNounsFeru[1]);
