@@ -195,7 +195,10 @@ public class Basket : MonoBehaviour, IDropHandler
          * Pass value to Monologue Script (in charge of "New" Scene).
          * Reset counter of total collected fruits.
          * Switch Scenes.
-         */
+        
+         * Not anymore!
+         * Now transition of Scenes is handled by the Confirm Fruit Selection Button.
+         
         if (totalReceivedFruits == (fruitsToBeReceived[0] + fruitsToBeReceived[1] + fruitsToBeReceived[2]))
         { 
             // Static variables/functions from other classes can have their values assigned/be called as following:
@@ -205,6 +208,7 @@ public class Basket : MonoBehaviour, IDropHandler
 
             Invoke("SwitchScene", 1.2f);
         }
+        */
 
         
 
@@ -218,7 +222,7 @@ public class Basket : MonoBehaviour, IDropHandler
     }
     #endregion
 
-    void SwitchScene()
+    public void SwitchScene()
     {
         /* If the fruits that were collected are the same that were requested:
         
