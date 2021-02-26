@@ -130,9 +130,17 @@ public class Animations: MonoBehaviour
 
                 /* Enables and disables the animations between all characters who speak in the scene, according to the sen-
                    tence that is currently being displayed in Dialogue Text.
+
+                   ! I'm noticing a pattern!
+                   ! Maybe this shouldn't even be a condition.
                  */
                 switch(/*Dialog.index)CurrentDialogIndex*/index)
-                {  
+                {
+                    case 0:
+                        personajes[0].SetActive(true);
+                        personajes[1].SetActive(false);                        
+                        break;
+                        
                     case 1:
                         // 
                         personajes[0].SetActive(true);
