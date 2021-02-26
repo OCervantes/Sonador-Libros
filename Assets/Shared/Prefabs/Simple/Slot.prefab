@@ -112,8 +112,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 318113dac1ffd8f4bbe08e17b547a6bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letter: {fileID: 0}
   slotLetter: 
-  lvlComplete: 0
-  gameManager: {fileID: 8198624900512753271, guid: 0de1408cf6318cb46a78717215b783f6,
-    type: 3}
+  vocabManager: {fileID: 0}
