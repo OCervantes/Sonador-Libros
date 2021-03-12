@@ -15,7 +15,7 @@ public class LevelEndManager : MonoBehaviour
         //LevelEndPanel = this.gameObject;
         CompletedGamePanel.SetActive(false);
         LevelEndPanel.SetActive(false);
-        //Creo que solo lo esta copiando no lo esta referenciando.
+        //This copies the text does not reference it.
         TextInstructionsString = TextInstructionsGameObject.GetComponent<Text>().text;
     }
 
@@ -25,6 +25,8 @@ public class LevelEndManager : MonoBehaviour
         if(LevelNumber == 7) { CompletedGamePanel.SetActive(true); }
         //Congratulate the player for completing the level
         TextInstructionsString = "¡Lo lograste, haz pasado el nivel " + LevelNumber + "! ¡Gracias!";
+        //Assigns the string to the gameobject.
+        TextInstructionsGameObject.GetComponent<Text>().text = TextInstructionsString;
         LevelEndPanel.SetActive(true);
     }
 
