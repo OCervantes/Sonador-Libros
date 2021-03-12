@@ -10,11 +10,15 @@ public class VocabularyManager: MonoBehaviour,
 {
     //Datos Miembro
     public AudioSource bounceSource, lockSource;
-    public GameObject recibidor, banco, definition, prefabMovableAndSlot, prefabSlot;    
+    public GameObject recibidor, banco, definition, prefabMovableAndSlot, prefabSlot;
+    public LevelEndManager LevelEnd;
     /*public*/ string missionName;
 
     string recoveredVocabWord;
     int correctChildCount;
+
+    //Counting the groups of three words
+    [SerializeField] int groupWordCount = 0;
 
     /* Lo tuve que volver estático porque no me permitía de otra manera.
      * Tendré que revisar que no interfiera más tarde.
@@ -59,6 +63,7 @@ public class VocabularyManager: MonoBehaviour,
 
     void BuildGame()
     {    
+        
         // If the game hasn't yet displayed the words within the range defined by [lowerRNGLimit, upperRNGLimit], do so.
         if (!(wordsAlreadyDisplayed.Contains(lowerRNGLimit) && wordsAlreadyDisplayed.Contains(lowerRNGLimit+1) && wordsAlreadyDisplayed.Contains(lowerRNGLimit+2)))
         {            
@@ -68,11 +73,17 @@ public class VocabularyManager: MonoBehaviour,
         // If the game HAS displayed the words within said range, adjust it so that it may consider the next 3 words.
         else
         {
+            
+            //Count the number of groups of three words that were instantiated
+            groupWordCount += 3;
+
             lowerRNGLimit = lowerRNGLimit + 3;
             upperRNGLimit = lowerRNGLimit + 2;
             
             InstanceGameObjects();
         }
+        //If all the words form a level have been displayed play the transition of level.
+        if (groupWordCount == 6) { LevelEnd.TransitionOfLevel(groupWordCount); groupWordCount = 0; }
     }
 
     /* Fetch a random word from the dictionaries, instantiate all Slot and MovAndSlot Objects necessary for said word,
