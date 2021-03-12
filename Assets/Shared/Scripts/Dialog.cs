@@ -13,7 +13,7 @@ public class Dialog : MonoBehaviour
     public /*static*/ int index;
     public GameObject ReturntoFirstScene, continueButton, gobackButton, dialogBackground, endgame, skip, loader, handanimation = null, repetir = null, Manzana1, Manzana2, Durazno1, Durazno2, Pera;
     public FruitInitialization initializer;
-    public /*[SerializeField]*/ float typingSpeed;
+    /*public*/ [SerializeField] float typingSpeed;
 
     [SerializeField] AudioClip[] maleNounsFeru, femaleNounsFeru, maleNounsMati, femaleNounsMati, un, numbersFeru, numbersMati, pluralFruitsFeru, pluralFruitsMati, singleFruitsFeru, singleFruitsMati;
 
@@ -28,9 +28,6 @@ public class Dialog : MonoBehaviour
     string SceneState; //Helps telling in which part of the game we are
     void Start()
     {                        
-        // Commented so that it may be edited in the Inspector, given that each Scene's typing speed differs.
-        typingSpeed = 0.02f;
-
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         dialogBackground.SetActive(true);
@@ -101,8 +98,27 @@ public class Dialog : MonoBehaviour
         StartCoroutine(Type());
     }
 
-    IEnumerator Type()
+    void Update()
     {
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        if (!(currentScene.Equals("New Correción")))
+        {
+            /* Each Scene's typing speed differs.
+            * Time spent on each character = audio length/(# of characters to display)
+
+            * It also depends on the device's rendering time (delta time).
+            */
+            string currentSentence = sentences[index];
+            AudioClip currentAudioClip = audios[index];            
+
+            typingSpeed = (currentAudioClip.length/currentSentence.Length)*Time.deltaTime;
+        }        
+    }
+
+    IEnumerator Type()
+    {        
+
         if (SceneManager.GetActiveScene().name == "New Corrección")
         {
             //int totalFruits = 0;                        
@@ -683,6 +699,7 @@ public class Dialog : MonoBehaviour
 
         else
         {
+            
             source.Stop();
             source.PlayOneShot(audios[index]);
 
