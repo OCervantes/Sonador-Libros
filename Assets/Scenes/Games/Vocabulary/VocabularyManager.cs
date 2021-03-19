@@ -79,11 +79,16 @@ public class VocabularyManager: MonoBehaviour,
 
             lowerRNGLimit = lowerRNGLimit + 3;
             upperRNGLimit = lowerRNGLimit + 2;
-            
-            InstanceGameObjects();
+
+            //If all the words form a level have been displayed play the transition of level.
+            if (groupWordCount == 6) { LevelEnd.TransitionOfLevel(); groupWordCount = 0; }
+            Debug.Log(LevelEnd.LevelNumber);
+
+            //If all the levels are completed then show the congratulation message, else intance the words.
+            if(LevelEnd.LevelNumber == 7) {LevelEnd.TransitionOfLevel(); groupWordCount = 0;}
+            else{InstanceGameObjects();}
         }
-        //If all the words form a level have been displayed play the transition of level.
-        if (groupWordCount == 6) { LevelEnd.TransitionOfLevel(groupWordCount); groupWordCount = 0; }
+        
     }
 
     /* Fetch a random word from the dictionaries, instantiate all Slot and MovAndSlot Objects necessary for said word,

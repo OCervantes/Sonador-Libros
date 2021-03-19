@@ -19,7 +19,7 @@ public class LevelEndManager : MonoBehaviour
         TextInstructionsString = TextInstructionsGameObject.GetComponent<Text>().text;
     }
 
-    public void TransitionOfLevel(int groupWordCount)
+    public void TransitionOfLevel()
     {
         //if last level show "Juego Completado"
         if(LevelNumber == 7) { CompletedGamePanel.SetActive(true); }
