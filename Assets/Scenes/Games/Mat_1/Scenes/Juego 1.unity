@@ -1076,6 +1076,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 956058739599433490, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 923464596982823624, guid: aae3a189388a0ff488330ea92b360859,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aae3a189388a0ff488330ea92b360859, type: 3}
 --- !u!1 &713877017
@@ -1619,6 +1629,7 @@ GameObject:
   - component: {fileID: 893437936}
   - component: {fileID: 893437935}
   - component: {fileID: 893437938}
+  - component: {fileID: 893437939}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1706,6 +1717,102 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!82 &893437939
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893437934}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &939201062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2070,6 +2177,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initializer: {fileID: 981208431}
+  source: {fileID: 893437939}
+  un:
+  - {fileID: 8300000, guid: 39bc81417d7cdb744975afecfb4a0923, type: 3}
+  - {fileID: 8300000, guid: d52e329f97364cc4887e98b49d0ca370, type: 3}
+  singleFruitsFeru:
+  - {fileID: 8300000, guid: 6abc2f6004bb61340b11baa62d36b851, type: 3}
+  - {fileID: 8300000, guid: 3a2de5f2730af984f9d7e917d123f959, type: 3}
+  - {fileID: 8300000, guid: 5169ddf4f25cdeb46b9ecd307ebd36e7, type: 3}
+  numbersFeru:
+  - {fileID: 8300000, guid: d76626a41fa51a94c975e7f2945bdac4, type: 3}
+  - {fileID: 8300000, guid: 899fc576a8209cd458d263d450308246, type: 3}
+  - {fileID: 8300000, guid: e6ceb6e7cd5f06044b1ed9b7d0e8ce57, type: 3}
+  - {fileID: 8300000, guid: e621adc8e09f4b44e80fcc20ce8764aa, type: 3}
+  - {fileID: 8300000, guid: b35ccb42ada54fa4cae7aa51625ba316, type: 3}
+  - {fileID: 8300000, guid: a3e83737cd83e7249b2a64a480cd004f, type: 3}
+  - {fileID: 8300000, guid: d5174e0625311974cb3ca54839758dcc, type: 3}
+  - {fileID: 8300000, guid: f86ed61069dd8b04783d66191b512323, type: 3}
+  - {fileID: 8300000, guid: c2de4ce795c1c0348846fb1c7f89af58, type: 3}
+  - {fileID: 8300000, guid: bf7dddb9f1e6ed34d9158b915c5f6df5, type: 3}
+  pluralFruitsFeru:
+  - {fileID: 8300000, guid: d821725ffe870cc4d8e202e02212c3d1, type: 3}
+  - {fileID: 8300000, guid: 0bb67427b591a2f43b142afe84a0504a, type: 3}
+  - {fileID: 8300000, guid: e7aae1b49769bb64292d0ad1b9c0288c, type: 3}
 --- !u!1 &1210885775
 GameObject:
   m_ObjectHideFlags: 0

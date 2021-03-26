@@ -112,7 +112,7 @@ public class Dialog : MonoBehaviour
             string currentSentence = sentences[index];
             AudioClip currentAudioClip = audios[index];            
 
-            typingSpeed = (currentAudioClip.length/currentSentence.Length)*Time.deltaTime;
+            typingSpeed = (currentAudioClip.length/currentSentence.Length);//*Time.deltaTime;
         }        
     }
 

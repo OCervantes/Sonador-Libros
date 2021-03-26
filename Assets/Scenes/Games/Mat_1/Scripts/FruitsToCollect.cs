@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class FruitsToCollect : MonoBehaviour
@@ -9,6 +10,10 @@ public class FruitsToCollect : MonoBehaviour
     Text instructions;
     GameObject[] fruits;
     /*Vector2*/float fruitXPosition;
+    public AudioSource source;
+    [SerializeField] AudioClip[] un, singleFruitsFeru, numbersFeru, pluralFruitsFeru;
+
+    float accumulatedInstructionDuration;
 
     // Start is called before the first frame update
     void Start()
@@ -21,11 +26,15 @@ public class FruitsToCollect : MonoBehaviour
         //fruitNames = new string [3];        
         instructions = GetComponent<Text>();
         instructions.text = "";
+
+        accumulatedInstructionDuration = 0f;
         /*
         fruitNames[0] = initializer.fruits[FruitInitialization.fruitIndexes[0]].name;
         fruitNames[1] = initializer.fruits[FruitInitialization.fruitIndexes[1]].name;
         fruitNames[2] = initializer.fruits[FruitInitialization.fruitIndexes[2]].name;
-        */        
+        */
+
+        
 
         for (int i=0; i<initializer.fruits.Length; i++)
         {
@@ -34,10 +43,80 @@ public class FruitsToCollect : MonoBehaviour
 
             instructions.text += fruitNumbers[i] + "        ";
 
+            StartCoroutine(SayInstructions(i));
+
             if(i !=2)
+            {
                 instructions.text += ", ";
+            } 
         }        
 
+        IEnumerator SayInstructions(int i)
+        {
+            Debug.Log("Instructions Coroutine");
+            if (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]] == 1)
+            {
+                // Masculina (Durazno)
+                if (initializer.fruits[FruitInitialization.fruitIndexes[i]].name == "Durazno")
+                {
+                    // Un                    
+                    yield return new WaitForSeconds(un[0].length + accumulatedInstructionDuration);
+                    source.PlayOneShot(un[0]);
+                    accumulatedInstructionDuration += un[0].length;
+                    
+                    // Durazno
+                    yield return new WaitForSeconds(singleFruitsFeru[2].length + accumulatedInstructionDuration);
+                    source.PlayOneShot(singleFruitsFeru[2]);
+                    accumulatedInstructionDuration += singleFruitsFeru[2].length;
+                }
+
+                // Femenina (Manzana, Pera)
+                else
+                {
+                    // una                    
+                    yield return new WaitForSeconds(numbersFeru[0].length + accumulatedInstructionDuration);
+                    source.PlayOneShot(numbersFeru[0]);
+                    accumulatedInstructionDuration += numbersFeru[0].length;
+                    
+                    // (fruta)
+                    yield return new WaitForSeconds(singleFruitsFeru[FruitInitialization.fruitIndexes[i]].length + accumulatedInstructionDuration);
+                    source.PlayOneShot(singleFruitsFeru[FruitInitialization.fruitIndexes[i]]);
+                    accumulatedInstructionDuration += singleFruitsFeru[FruitInitialization.fruitIndexes[i]].length;
+                }
+            }
+
+            // Frutas (plural)
+            else
+            {
+                // Masculinas (Duraznos)
+                if (initializer.fruits[FruitInitialization.fruitIndexes[i]].name == "Durazno")
+                {
+                    // (número variable)                    
+                    yield return new WaitForSeconds(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]]-1].length + accumulatedInstructionDuration);
+                    source.PlayOneShot(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]]-1]);
+                    accumulatedInstructionDuration += numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]]-1].length;
+                                        
+                    // Duraznos
+                    yield return new WaitForSeconds(pluralFruitsFeru[2].length + accumulatedInstructionDuration);
+                    source.PlayOneShot(pluralFruitsFeru[2]);
+                    accumulatedInstructionDuration += pluralFruitsFeru[2].length;
+                }
+
+                // Femeninas (Manzanas, Peras)
+                else
+                {
+                    // (número variable)                
+                    yield return new WaitForSeconds(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]]-1].length + accumulatedInstructionDuration);
+                    source.PlayOneShot(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]]-1]);
+                    accumulatedInstructionDuration += numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]]-1].length;
+                    
+                    // (frutas)
+                    yield return new WaitForSeconds(pluralFruitsFeru[FruitInitialization.fruitIndexes[i]].length + accumulatedInstructionDuration);
+                    source.PlayOneShot(pluralFruitsFeru[FruitInitialization.fruitIndexes[i]]);
+                    accumulatedInstructionDuration += pluralFruitsFeru[FruitInitialization.fruitIndexes[i]].length;
+                }
+            }
+        }
         /*
         for (int i=0; i<instructions.text.Length; i++)
         {
@@ -154,4 +233,5 @@ public class FruitsToCollect : MonoBehaviour
 
     }
     */
+
 }
