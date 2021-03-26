@@ -63,7 +63,7 @@ public class VocabularyManager: MonoBehaviour,
 
     void BuildGame()
     {    
-        
+        int LastLevel = 5;
         // If the game hasn't yet displayed the words within the range defined by [lowerRNGLimit, upperRNGLimit], do so.
         if (!(wordsAlreadyDisplayed.Contains(lowerRNGLimit) && wordsAlreadyDisplayed.Contains(lowerRNGLimit+1) && wordsAlreadyDisplayed.Contains(lowerRNGLimit+2)))
         {            
@@ -85,7 +85,7 @@ public class VocabularyManager: MonoBehaviour,
             Debug.Log(LevelEnd.LevelNumber);
 
             //If all the levels are completed then show the congratulation message, else intance the words.
-            if(LevelEnd.LevelNumber == 7) {LevelEnd.TransitionOfLevel(); groupWordCount = 0;}
+            if(LevelEnd.LevelNumber == LastLevel) {LevelEnd.CompletedGamePanel.SetActive(true); groupWordCount = 0;}
             else{InstanceGameObjects();}
         }
         

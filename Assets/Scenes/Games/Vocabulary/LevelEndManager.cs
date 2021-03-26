@@ -9,6 +9,7 @@ public class LevelEndManager : MonoBehaviour
     public GameObject LevelEndPanel, CompletedGamePanel, TextInstructionsGameObject;
     public string TextInstructionsString;
     public int LevelNumber = 1;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +22,6 @@ public class LevelEndManager : MonoBehaviour
 
     public void TransitionOfLevel()
     {
-        //if last level show "Juego Completado"
-        if(LevelNumber == 7) { CompletedGamePanel.SetActive(true); }
         //Congratulate the player for completing the level
         TextInstructionsString = "¡Lo lograste, haz pasado el nivel " + LevelNumber + "! ¡Gracias!";
         //Assigns the string to the gameobject.
