@@ -12,6 +12,7 @@ public class VocabularyManager: MonoBehaviour,
     public AudioSource bounceSource, lockSource;
     public GameObject recibidor, banco, definition, prefabMovableAndSlot, prefabSlot;
     public LevelEndManager LevelEnd;
+    public WordHintManager WordHintManager;
     /*public*/ string missionName;
 
     string recoveredVocabWord;
@@ -81,11 +82,23 @@ public class VocabularyManager: MonoBehaviour,
             upperRNGLimit = lowerRNGLimit + 2;
 
             //If all the words form a level have been displayed play the transition of level.
-            if (groupWordCount == 6) { LevelEnd.TransitionOfLevel(); groupWordCount = 0; }
+            if (groupWordCount == 6) 
+            { 
+                LevelEnd.TransitionOfLevel(); 
+                groupWordCount = 0; 
+                WordHintManager.slotIncrementer = 0;
+                WordHintManager.countHints = 0;
+            }
             Debug.Log(LevelEnd.LevelNumber);
 
             //If all the levels are completed then show the congratulation message, else intance the words.
-            if(LevelEnd.LevelNumber == LastLevel) {LevelEnd.CompletedGamePanel.SetActive(true); groupWordCount = 0;}
+            if(LevelEnd.LevelNumber == LastLevel) 
+            {
+                LevelEnd.CompletedGamePanel.SetActive(true); 
+                groupWordCount = 0;
+                WordHintManager.slotIncrementer = 0;
+                WordHintManager.countHints = 0;
+            }
             else{InstanceGameObjects();}
         }
         
@@ -126,7 +139,7 @@ public class VocabularyManager: MonoBehaviour,
             SlotObj.slotLetter = System.Convert.ToString(recoveredVocabWord[n]).ToUpper();
             SlotObj.vocabManager = this;
         }
-
+        
         Stack letterIndexes = new Stack();
 
         /* Displays the number of children 

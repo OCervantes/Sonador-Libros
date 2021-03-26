@@ -154,5 +154,47 @@ public class Slot : MonoBehaviour, IDropHandler
         yield return new WaitForSeconds(1);
         component.color = new Color(1f, 1f, 1f, 0.39f);
     }    
+    //Cuando el usuario quiere un Hint
+    //Hacer metodo que reciva los gameobject the moveandSlot y compare el texto de esto con el texto del slot.
+    public void MoveCardToCorrectSlot(GameObject[] movableSlots)
+    {
+        GameObject Card, CardText;
+        
+        foreach (GameObject cardSlot in movableSlots)
+        {
+            Card = cardSlot.transform.GetChild(0).gameObject;
+            CardText = Card.transform.GetChild(0).gameObject;
+            Text textComponent = CardText.GetComponent<Text>();
 
+            if (textComponent.text == slotLetter)
+            {
+               
+                //Card.transform.position = this.transform.position;
+                Card
+                .transform
+                .SetParent(transform);
+                Card.GetComponent<Image>()
+                    .color = Color.green;   //CAMBIO DE COLOR EXITOSO
+
+                /*Slot.*/embeddedMovCounter++;
+
+                vocabManager.lockSource.Play();
+
+                
+                numberOfChildren = GameObject
+                    .Find("Recibidor")
+                    .GetComponent<Transform>()
+                    .childCount; //EUREKA. FORMA SEGURA DE CONSEGUIR childCount.
+
+                //Debug.Log("Number of children in Recibidor: " + numberOfChildren);
+
+                if (embeddedMovCounter == numberOfChildren)
+                {
+                    vocabManager.EndWord();
+                    embeddedMovCounter = 0;
+                }
+
+            } 
+        }
+    }
 }
