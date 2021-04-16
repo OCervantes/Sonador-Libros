@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class WordHintManager : MonoBehaviour
 {
-    public GameObject Recibidor, BancoDeLetras;
+    public GameObject Recibidor, BancoDeLetras, checkChild;
     public GameObject[] slots;
     public GameObject[] movableSlots;
     public int numberOfHints = 3;
     public int slotIncrementer = 0;
+    public int countHints = 0;
 
     // Start is called before the first frame update
     public void StartHint()
@@ -19,14 +20,27 @@ public class WordHintManager : MonoBehaviour
         slots = GetChilds(Recibidor);
         movableSlots = GetChilds(BancoDeLetras);
 
-        /*for(int i=0; i<numberOfHints; i++)
+        if(countHints != numberOfHints)
         {
-            slots[i].GetComponent<Slot>().MoveCardToCorrectSlot(movableSlots);
-        } */
-        if(slotIncrementer != numberOfHints){
+            if (slots[slotIncrementer].transform.childCount >= 1)
+            {
+                slotIncrementer++;
+            }
+            Debug.Log("SlotIncrementer: " + slotIncrementer + "/n" + "countHints: " + countHints);
+            slots[slotIncrementer].GetComponent<Slot>().MoveCardToCorrectSlot(movableSlots);
+            countHints++;
+            slotIncrementer++;
+            Debug.Log("SlotIncrementer: " + slotIncrementer + "/n" + "countHints: " + countHints);
+            
+        } 
+        /*if(slotIncrementer != numberOfHints){
+            if (slots[slotIncrementer].transform.GetChild(0).gameObject)
+            {
+                slotIncrementer++;
+            }
             slots[slotIncrementer].GetComponent<Slot>().MoveCardToCorrectSlot(movableSlots);
             slotIncrementer++;
-        }
+        }*/
     }
 
     public GameObject[] GetChilds(GameObject parent){

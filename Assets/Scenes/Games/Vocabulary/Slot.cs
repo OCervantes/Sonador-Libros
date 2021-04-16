@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 public class Slot : MonoBehaviour, IDropHandler
 {
@@ -155,14 +156,24 @@ public class Slot : MonoBehaviour, IDropHandler
         component.color = new Color(1f, 1f, 1f, 0.39f);
     }    
     //Cuando el usuario quiere un Hint
-    //Hacer metodo que reciva los gameobject the moveandSlot y compare el texto de esto con el texto del slot.
+    //Metodo que reciva los gameobject the moveandSlot y compare el texto de esto con el texto del slot.
     public void MoveCardToCorrectSlot(GameObject[] movableSlots)
     {
-        GameObject Card, CardText;
+        GameObject Card = null, CardText= null;
         
         foreach (GameObject cardSlot in movableSlots)
         {
-            Card = cardSlot.transform.GetChild(0).gameObject;
+
+
+            //Prueba si realmente el gameobject moveandSlot tiene un hijo, si no ve al siguiente gameobject
+            try
+            {
+                Card = cardSlot.transform.GetChild(0).gameObject;
+            }
+            catch(Exception e)
+            {
+                continue;
+            }
             CardText = Card.transform.GetChild(0).gameObject;
             Text textComponent = CardText.GetComponent<Text>();
 
@@ -193,7 +204,10 @@ public class Slot : MonoBehaviour, IDropHandler
                     vocabManager.EndWord();
                     embeddedMovCounter = 0;
                 }
-
+                /*Se sale de la función (return) si ya encontro la carta a mover, para evitar que si 
+                 dos letras son iguales, mueva las dos.
+                */
+                return; 
             } 
         }
     }

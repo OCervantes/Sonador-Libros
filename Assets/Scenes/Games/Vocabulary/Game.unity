@@ -3790,6 +3790,11 @@ PrefabInstance:
       propertyPath: LevelEnd
       value: 
       objectReference: {fileID: 1913469961}
+    - target: {fileID: 8198624900512753271, guid: 0de1408cf6318cb46a78717215b783f6,
+        type: 3}
+      propertyPath: WordHintManager
+      value: 
+      objectReference: {fileID: 1913469962}
     - target: {fileID: 8198624900512753264, guid: 0de1408cf6318cb46a78717215b783f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3894,9 +3899,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Recibidor: {fileID: 615976733}
   BancoDeLetras: {fileID: 336328340}
+  checkChild: {fileID: 0}
   slots: []
   movableSlots: []
   numberOfHints: 3
+  slotIncrementer: 0
+  countHints: 0
 --- !u!1 &2003462651
 GameObject:
   m_ObjectHideFlags: 0

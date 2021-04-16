@@ -63,18 +63,23 @@ public class VocabularyManager: MonoBehaviour,
 
 
     void BuildGame()
-    {    
+    {
+        //Pendiente: Revisar en donde reinciar el slotIncrementer y countHints (digo que al inicio)
         int LastLevel = 5;
+        WordHintManager.slotIncrementer = 0;
+        WordHintManager.countHints = 0;
         // If the game hasn't yet displayed the words within the range defined by [lowerRNGLimit, upperRNGLimit], do so.
         if (!(wordsAlreadyDisplayed.Contains(lowerRNGLimit) && wordsAlreadyDisplayed.Contains(lowerRNGLimit+1) && wordsAlreadyDisplayed.Contains(lowerRNGLimit+2)))
-        {            
+        {
             InstanceGameObjects();
         }
 
         // If the game HAS displayed the words within said range, adjust it so that it may consider the next 3 words.
         else
         {
-            
+            WordHintManager.slotIncrementer = 0;
+            WordHintManager.countHints = 0;
+            Debug.Log("incrementer: " + WordHintManager.slotIncrementer);
             //Count the number of groups of three words that were instantiated
             groupWordCount += 3;
 
@@ -86,8 +91,9 @@ public class VocabularyManager: MonoBehaviour,
             { 
                 LevelEnd.TransitionOfLevel(); 
                 groupWordCount = 0; 
-                //WordHintManager.slotIncrementer = 0;
-                //WordHintManager.countHints = 0;
+
+                WordHintManager.slotIncrementer = 0;
+                WordHintManager.countHints = 0;
             }
             Debug.Log(LevelEnd.LevelNumber);
 
@@ -99,7 +105,12 @@ public class VocabularyManager: MonoBehaviour,
                 //WordHintManager.slotIncrementer = 0;
                 //WordHintManager.countHints = 0;
             }
-            else{InstanceGameObjects();}
+            else
+            {
+                WordHintManager.slotIncrementer = 0;
+                WordHintManager.countHints = 0;
+                InstanceGameObjects(); 
+            }
         }
         
     }
