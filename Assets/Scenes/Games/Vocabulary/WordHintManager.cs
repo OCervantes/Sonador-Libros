@@ -9,7 +9,6 @@ public class WordHintManager : MonoBehaviour
     public GameObject[] movableSlots;
     public int numberOfHints = 3;
     public int slotIncrementer = 0;
-    public int countHints = 0;
 
     // Start is called before the first frame update
     public void StartHint()
@@ -20,21 +19,10 @@ public class WordHintManager : MonoBehaviour
         slots = GetChilds(Recibidor);
         movableSlots = GetChilds(BancoDeLetras);
 
-        /*if(countHints != numberOfHints){
-            if(Recibidor.transform.childCount - 1 <= slotIncrementer)
-            {
-                slotIncrementer = 0;
-            }
-            if(slots[slotIncrementer].transform.GetChild(0) == true)
-            {
-                slotIncrementer++;
-            }
-            else{
-                slots[slotIncrementer].GetComponent<Slot>().MoveCardToCorrectSlot(movableSlots);
-                countHints++;
-                slotIncrementer++;
-            }
-        }*/
+        /*for(int i=0; i<numberOfHints; i++)
+        {
+            slots[i].GetComponent<Slot>().MoveCardToCorrectSlot(movableSlots);
+        } */
         if(slotIncrementer != numberOfHints){
             slots[slotIncrementer].GetComponent<Slot>().MoveCardToCorrectSlot(movableSlots);
             slotIncrementer++;

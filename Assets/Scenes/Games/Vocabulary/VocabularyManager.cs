@@ -86,8 +86,8 @@ public class VocabularyManager: MonoBehaviour,
             { 
                 LevelEnd.TransitionOfLevel(); 
                 groupWordCount = 0; 
-                WordHintManager.slotIncrementer = 0;
-                WordHintManager.countHints = 0;
+                //WordHintManager.slotIncrementer = 0;
+                //WordHintManager.countHints = 0;
             }
             Debug.Log(LevelEnd.LevelNumber);
 
@@ -96,8 +96,8 @@ public class VocabularyManager: MonoBehaviour,
             {
                 LevelEnd.CompletedGamePanel.SetActive(true); 
                 groupWordCount = 0;
-                WordHintManager.slotIncrementer = 0;
-                WordHintManager.countHints = 0;
+                //WordHintManager.slotIncrementer = 0;
+                //WordHintManager.countHints = 0;
             }
             else{InstanceGameObjects();}
         }
