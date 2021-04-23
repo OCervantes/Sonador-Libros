@@ -14,7 +14,7 @@ public class WordHintManager : MonoBehaviour
     // Start is called before the first frame update
     public void StartHint()
     {
-        /*Tal vez guardar una lista de los objetos movableandslot, 
+        /*Guarda una lista de los objetos movableandslot, 
         y comparar cada una con los slots (también los podemos guardar en una lista), y
         si son iguales sus texts, entonces poner la posición de movableandSlot en la posición slot*/
         slots = GetChilds(Recibidor);
@@ -22,6 +22,7 @@ public class WordHintManager : MonoBehaviour
 
         if(countHints != numberOfHints)
         {
+            //Si un slot ya tiene un hijo entoncces incrementar el indice para evitar palabras repetidas esten en el mismos slot.
             if (slots[slotIncrementer].transform.childCount >= 1)
             {
                 slotIncrementer++;
@@ -33,14 +34,6 @@ public class WordHintManager : MonoBehaviour
             Debug.Log("SlotIncrementer: " + slotIncrementer + "/n" + "countHints: " + countHints);
             
         } 
-        /*if(slotIncrementer != numberOfHints){
-            if (slots[slotIncrementer].transform.GetChild(0).gameObject)
-            {
-                slotIncrementer++;
-            }
-            slots[slotIncrementer].GetComponent<Slot>().MoveCardToCorrectSlot(movableSlots);
-            slotIncrementer++;
-        }*/
     }
 
     public GameObject[] GetChilds(GameObject parent){
