@@ -340,6 +340,7 @@ public class FirebaseManager : MonoBehaviour {
 		}
 			userData["current_level"] = newdata.currentLevel;
 			userData["has_seen_intro"] = newdata.hasSeenIntro;
+			userData["has_passed_math_tutorial"] = newdata.hasPassedMathTutorial;
 
 		return userData;
 	}
@@ -604,9 +605,11 @@ public struct MissionData {
 public struct ProgressData{
 	public readonly int currentLevel;
 	public readonly bool hasSeenIntro;
+	public readonly bool hasPassedMathTutorial;
 	
 	public ProgressData(DocumentStore data){
 		hasSeenIntro = (bool) data["has_seen_intro"];
 		currentLevel = (int) data["current_level"];
+		hasPassedMathTutorial = (bool) data["has_passed_math_tutorial"];
 	}
 }
