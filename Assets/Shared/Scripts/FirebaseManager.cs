@@ -177,6 +177,8 @@ public class FirebaseManager : MonoBehaviour {
 					}
 
 					user = task.Result;
+					/* Update a user's last login date once they've logged in.
+					 */
 					reference
 						.Child("users")
 						.Child(user.UserId)
@@ -198,6 +200,13 @@ public class FirebaseManager : MonoBehaviour {
 		}
 	}*/
 
+	/* Save a
+	   
+	   Requires the new stats to save as a parameter, which consists of:
+	   - Time taken to complete it
+	   - Completion type (Rejected, Began, Abandoned, Failed, Completed)
+	   - The level's identifier
+	 */
 	public static void SaveMissionStats(MissionStats newStats) {
 		if (user == null) {
 			Debug.LogError("A logged in user is required to save mission data.");
@@ -211,6 +220,7 @@ public class FirebaseManager : MonoBehaviour {
 				savedStats => {
 					Debug.Log("Running transaction on statistics.");
 					savedStats.Value =
+						/* Update user's stats for: each level's mission statistics, completion type, time. */
 						CommitMissionStats(savedStats.Value as DocumentStore,
 							newStats);
 
@@ -378,6 +388,7 @@ public class FirebaseManager : MonoBehaviour {
 			);
 	}
 
+	/* Update user's stats for: each level's mission statistics, completion type, time. */
 	private static DocumentStore CommitMissionStats(DocumentStore savedStats,
 		MissionStats newStats) {
 		if (savedStats == null) {
@@ -385,10 +396,16 @@ public class FirebaseManager : MonoBehaviour {
 			savedStats = initializeStatistics();
 		}
 
+		/* Depending on the new stats' completion type, update it's corresponding counter
+		   and total time played.
+		 */
 		IncrementCompletionFor(savedStats, newStats.Type);
 		UpdateTime(savedStats, newStats.Time);
 
-		DocumentStore levelStats = null;
+		/* Include a new node in the user's stats, such that it records each level's
+		   mission statistics, and update its values if necessary.
+		 */
+		DocumentStore levelStats = null;		
 		if (savedStats.ContainsKey(newStats.LevelID)) {
 			levelStats = savedStats[newStats.LevelID] as DocumentStore;
 		}
@@ -397,26 +414,40 @@ public class FirebaseManager : MonoBehaviour {
 		return savedStats;
 	}
 
+	/* Update user's statistics (number of missions completed, total time, avg time per mission) in the DB */
 	private static DocumentStore CommitLevelStats(DocumentStore savedStats,
 		MissionStats newStats) {
+		
+		/* Restart user's statistics (missions failed, accepted, etc.)
+		   and include "avg_time" key in them.
+		 */
 		if (savedStats == null) {
 			Debug.Log("Initializing Level statistics");
 			savedStats = initializeStatistics();
 			savedStats["avg_time"] = "0";
 		}
 
+		/* Depending on the new stats' completion type, update it's corresponding counter
+		   and total time played.
+		 */
 		IncrementCompletionFor(savedStats, newStats.Type);
 		UpdateTime(savedStats, newStats.Time);
 
 		return savedStats;
 	}
 
+	/* Update user's total time played, and avg time per completed mission */
 	private static DocumentStore UpdateTime(DocumentStore data, TimeSpan time) {
 		TimeSpan lastTime, totalTime, avgTime;
 		if (data.ContainsKey("total_time")) {
+
+			/* Update total time played */
 			lastTime = TimeSpan.Parse(data["total_time"] as string);
 			totalTime = lastTime + time;
 
+			/* If user stats already has the "avg_time" key:
+			   - Calculate avg time to complete a mission, and update the DB.
+			 */
 			if (	data.ContainsKey("avg_time") &&
 					data.ContainsKey("num_m_completed")) {
 				long completedMissions = ((long) data["num_m_completed"]);
@@ -426,12 +457,18 @@ public class FirebaseManager : MonoBehaviour {
 				data["avg_time"] = avgTime.ToString();
 			}
 
+			/* Update user's total time played */
 			data["total_time"] = totalTime.ToString();
 		}
 
 		return data;
 	}
 
+	/* Increase by one the number of missions of a certain type:
+	   (rejected, begun, abandoned, failed, completed)
+
+	   Return the updated Dictionary.
+	 */
 	private static DocumentStore IncrementCompletionFor(DocumentStore data,
 		CompletionType type) {
 		string completionName = "";
