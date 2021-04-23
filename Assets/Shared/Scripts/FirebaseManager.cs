@@ -13,6 +13,11 @@ using DocumentStore = System.Collections.Generic.Dictionary<string, object>;
 
 public class FirebaseManager : MonoBehaviour {
 
+	/* Firebase Authentication object: manage user accounts and credentials.
+	   Type: Firebase.Auth.FirebaseAuth
+
+	   Given its static type, retrieved as an attribute, not as a method.
+	 */
 	protected static FirebaseAuth auth;
 	public static FirebaseAuth Auth {
 		get {
@@ -20,6 +25,12 @@ public class FirebaseManager : MonoBehaviour {
 		}
 	}
 
+	/* Firebase reference: a particular location in your Database; the starting point for all Database operations.
+	   After initialized it with a URL, can be used for reading or writing data to that Database location.
+	   Type: Firebase.Database.DatabaseReference
+
+	   Retrieved as an attribute, not as a method.
+	 */
 	protected static DatabaseReference reference;
 	public static DatabaseReference Reference {
 		get {
@@ -27,6 +38,11 @@ public class FirebaseManager : MonoBehaviour {
 		}
 	}
 
+	/* An instance of this class.
+	   (Custom) Type: FirebaseManager
+
+	   Retrieved as an attribute, not as a method.
+	 */
 	protected static FirebaseManager instance;
 	public static FirebaseManager Instance {
 		get {
@@ -34,6 +50,12 @@ public class FirebaseManager : MonoBehaviour {
 		}
 	}
 
+	/* Firebase user account object: manipulate the profile of a user, link to and unlink from authentication providers, and refresh 
+	   authentication tokens.	   
+	   Type: Firebase.Auth.FirebaseUser
+
+	   Retrieved as an attribute, not as a method.
+	 */
 	protected static FirebaseUser user;
 	public static FirebaseUser User {
 		get {
@@ -41,6 +63,9 @@ public class FirebaseManager : MonoBehaviour {
 		}
 	}
 
+	/* Overridable method that initializes an instance of this class to 'instance'.
+	   Also preserves the GameObject it is attached to when loading different scenes. 
+	 */
 	protected virtual void Awake () {
 		instance = this;
 		DontDestroyOnLoad (gameObject);
@@ -58,6 +83,11 @@ public class FirebaseManager : MonoBehaviour {
 		//AuthStateChanged(this, null);
 	}
 
+	/* Create a new player.
+	
+	   Requires the use of the OnFinishConnectionCallback, which must define the implementation
+	   of the ConnectionFinished method, which receives a CallbackResult and a message as parameters.
+	 */
 	public static void CreateNewPlayer(string email, string username,
 		string password, OnFinishConnectionCallback callback) {
 		auth
@@ -87,16 +117,28 @@ public class FirebaseManager : MonoBehaviour {
 					userData["last_login"] = DateTime.Now.ToShortDateString();
 					userData["username"] = username;
 
+					/* Save the user's last login date and username in the database.
+					 */
 					reference
 						.Child("users")
 						.Child(user.UserId)
 						.SetValueAsync(userData);
 
+					/* Initialize at 0:
+					   - Number of rejected missions
+					   - Number of accepted missions
+					   - Number of abandoned missions
+					   - Number of failed missions
+					   - Number of completed missions
+					   - Total play time
+					 */
 					reference
 						.Child("statistics")
 						.Child(user.UserId)
 						.SetValueAsync(initializeStatistics());
 
+					/*
+					 */
 					reference
 						.Child("progress")
 						.Child(user.UserId)
@@ -192,7 +234,7 @@ public class FirebaseManager : MonoBehaviour {
 					Debug.Log("Transaction complete.");
 				}
 			);
-	}
+	}		
 
 	public static void GetUsername(OnResultRecievedCallback callback) {
 		reference
@@ -226,6 +268,7 @@ public class FirebaseManager : MonoBehaviour {
 						);
 						return;
 					}
+					
 					callback.ResultRecieved(
 						CallbackResult.Success,
 						task.Result.Value as DocumentStore,
@@ -436,7 +479,7 @@ public class FirebaseManager : MonoBehaviour {
 		DocumentStore data = new DocumentStore();
 
 		data["current_level"] = 0;
-		data["has_seen_intro"] = false;
+		data["has_seen_intro"] = false;		
 
 		return data;
 	}
