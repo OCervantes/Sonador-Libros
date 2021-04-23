@@ -137,7 +137,10 @@ public class FirebaseManager : MonoBehaviour {
 						.Child(user.UserId)
 						.SetValueAsync(initializeStatistics());
 
-					/*
+					/* Initialize at 0/false, when applicable:
+					   - Current level
+					   - If the user has seen the game's intro
+					   - If the user has passed the math game's tutorial
 					 */
 					reference
 						.Child("progress")
@@ -479,7 +482,8 @@ public class FirebaseManager : MonoBehaviour {
 		DocumentStore data = new DocumentStore();
 
 		data["current_level"] = 0;
-		data["has_seen_intro"] = false;		
+		data["has_seen_intro"] = false;
+		data["has_passed_math_tutorial"] = false;
 
 		return data;
 	}
