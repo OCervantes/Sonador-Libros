@@ -138,4 +138,32 @@ public class Basket : MonoBehaviour, IDropHandler
             popup.ShowPopup(UIController.instance.mainCanvas, "Uh Oh!");
         }
     }
+
+    // Public in order to be referenced by the Inspector.
+    public void LoadNextScene()
+    {
+        // If every requested fruit was collected:
+        if (receivedFruits[0] == fruitsToBeReceived[0] && 
+            receivedFruits[1] == fruitsToBeReceived[1] && 
+            receivedFruits[2] == fruitsToBeReceived[2])
+        {
+            // The FruitInitialization Script will generate new fruits to collect, once the Player comes back to the "Juego 1"Scene.
+            FruitInitialization.playerCollectedCorrectAmountOfFruits = true;
+
+            // Player will be taken to the "New" Scene, in order to verify that they understand the abstract concept of numbers.
+            SceneManager.LoadScene("New");
+        }
+
+        // Otherwise...         
+        else
+        {
+            /* The FruitInitialization Script will generate the same fruits that were requested this time, in order to have the player 
+               practice with the fruits they did not collect correctly.
+             */  
+            FruitInitialization.playerCollectedCorrectAmountOfFruits = false;
+
+            // Player will be taken to the "New Corrección" Scene, in order to learn from their mistakes, and have another go at the game.
+            SceneManager.LoadScene("New Corrección");
+        }
+    }
 }
