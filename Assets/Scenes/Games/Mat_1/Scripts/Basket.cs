@@ -150,7 +150,10 @@ public class Basket : MonoBehaviour, IDropHandler
             // The FruitInitialization Script will generate new fruits to collect, once the Player comes back to the "Juego 1"Scene.
             FruitInitialization.playerCollectedCorrectAmountOfFruits = true;
 
-            // Player will be taken to the "New" Scene, in order to verify that they understand the abstract concept of numbers.
+            // Monologue, script working at "New" Scene, is given the value of the number of received fruits.
+            Monologue.fruits = totalReceivedFruits;
+
+            // Player will be taken to the "New" Scene, in order to verify that they understand the abstract concept of numbers.            
             SceneManager.LoadScene("New");
         }
 
