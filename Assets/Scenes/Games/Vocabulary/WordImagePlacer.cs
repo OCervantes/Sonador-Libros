@@ -18,6 +18,8 @@ public class WordImagePlacer : MonoBehaviour
     {
         //Creates a new GameObject were the sprite is going to be added.
         imageHolder = new GameObject("Name");
+        //Initialize image position.
+        imageHolder.transform.position = new Vector3(-5,0,0);
         renderer = imageHolder.AddComponent<SpriteRenderer>();
         //Addressables.LoadAssetsAsync<Sprite>("vocabulary", null).Completed += OnSpritesLoaded;
     }
