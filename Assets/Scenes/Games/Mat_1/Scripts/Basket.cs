@@ -43,9 +43,7 @@ public class Basket : MonoBehaviour, IDropHandler
         fruitsToBeReceived[2] = FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]];
 
         Debug.Log("Basket fruits[0], [1], [2]: " + fruits[0] + ", " + fruits[1] + ", " + fruits[2]);
-        Debug.Log("Basket fruitsToBeReceived[0], [1], [2]: " + fruitsToBeReceived[0] + ", " + fruitsToBeReceived[1] + ", " + fruitsToBeReceived[2]);
-
-        //source = GetComponent<AudioSource>();
+        Debug.Log("Basket fruitsToBeReceived[0], [1], [2]: " + fruitsToBeReceived[0] + ", " + fruitsToBeReceived[1] + ", " + fruitsToBeReceived[2]);        
     }    
 
     /*
@@ -80,137 +78,23 @@ public class Basket : MonoBehaviour, IDropHandler
     // Each time a Fruit is dragged to the basket:
     public void OnDrop(PointerEventData eventData)
     {                
-        // Print the fruit's name.
-        Debug.Log("Name: " + MatDragHandeler.itemBeingDragged.name);
-        
-        // Set the Basket as its parent.
-        // NOT ANYMORE. WE WANT PANELS, NOT THE OBJECTS MatDragHandeler.itemBeingDragged.transform.SetParent(transform);
-        //MatDragHandeler.itemBeingDragged.GetComponent<MatDragHandeler>().flag = true;        
-        
-        /*
-        if (totalReceivedFruits == 1)
-            fruitsInBasketLabel.text = totalReceivedFruits.ToString() + " fruta.";
-        else
-            fruitsInBasketLabel.text = totalReceivedFruits.ToString() + " frutas.";
-        */
-                
-        //source.PlayOneShot(audios[(totalReceivedFruits)-1]);
-        
+        // Print the fruit's name in console.
+        string fruitType = MatDragHandeler.itemBeingDragged.name;
+        Debug.Log("Name: " + fruitType);        
 
-        // Depending on the specific fruit that was dragged to the basket, increment its specific counter.
-        if (MatDragHandeler.itemBeingDragged.name == fruits[0].name + "(Clone)")
-        {            
-            if (receivedFruits[0] >= fruitsToBeReceived[0])
-            {
-                Debug.Log("Uh Oh!");
-                Popup popup = UIController.instance.CreatePopup();
-
-                popup.ShowPopup(UIController.instance.mainCanvas, "Uh Oh!");
-            }
-            else
-            {
-                receivedFruits[0]++;
-                Debug.Log("receivedFruits[0] = " + receivedFruits[0]);
-
-                /* Instantiate Fruit Panel within corresponding Panel
-                */
-                GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[0]], tableclothPanel.transform);
-                newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
-
-                /* Increment the counter of total fruits collected, print it in console, adjust the label of fruits collected,
-                and play corresponding audio.
-                */
-                totalReceivedFruits++;
-                Debug.Log("totalReceivedFruits = " + totalReceivedFruits);
-            }
-                        
-            //newFruitPanel.tra
-        }
-        else if (MatDragHandeler.itemBeingDragged.name == fruits[1].name + "(Clone)")
+        // Depending on the specific fruit that was dragged to the basket, increment its specific counter.        
+        if (fruitType == fruits[0].name + "(Clone)")
         {
-            /*receivedFruits[1]++;
-            Debug.Log("receivedFruits[1] = " + receivedFruits[1]);
-            */
-            
-            if (receivedFruits[1] >= fruitsToBeReceived[1])
-            {
-                Debug.Log("Uh Oh!");
-                Popup popup = UIController.instance.CreatePopup();
-
-                popup.ShowPopup(UIController.instance.mainCanvas, "Uh Oh!");
-            }
-            else
-            {
-                receivedFruits[1]++;
-                Debug.Log("receivedFruits[1] = " + receivedFruits[1]);
-
-                /* Instantiate Fruit Panel within corresponding Panel
-                */
-                GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[1]], tableclothPanel.transform);
-                newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
-
-                /* Increment the counter of total fruits collected, print it in console, adjust the label of fruits collected,
-                and play corresponding audio.
-                */
-                totalReceivedFruits++;
-                Debug.Log("totalReceivedFruits = " + totalReceivedFruits);
-            }
-
-            /* Instantiate Fruit Panel within corresponding Panel
-            */
-            //GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[1]], tableclothPanel.transform);
-            //newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
-            //newFruitPanel.tra
+            ProcessFruit(0);            
+        }
+        else if (fruitType == fruits[1].name + "(Clone)")
+        {
+            ProcessFruit(1);            
         }   
         else
-        {                       
-            if (receivedFruits[2] >= fruitsToBeReceived[2])
-            {
-                Debug.Log("Uh Oh!");
-                Popup popup = UIController.instance.CreatePopup();
-
-                popup.ShowPopup(UIController.instance.mainCanvas, "Uh Oh!");
-            }
-            else
-            {
-                receivedFruits[2]++;
-                Debug.Log("receivedFruits[2] = " + receivedFruits[2]);
-
-                /* Instantiate Fruit Panel within corresponding Panel
-                */
-                GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[2]], tableclothPanel.transform);
-                newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
-
-                /* Increment the counter of total fruits collected, print it in console, adjust the label of fruits collected,
-                and play corresponding audio.
-                */
-                totalReceivedFruits++;
-                Debug.Log("totalReceivedFruits = " + totalReceivedFruits);
-            }
-            
+        {
+            ProcessFruit(2);
         }
-        
-        /* Once all the requested AMOUNT of fruits has been collected:
-
-         * Pass value to Monologue Script (in charge of "New" Scene).
-         * Reset counter of total collected fruits.
-         * Switch Scenes.
-        
-         * Not anymore!
-         * Now transition of Scenes is handled by the Confirm Fruit Selection Button.
-         
-        if (totalReceivedFruits == (fruitsToBeReceived[0] + fruitsToBeReceived[1] + fruitsToBeReceived[2]))
-        { 
-            // Static variables/functions from other classes can have their values assigned/be called as following:
-            Monologue.fruits = totalReceivedFruits;
-
-            totalReceivedFruits = 0;
-
-            Invoke("SwitchScene", 1.2f);
-        }
-        */
-
-        
 
         /* ExecuteHierarchy calls EVERY Game Object above the one called along, until it finds something that can actually handle.
             * Pass "IHasChanged" interface.
@@ -222,36 +106,36 @@ public class Basket : MonoBehaviour, IDropHandler
     }
     #endregion
 
-    public void SwitchScene()
+    void ProcessFruit(int fruitIndex)
     {
-        /* If the fruits that were collected are the same that were requested:
-        
-         * The FruitInitialization Script will generate new fruits to collect, once the Player comes back to the "Juego 1"
-           Scene.
-         * Player will be taken to the "New" Scene, in order to verify that they understand the abstract concept of num-
-           bers.
-         */
-        if (receivedFruits[0] == fruitsToBeReceived[0] && receivedFruits[1] == fruitsToBeReceived[1] && receivedFruits[2] == fruitsToBeReceived[2])
+        //If there are still fruits to be received, for this specific type of fruit:
+        if (receivedFruits[fruitIndex] < fruitsToBeReceived[fruitIndex])
         {
-            /* Non-static variables/functions, on the other hand, must have an instance of their class declared in order
-               to access them.
-             */
-            //initializer.SetFruitInitializationFlag(true);
-            FruitInitialization.playerCollectedCorrectAmountOfFruits = true;
-            SceneManager.LoadScene("New");
-        }
-        /* If not:
+            // Increment counter of received fruits of said kind
+            receivedFruits[fruitIndex]++;
+            Debug.Log("receivedFruits[" + fruitIndex + "] = " + receivedFruits[fruitIndex]);
 
-         * The FruitInitialization Script will generate the same fruits that were requested this time, in order to have
-           the player practice with the fruits they did not collect correctly.
-         * Player will be taken to the "New Corrección" Scene, in order to learn from their mistakes, and have another go
-           at the game.           
-         */
+            // Instantiate Fruit Panel within corresponding Panel
+            GameObject newFruitPanel = Instantiate(fruitPanels[FruitInitialization.fruitIndexes[fruitIndex]], tableclothPanel.transform);
+            newFruitPanel.transform.SetParent(tableclothPanel.transform, false);
+
+            // Eliminate fruit being dragged to the tablecloth
+            GameObject draggedFruit = MatDragHandeler.itemBeingDragged;
+            Destroy(draggedFruit);
+
+            // Increment the counter of total fruits collected, and print it in console
+            totalReceivedFruits++;
+            Debug.Log("totalReceivedFruits = " + totalReceivedFruits);            
+        }
+
+        // Otherwise...
         else
         {
-            //initializer.SetFruitInitializationFlag(false);
-            FruitInitialization.playerCollectedCorrectAmountOfFruits = false;
-            SceneManager.LoadScene("New Corrección");
+            // Display "Uh Oh" via Popup as a warning message for the user
+            Debug.Log("Uh Oh!");
+            Popup popup = UIController.instance.CreatePopup();
+
+            popup.ShowPopup(UIController.instance.mainCanvas, "Uh Oh!");
         }
     }
 }
