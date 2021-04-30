@@ -8,27 +8,7 @@ public class Popup : MonoBehaviour
 {
     [SerializeField] Button closePopupButton;
     [SerializeField] Text popupText;
-
-    //Transform popupCanvas;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        //4popupCanvas = gameObject.GetComponentInParent<Transform>();
-        //popupCanvas.gameObject.SetActive(true);
-        //popupCanvas
-
-        //gameObject.GetComponentInParent<GameObject>().SetActive(true);
-        //showPopup(/*gameObject.GetComponentInParent<Transform>()*/UIController.instance.mainCanvas, "This is a message.");
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] Font popupFont;
 
     /*
      * canvas = The canvas in which to initialize this Popup.
@@ -37,8 +17,9 @@ public class Popup : MonoBehaviour
      */
     public void ShowPopup(Transform canvas, string message/*, Action action*/)
     {
-        /* Set the popup's message */
+        // Set the popup's message and font
         popupText.text = message;
+        popupText.font = popupFont;        
 
         /* Place Popup in Screen. 
          * Instantiating it won't make it appear on scren.
@@ -46,7 +27,7 @@ public class Popup : MonoBehaviour
          */
         transform.SetParent(canvas);
         transform.localScale = Vector3.one;
-        //transform.localPosition = Vector3.zero;
+                
         GetComponent<RectTransform>().offsetMin = Vector2.zero;
         GetComponent<RectTransform>().offsetMax = Vector2.zero;
 
