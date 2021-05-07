@@ -28,6 +28,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 82d125a3550e218468cafcef18291786, type: 2}
   - {fileID: 11400000, guid: 22cd0f99ea5ea004d956bf82207c4050, type: 2}
   - {fileID: 11400000, guid: 5300b3c909c96c841aa02b228652bdbd, type: 2}
+  - {fileID: 11400000, guid: 0824ed0edb55512489ae6b64453717ce, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -71,6 +72,7 @@ MonoBehaviour:
     - default
     - memorama
     - vocabulary
+    - definitions
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: c4a2d0e753b5ada45b0a2e8e60746dae, type: 2}

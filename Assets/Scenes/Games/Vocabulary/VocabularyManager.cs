@@ -14,6 +14,7 @@ public class VocabularyManager: MonoBehaviour,
     public LevelEndManager LevelEnd;
     public WordHintManager WordHintManager;
     public WordImagePlacer WordImagePlacer;
+    public DefinitionAudioLoader DefinitionAudioLoader;
     /*public*/ string missionName;
 
     string recoveredVocabWord;
@@ -135,6 +136,7 @@ public class VocabularyManager: MonoBehaviour,
         recoveredVocabWord = indexedDictionary[randomlyGeneratedIndex];
         Debug.Log("Index: " + randomlyGeneratedIndex + "\nRecovered Vocab Word: " + recoveredVocabWord);
         WordImagePlacer.InstantiateImage(recoveredVocabWord);
+        DefinitionAudioLoader.InstantiateAudio(recoveredVocabWord);
         /* Add randomly generated number to Stack, to know which index --> word has already been displayed, in order to
            not display it again.
          */

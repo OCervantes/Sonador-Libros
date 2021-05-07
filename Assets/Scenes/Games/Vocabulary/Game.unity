@@ -3800,6 +3800,11 @@ PrefabInstance:
       propertyPath: WordImagePlacer
       value: 
       objectReference: {fileID: 1913469963}
+    - target: {fileID: 8198624900512753271, guid: 0de1408cf6318cb46a78717215b783f6,
+        type: 3}
+      propertyPath: DefinitionAudioLoader
+      value: 
+      objectReference: {fileID: 1913469964}
     - target: {fileID: 8198624900512753264, guid: 0de1408cf6318cb46a78717215b783f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3926,6 +3931,22 @@ MonoBehaviour:
   m_recoveredVocabWord: 
   imageHolder: {fileID: 0}
   renderer: {fileID: 0}
+--- !u!114 &1913469964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913469960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62705bcdcaedd3c44a29f428272d2093, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClips: []
+  m_recoveredVocabWord: 
+  audioHolder: {fileID: 0}
+  audio: {fileID: 0}
 --- !u!1 &2003462651
 GameObject:
   m_ObjectHideFlags: 0
