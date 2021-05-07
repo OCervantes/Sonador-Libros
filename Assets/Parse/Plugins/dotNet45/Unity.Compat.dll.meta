@@ -1,9 +1,10 @@
 fileFormatVersion: 2
-guid: c93e14a997f021649a540834ae455e65
+guid: 3db0783b58c2429b9bc1f560ba323d05
 labels:
 - gvh
 - gvh_dotnet-4.5
-- gvh_version-6.4.0
+- gvh_version-6.15.2
+- gvhp_exportpath-Parse/Plugins/dotNet45/Unity.Compat.dll
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
