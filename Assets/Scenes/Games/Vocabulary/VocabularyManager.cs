@@ -10,11 +10,18 @@ public class VocabularyManager: MonoBehaviour,
 {
     //Datos Miembro
     public AudioSource bounceSource, lockSource;
-    public GameObject recibidor, banco, definition, prefabMovableAndSlot, prefabSlot;    
+    public GameObject recibidor, banco, definition, prefabMovableAndSlot, prefabSlot;
+    public LevelEndManager LevelEnd;
+    public WordHintManager WordHintManager;
+    public WordImagePlacer WordImagePlacer;
+    public DefinitionAudioLoader DefinitionAudioLoader;
     /*public*/ string missionName;
 
     string recoveredVocabWord;
     int correctChildCount;
+
+    //Counting the groups of three words
+    [SerializeField] int groupWordCount = 0;
 
     /* Lo tuve que volver estático porque no me permitía de otra manera.
      * Tendré que revisar que no interfiera más tarde.
@@ -58,21 +65,56 @@ public class VocabularyManager: MonoBehaviour,
 
 
     void BuildGame()
-    {    
+    {
+        //Pendiente: Revisar en donde reinciar el slotIncrementer y countHints (digo que al inicio)
+        int LastLevel = 5;
+        WordHintManager.slotIncrementer = 0;
+        WordHintManager.countHints = 0;
         // If the game hasn't yet displayed the words within the range defined by [lowerRNGLimit, upperRNGLimit], do so.
         if (!(wordsAlreadyDisplayed.Contains(lowerRNGLimit) && wordsAlreadyDisplayed.Contains(lowerRNGLimit+1) && wordsAlreadyDisplayed.Contains(lowerRNGLimit+2)))
-        {            
+        {
             InstanceGameObjects();
         }
 
         // If the game HAS displayed the words within said range, adjust it so that it may consider the next 3 words.
         else
         {
+            WordHintManager.slotIncrementer = 0;
+            WordHintManager.countHints = 0;
+            Debug.Log("incrementer: " + WordHintManager.slotIncrementer);
+            //Count the number of groups of three words that were instantiated
+            groupWordCount += 3;
+
             lowerRNGLimit = lowerRNGLimit + 3;
             upperRNGLimit = lowerRNGLimit + 2;
-            
-            InstanceGameObjects();
+
+            //If all the words form a level have been displayed play the transition of level.
+            if (groupWordCount == 6) 
+            { 
+                LevelEnd.TransitionOfLevel(); 
+                groupWordCount = 0; 
+
+                WordHintManager.slotIncrementer = 0;
+                WordHintManager.countHints = 0;
+            }
+            Debug.Log(LevelEnd.LevelNumber);
+
+            //If all the levels are completed then show the congratulation message, else intance the words.
+            if(LevelEnd.LevelNumber == LastLevel) 
+            {
+                LevelEnd.CompletedGamePanel.SetActive(true); 
+                groupWordCount = 0;
+                //WordHintManager.slotIncrementer = 0;
+                //WordHintManager.countHints = 0;
+            }
+            else
+            {
+                WordHintManager.slotIncrementer = 0;
+                WordHintManager.countHints = 0;
+                InstanceGameObjects(); 
+            }
         }
+        
     }
 
     /* Fetch a random word from the dictionaries, instantiate all Slot and MovAndSlot Objects necessary for said word,
@@ -93,7 +135,8 @@ public class VocabularyManager: MonoBehaviour,
         // Pick word from dictionary corresponding to said random number.        
         recoveredVocabWord = indexedDictionary[randomlyGeneratedIndex];
         Debug.Log("Index: " + randomlyGeneratedIndex + "\nRecovered Vocab Word: " + recoveredVocabWord);
-
+        WordImagePlacer.InstantiateImage(recoveredVocabWord);
+        DefinitionAudioLoader.InstantiateAudio(recoveredVocabWord);
         /* Add randomly generated number to Stack, to know which index --> word has already been displayed, in order to
            not display it again.
          */
@@ -110,7 +153,7 @@ public class VocabularyManager: MonoBehaviour,
             SlotObj.slotLetter = System.Convert.ToString(recoveredVocabWord[n]).ToUpper();
             SlotObj.vocabManager = this;
         }
-
+        
         Stack letterIndexes = new Stack();
 
         /* Displays the number of children 

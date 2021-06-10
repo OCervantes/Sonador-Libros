@@ -1,0 +1,235 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: vocabulary
+  m_EditorClassIdentifier: 
+  m_GroupName: vocabulary
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 157c79a0aa07e3b428806316d08a3220
+  m_SerializeEntries:
+  - m_GUID: 00ab83910ba27af4ca0a9d57add93c8f
+    m_Address: Libros
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 00ab83910ba27af4ca0a9d57add93c8f, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 00ab83910ba27af4ca0a9d57add93c8f, type: 3}
+  - m_GUID: 023cd0ee79184794b9ccc3535f243fd3
+    m_Address: "Oto\xF1o"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 023cd0ee79184794b9ccc3535f243fd3, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 023cd0ee79184794b9ccc3535f243fd3, type: 3}
+  - m_GUID: 02f9b507c0d267e44a43970a3b282f5d
+    m_Address: Ruta
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 02f9b507c0d267e44a43970a3b282f5d, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 02f9b507c0d267e44a43970a3b282f5d, type: 3}
+  - m_GUID: 11fc00f60fed3804eb87426796287025
+    m_Address: Libreta
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 11fc00f60fed3804eb87426796287025, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 11fc00f60fed3804eb87426796287025, type: 3}
+  - m_GUID: 15283e6dcf34dd847af15b24eadf3df6
+    m_Address: Invierno
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 15283e6dcf34dd847af15b24eadf3df6, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 15283e6dcf34dd847af15b24eadf3df6, type: 3}
+  - m_GUID: 18924c2df20c5464189e03ff33e38c1a
+    m_Address: Sal
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 18924c2df20c5464189e03ff33e38c1a, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 18924c2df20c5464189e03ff33e38c1a, type: 3}
+  - m_GUID: 2459e0d21a945cb4a8167a00db8236c4
+    m_Address: Salida
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 2459e0d21a945cb4a8167a00db8236c4, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 2459e0d21a945cb4a8167a00db8236c4, type: 3}
+  - m_GUID: 27f73b5ca657e3240ab1952a8ba6b366
+    m_Address: Gelatina
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 27f73b5ca657e3240ab1952a8ba6b366, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 27f73b5ca657e3240ab1952a8ba6b366, type: 3}
+  - m_GUID: 37b16096d3bb78848a9d33ee7bf2a585
+    m_Address: "Ni\xF1os"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 37b16096d3bb78848a9d33ee7bf2a585, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 37b16096d3bb78848a9d33ee7bf2a585, type: 3}
+  - m_GUID: 3ae94e002888b024789c21675072227a
+    m_Address: "Ba\xF1os"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 3ae94e002888b024789c21675072227a, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 3ae94e002888b024789c21675072227a, type: 3}
+  - m_GUID: 41dd230377d26ab469e333cc12da61a3
+    m_Address: Galleta
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 41dd230377d26ab469e333cc12da61a3, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 41dd230377d26ab469e333cc12da61a3, type: 3}
+  - m_GUID: 4c520180f78269046ae8dd3c42d5e711
+    m_Address: Calle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 4c520180f78269046ae8dd3c42d5e711, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 4c520180f78269046ae8dd3c42d5e711, type: 3}
+  - m_GUID: 55861ce05916ab04eb3e7d5360dd4393
+    m_Address: Plato
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 55861ce05916ab04eb3e7d5360dd4393, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 55861ce05916ab04eb3e7d5360dd4393, type: 3}
+  - m_GUID: 5de8a18089d2f73418b4db9376379b96
+    m_Address: Amistad
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 5de8a18089d2f73418b4db9376379b96, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 5de8a18089d2f73418b4db9376379b96, type: 3}
+  - m_GUID: 6287af5b14b5c034797615868e51eae9
+    m_Address: Amor
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 6287af5b14b5c034797615868e51eae9, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 6287af5b14b5c034797615868e51eae9, type: 3}
+  - m_GUID: 67749587f873c7d459f61004cc1614a2
+    m_Address: Leche
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 67749587f873c7d459f61004cc1614a2, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 67749587f873c7d459f61004cc1614a2, type: 3}
+  - m_GUID: 789b11fb821aed64eac10dd207066650
+    m_Address: "Ni\xF1as"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 789b11fb821aed64eac10dd207066650, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 789b11fb821aed64eac10dd207066650, type: 3}
+  - m_GUID: 87f1090a2ed24a34ca7f344097499450
+    m_Address: Tomate
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 87f1090a2ed24a34ca7f344097499450, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 87f1090a2ed24a34ca7f344097499450, type: 3}
+  - m_GUID: 9701a85cb8cf8834386c933285531e55
+    m_Address: Pinturas
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 9701a85cb8cf8834386c933285531e55, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 9701a85cb8cf8834386c933285531e55, type: 3}
+  - m_GUID: 97868281e503f9145ac6c272e267926d
+    m_Address: Entrada
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 97868281e503f9145ac6c272e267926d, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 97868281e503f9145ac6c272e267926d, type: 3}
+  - m_GUID: 9b57c44ce93d3024f91b7cf84987809e
+    m_Address: Postre
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: 9b57c44ce93d3024f91b7cf84987809e, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 9b57c44ce93d3024f91b7cf84987809e, type: 3}
+  - m_GUID: a0f945237d8e90f4ab1216270d4ead1c
+    m_Address: Sopa
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: a0f945237d8e90f4ab1216270d4ead1c, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: a0f945237d8e90f4ab1216270d4ead1c, type: 3}
+  - m_GUID: a1ca248f5dd485443b12a0ea064d69ca
+    m_Address: Azucar
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: a1ca248f5dd485443b12a0ea064d69ca, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: a1ca248f5dd485443b12a0ea064d69ca, type: 3}
+  - m_GUID: b66abdb7c298952469ccca425d7db824
+    m_Address: Alto
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: b66abdb7c298952469ccca425d7db824, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: b66abdb7c298952469ccca425d7db824, type: 3}
+  - m_GUID: be5518735225f4341b125518f1e57220
+    m_Address: Pan
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: be5518735225f4341b125518f1e57220, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: be5518735225f4341b125518f1e57220, type: 3}
+  - m_GUID: db00a84f5cd52474da8ecff05927ecb7
+    m_Address: Taxi
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: db00a84f5cd52474da8ecff05927ecb7, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: db00a84f5cd52474da8ecff05927ecb7, type: 3}
+  - m_GUID: e10c514b25a3cda44ae22b678e592df4
+    m_Address: Menu
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: e10c514b25a3cda44ae22b678e592df4, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: e10c514b25a3cda44ae22b678e592df4, type: 3}
+  - m_GUID: edd1175082846324a80e4a6317941854
+    m_Address: Verano
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: edd1175082846324a80e4a6317941854, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: edd1175082846324a80e4a6317941854, type: 3}
+  - m_GUID: f42132b62d2212f4e8a3d7cbe08a8f18
+    m_Address: Primavera
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: f42132b62d2212f4e8a3d7cbe08a8f18, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: f42132b62d2212f4e8a3d7cbe08a8f18, type: 3}
+  - m_GUID: f50fd2667ce60a8428352fb442f8f27a
+    m_Address: Cafe
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - vocabulary
+    m_MainAsset: {fileID: 2800000, guid: f50fd2667ce60a8428352fb442f8f27a, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: f50fd2667ce60a8428352fb442f8f27a, type: 3}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3b5f5e3460a6e0545a66edee7dddc0b0, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 7bb5d6adf8c677346a04051a9e15c3d8, type: 2}
+    - {fileID: 11400000, guid: 0486fa77024a18247ac574fe1ee4fd93, type: 2}

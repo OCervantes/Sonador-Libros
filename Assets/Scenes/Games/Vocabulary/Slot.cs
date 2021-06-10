@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 public class Slot : MonoBehaviour, IDropHandler
 {
@@ -154,5 +155,60 @@ public class Slot : MonoBehaviour, IDropHandler
         yield return new WaitForSeconds(1);
         component.color = new Color(1f, 1f, 1f, 0.39f);
     }    
+    //Cuando el usuario quiere un Hint
+    //Metodo que reciva los gameobject the moveandSlot y compare el texto de esto con el texto del slot.
+    public void MoveCardToCorrectSlot(GameObject[] movableSlots)
+    {
+        GameObject Card = null, CardText= null;
+        
+        foreach (GameObject cardSlot in movableSlots)
+        {
 
+
+            //Prueba si realmente el gameobject moveandSlot tiene un hijo, si no ve al siguiente gameobject
+            try
+            {
+                Card = cardSlot.transform.GetChild(0).gameObject;
+            }
+            catch(Exception e)
+            {
+                continue;
+            }
+            CardText = Card.transform.GetChild(0).gameObject;
+            Text textComponent = CardText.GetComponent<Text>();
+
+            if (textComponent.text == slotLetter)
+            {
+               
+                //Card.transform.position = this.transform.position;
+                Card
+                .transform
+                .SetParent(transform);
+                Card.GetComponent<Image>()
+                    .color = Color.green;   //CAMBIO DE COLOR EXITOSO
+
+                /*Slot.*/embeddedMovCounter++;
+
+                vocabManager.lockSource.Play();
+
+                
+                numberOfChildren = GameObject
+                    .Find("Recibidor")
+                    .GetComponent<Transform>()
+                    .childCount; //EUREKA. FORMA SEGURA DE CONSEGUIR childCount.
+
+                //Debug.Log("Number of children in Recibidor: " + numberOfChildren);
+
+                if (embeddedMovCounter == numberOfChildren)
+                {
+                    vocabManager.EndWord();
+                    embeddedMovCounter = 0;
+                }
+                /*Se sale de la función (return) si ya encontro la carta a mover, para evitar que si 
+                 dos letras son iguales, mueva las dos.
+                */
+                return; 
+            } 
+        }
+    }
 }
