@@ -4,234 +4,163 @@ using UnityEngine.UI;
 
 public class FruitsToCollect : MonoBehaviour
 {
-    public FruitInitialization initializer;
-    static int[] fruitNumbers;
-    //static string[] fruitNames;
-    Text instructions;
-    GameObject[] fruits;
-    /*Vector2*/float fruitXPosition;
-    public AudioSource source;
+    public FruitInitialization fruitInitializer;     // Referenced by Basket and Dialog
+    public AudioSource audioSource;
     [SerializeField] AudioClip[] un, singleFruitsFeru, numbersFeru, pluralFruitsFeru;
-
-    float accumulatedInstructionDuration;
+    static int[] NUMBER_OF_FRUITS_PER_TYPE;          // Declarado al inicio, porque no se permite declarar vars estáticas dentro de Start()
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject fruit;
-        fruitNumbers = new int [3];
-        fruits = new GameObject [3];
-        //fruitPosition = new Vector2();
+        NUMBER_OF_FRUITS_PER_TYPE  = new int [3];
+        GameObject[] FRUIT_OBJECTS = new GameObject [3];
 
-        //fruitNames = new string [3];        
-        instructions = GetComponent<Text>();
+        Text instructions = GetComponent<Text>();
         instructions.text = "";
 
-        accumulatedInstructionDuration = 0f;
-        /*
-        fruitNames[0] = initializer.fruits[FruitInitialization.fruitIndexes[0]].name;
-        fruitNames[1] = initializer.fruits[FruitInitialization.fruitIndexes[1]].name;
-        fruitNames[2] = initializer.fruits[FruitInitialization.fruitIndexes[2]].name;
-        */
 
+        // Debido a que se manda a llamar en SayInstructions, no se puede declarar después del ciclo for
+        float elapsedInstructionAudioTime = 0f;
         
+        int NUMBER_OF_FRUIT_TYPES = fruitInitializer.fruits.Length;     // = 3
 
-        for (int i=0; i<initializer.fruits.Length; i++)
+        // For each fruit type:
+        for (int i = 0; i < NUMBER_OF_FRUIT_TYPES; i++)
         {
-            fruitNumbers[i] = FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]];
-            fruits[i] = initializer.fruits[FruitInitialization.fruitIndexes[i]];
+            // Get corresponding fruit index:
+            /*
+                0 = Manzana
+                1 = Pera
+                2 = Durazno
+             */
+            int CURRENT_FRUIT_INDEX = FruitInitialization.fruitIndexes[i];
 
-            instructions.text += fruitNumbers[i] + "        ";
+            // Get corresponding fruit and the number of its instances
+            FRUIT_OBJECTS[i]             = fruitInitializer.fruits[CURRENT_FRUIT_INDEX];
+            NUMBER_OF_FRUITS_PER_TYPE[i] = FruitInitialization.numFruits[CURRENT_FRUIT_INDEX];
 
-            StartCoroutine(SayInstructions(i));
+            // Print it in the instructions
+            const string SPACES_BETWEEN_NUMBER_OF_FRUITS = "        ";
+            instructions.text += NUMBER_OF_FRUITS_PER_TYPE[i] + SPACES_BETWEEN_NUMBER_OF_FRUITS;
 
-            if(i !=2)
-            {
+            if ( i != (NUMBER_OF_FRUIT_TYPES - 1) )            
                 instructions.text += ", ";
-            } 
-        }        
-
-        IEnumerator SayInstructions(int i)
+            
+            // Play corresponding audio
+            StartCoroutine( SayInstructions(i, CURRENT_FRUIT_INDEX) );
+        
+        }   // End for
+        
+        IEnumerator SayInstructions(int i, int CURRENT_FRUIT_INDEX)
         {
             Debug.Log("Instructions Coroutine");
-            if (FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]] == 1)
+
+            // Fruta (singular)
+            if (FruitInitialization.numFruits[CURRENT_FRUIT_INDEX] == 1)
             {
                 // Masculina (Durazno)
-                if (initializer.fruits[FruitInitialization.fruitIndexes[i]].name == "Durazno")
+                if (fruitInitializer.fruits[CURRENT_FRUIT_INDEX].name == "Durazno")
                 {
                     // Un                    
-                    yield return new WaitForSeconds(un[0].length + accumulatedInstructionDuration);
-                    source.PlayOneShot(un[0]);
-                    accumulatedInstructionDuration += un[0].length;
+                    yield return new WaitForSeconds(un[0].length + elapsedInstructionAudioTime);
+                    audioSource.PlayOneShot(un[0]);
+                    elapsedInstructionAudioTime += un[0].length;
                     
                     // Durazno
-                    yield return new WaitForSeconds(singleFruitsFeru[2].length + accumulatedInstructionDuration);
-                    source.PlayOneShot(singleFruitsFeru[2]);
-                    accumulatedInstructionDuration += singleFruitsFeru[2].length;
-                }
+                    yield return new WaitForSeconds(singleFruitsFeru[2].length + elapsedInstructionAudioTime);
+                    audioSource.PlayOneShot(singleFruitsFeru[2]);
+                    elapsedInstructionAudioTime += singleFruitsFeru[2].length;
+                
+                }   // End if
 
                 // Femenina (Manzana, Pera)
                 else
                 {
-                    // una                    
-                    yield return new WaitForSeconds(numbersFeru[0].length + accumulatedInstructionDuration);
-                    source.PlayOneShot(numbersFeru[0]);
-                    accumulatedInstructionDuration += numbersFeru[0].length;
+                    // Una                    
+                    yield return new WaitForSeconds(numbersFeru[0].length + elapsedInstructionAudioTime);
+                    audioSource.PlayOneShot(numbersFeru[0]);
+                    elapsedInstructionAudioTime += numbersFeru[0].length;
                     
                     // (fruta)
-                    yield return new WaitForSeconds(singleFruitsFeru[FruitInitialization.fruitIndexes[i]].length + accumulatedInstructionDuration);
-                    source.PlayOneShot(singleFruitsFeru[FruitInitialization.fruitIndexes[i]]);
-                    accumulatedInstructionDuration += singleFruitsFeru[FruitInitialization.fruitIndexes[i]].length;
-                }
-            }
+                    yield return new WaitForSeconds(singleFruitsFeru[CURRENT_FRUIT_INDEX].length + elapsedInstructionAudioTime);
+                    audioSource.PlayOneShot(singleFruitsFeru[CURRENT_FRUIT_INDEX]);
+                    elapsedInstructionAudioTime += singleFruitsFeru[CURRENT_FRUIT_INDEX].length;
+                
+                }   // End else
+
+            }   // End if
 
             // Frutas (plural)
             else
             {
                 // Masculinas (Duraznos)
-                if (initializer.fruits[FruitInitialization.fruitIndexes[i]].name == "Durazno")
+                if (fruitInitializer.fruits[CURRENT_FRUIT_INDEX].name == "Durazno")
                 {
                     // (número variable)                    
-                    yield return new WaitForSeconds(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]]-1].length + accumulatedInstructionDuration);
-                    source.PlayOneShot(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]]-1]);
-                    accumulatedInstructionDuration += numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]]-1].length;
+                    yield return new WaitForSeconds(numbersFeru[FruitInitialization.numFruits[CURRENT_FRUIT_INDEX]-1].length + elapsedInstructionAudioTime);
+                    audioSource.PlayOneShot(numbersFeru[FruitInitialization.numFruits[CURRENT_FRUIT_INDEX]-1]);
+                    elapsedInstructionAudioTime += numbersFeru[FruitInitialization.numFruits[CURRENT_FRUIT_INDEX]-1].length;
                                         
                     // Duraznos
-                    yield return new WaitForSeconds(pluralFruitsFeru[2].length + accumulatedInstructionDuration);
-                    source.PlayOneShot(pluralFruitsFeru[2]);
-                    accumulatedInstructionDuration += pluralFruitsFeru[2].length;
-                }
+                    yield return new WaitForSeconds(pluralFruitsFeru[2].length + elapsedInstructionAudioTime);
+                    audioSource.PlayOneShot(pluralFruitsFeru[2]);
+                    elapsedInstructionAudioTime += pluralFruitsFeru[2].length;
+                
+                }   // End if
 
                 // Femeninas (Manzanas, Peras)
                 else
                 {
                     // (número variable)                
-                    yield return new WaitForSeconds(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]]-1].length + accumulatedInstructionDuration);
-                    source.PlayOneShot(numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]]-1]);
-                    accumulatedInstructionDuration += numbersFeru[FruitInitialization.numFruits[FruitInitialization.fruitIndexes[i]]-1].length;
+                    yield return new WaitForSeconds(numbersFeru[FruitInitialization.numFruits[CURRENT_FRUIT_INDEX]-1].length + elapsedInstructionAudioTime);
+                    audioSource.PlayOneShot(numbersFeru[FruitInitialization.numFruits[CURRENT_FRUIT_INDEX]-1]);
+                    elapsedInstructionAudioTime += numbersFeru[FruitInitialization.numFruits[CURRENT_FRUIT_INDEX]-1].length;
                     
                     // (frutas)
-                    yield return new WaitForSeconds(pluralFruitsFeru[FruitInitialization.fruitIndexes[i]].length + accumulatedInstructionDuration);
-                    source.PlayOneShot(pluralFruitsFeru[FruitInitialization.fruitIndexes[i]]);
-                    accumulatedInstructionDuration += pluralFruitsFeru[FruitInitialization.fruitIndexes[i]].length;
-                }
-            }
-        }
-        /*
-        for (int i=0; i<instructions.text.Length; i++)
-        {
-            Debug.Log("Char #" + i +  ": " + instructions.text.ToCharArray()[i]);
-        }
+                    yield return new WaitForSeconds(pluralFruitsFeru[CURRENT_FRUIT_INDEX].length + elapsedInstructionAudioTime);
+                    audioSource.PlayOneShot(pluralFruitsFeru[CURRENT_FRUIT_INDEX]);
+                    elapsedInstructionAudioTime += pluralFruitsFeru[CURRENT_FRUIT_INDEX].length;
+                
+                }   // End else
+            
+            }   // End else
+        
+        }   // End SayInstructions
+        
+        instructions.fontSize = 100;
 
-        instructions.text.ToCharArray()[/*instructions.text.Length - 231] = ' ';//.Replace(',', ' ');
-        instructions.text.Trim();
-        */
-        instructions.fontSize = 52;
+        const int FRUIT_Y_COORDINATE = 965;
+        const float FRUIT_SIZE = 1.25f;
 
-        /*
-        if (fruits[0].name == "manzana")
-        {
-            fruitPosition.x = 120;
-            fruitPosition.y = 55;
-        }
-        else if (fruits[0].name == "pera")
-        {
-            fruitPosition.x = 105;
-            fruitPosition.y = 70;
-        }
-        else
-        {
-            fruitPosition.x = 120;
-            fruitPosition.y = 60;            
-        }
-        */        
+        // Show first fruit in instructions
+        float FRUIT_X_COORDINATE = 325;
+        GameObject fruit = Instantiate(FRUIT_OBJECTS[0], new Vector2(FRUIT_X_COORDINATE, FRUIT_Y_COORDINATE), Quaternion.identity, gameObject.transform
+                                                                                                                        .parent            // Instructions Background
+                                                                                                                        .parent            // Canvas
+                                                                                                                        .GetChild(1)       // Game Frame
+                                                                                                                        .GetChild(0));     // Fruit A Panel (Source)
+        fruit.transform.localScale = Vector3.one * FRUIT_SIZE;
 
-        if (fruits[0].name == "pera")
-            fruitXPosition = 111.5f;
-        else
-            fruitXPosition = 118;                
+        
+        // Show second fruit in instructions
+        FRUIT_X_COORDINATE = 615;
+        fruit = Instantiate(FRUIT_OBJECTS[1], new Vector2(FRUIT_X_COORDINATE, FRUIT_Y_COORDINATE), Quaternion.identity, gameObject.transform
+                                                                                                                        .parent            // Instructions Background
+                                                                                                                        .parent            // Canvas
+                                                                                                                        .GetChild(1)       // Game Frame
+                                                                                                                        .GetChild(1));     // Fruit B Panel (Source)
+        fruit.transform.localScale = Vector3.one * FRUIT_SIZE;
 
-        fruit = Instantiate(fruits[0], /*new Vector2(0, 0)*/new Vector2(fruitXPosition, 669), Quaternion.identity, gameObject.transform
-                                                                                                                                 .parent
-                                                                                                                                 .GetChild(1)
-                                                                                                                                 .GetChild(0));
-        fruit.transform.localScale = Vector3.one * 0.65f;
+        
+        // Show third fruit in instructions
+        FRUIT_X_COORDINATE = 925;
+        fruit = Instantiate(FRUIT_OBJECTS[2], new Vector2(FRUIT_X_COORDINATE, FRUIT_Y_COORDINATE), Quaternion.identity, gameObject.transform
+                                                                                                                        .parent            // Instructions Background
+                                                                                                                        .parent            // Canvas
+                                                                                                                        .GetChild(1)       // Game Frame
+                                                                                                                        .GetChild(2));     // Fruit C Panel (Source)
+        fruit.transform.localScale = Vector3.one * FRUIT_SIZE;
 
+    }   // End Start
 
-        if (fruits[1].name == "manzana")
-            fruitXPosition = 264;
-        else if (fruits[1].name == "durazno")
-            fruitXPosition = 271.8f;
-        else
-            fruitXPosition = 260;
-
-        fruit = Instantiate(fruits[1], /*new Vector2(0, 0)*/new Vector2(fruitXPosition, 669), Quaternion.identity, gameObject.transform
-                                                                                                                                 .parent
-                                                                                                                                 .GetChild(1)
-                                                                                                                                 .GetChild(0));
-        fruit.transform.localScale = Vector3.one * 0.65f;
-
-
-        if (fruits[2].name == "pera")
-            fruitXPosition = 421.2f;
-        else
-            fruitXPosition = 430;
-
-        fruit = Instantiate(fruits[2], /*new Vector2(0, 0)*/new Vector2(fruitXPosition, 669), Quaternion.identity, gameObject.transform
-                                                                                                                                 .parent
-                                                                                                                                 .GetChild(1)
-                                                                                                                                 .GetChild(0));
-        fruit.transform.localScale = Vector3.one * 0.65f;                                                                                                                             
-        /*
-        fruitNumbers[0] = FruitInitialization.numFruits[FruitInitialization.fruitIndexes[0]];
-        fruitNumbers[1] = FruitInitialization.numFruits[FruitInitialization.fruitIndexes[1]];
-        fruitNumbers[2] = FruitInitialization.numFruits[FruitInitialization.fruitIndexes[2]];
-
-        fruits[0] = initializer.fruits[FruitInitialization.fruitIndexes[0]];
-        fruits[1] = initializer.fruits[FruitInitialization.fruitIndexes[1]];
-        fruits[2] = initializer.fruits[FruitInitialization.fruitIndexes[2]];
-        */
-
-        /*
-        instructions = GetComponent<Text>();
-        instructions.text = "";
-         */
-
-        /*    
-        for (int i=0; i<3; i++)
-        {
-            if (fruitNumbers[i] > 1)
-            {
-                if (fruitNames[i] == "Peach")
-                    fruitNames[i] += "es";
-                else
-                    fruitNames[i] += "s";
-            }                
-        }*/
-
-        //printInstructions();
-
-        /*
-        instructions.text = fruitNumbers[0] + "      " /*+ fruitNames[0] + ", " 
-                          + fruitNumbers[1] + "      " /*+ fruitNames[1] + ", "
-                          + fruitNumbers[2] + "      " /*+ fruitNames[2];
-        */
-
-
-    }
-
-    /*
-    void printInstructions()
-    {
-        instructions.text = fruitNumbers[0] + "             " /*+ fruitNames[0] + ", " 
-                          + fruitNumbers[1] + "             " /*+ fruitNames[1] + ", "
-                          + fruitNumbers[2] + "             " /*+ fruitNames[2];
-    }
-
-    void instantiateFruits()
-    {
-
-    }
-    */
-
-}
+}   // End class FruitsToCollect
