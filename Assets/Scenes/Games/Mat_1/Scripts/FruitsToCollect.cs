@@ -8,7 +8,6 @@ public class FruitsToCollect : MonoBehaviour
     public AudioSource audioSource;
     [SerializeField] AudioClip[] un, singleFruitsFeru, numbersFeru, pluralFruitsFeru;
     static int[] NUMBER_OF_FRUITS_PER_TYPE;          // Declarado al inicio, porque no se permite declarar vars estáticas dentro de Start()
-
     [SerializeField] Image[] instructionFruitImages;
 
     // Start is called before the first frame update
@@ -129,99 +128,11 @@ public class FruitsToCollect : MonoBehaviour
         
         }   // End SayInstructions
         
-        // instructions.fontSize = 87;
+        // For each fruit type:
+        for (int i = 0; i < NUMBER_OF_FRUIT_TYPES; i++)
 
-        /*
-        float FRUIT_Y_COORDINATE = Screen.height * 0.9058f;
-        Debug.Log("Fruit Y coordinate: " + FRUIT_Y_COORDINATE);
-        const float FRUIT_SIZE = 0.475f;
-
-        Debug.Log(Screen.currentResolution);
-        Debug.Log(Screen.width + ", " + Screen.height);
-
-        // 
-        float Vector2_X_to_RectTransform_PosX_Factor = ( Screen.width * (float) 5.83e-4 ) + 1.905f;
-        switch (Screen.width)
-        {
-            case 800:
-                Vector2_X_to_RectTransform_PosX_Factor = 1.6f;
-                break;
-            
-            case 1280:
-                Vector2_X_to_RectTransform_PosX_Factor = 1.066666f + (float) 6.8557e-5;
-                break;
-
-            case 1920:
-            case 2160:
-                Vector2_X_to_RectTransform_PosX_Factor = 0.711111f + (float) 1.1742e-4;
-                break;
-
-            case 2560:
-            case 2960:
-                Vector2_X_to_RectTransform_PosX_Factor = 0.533333f + (float) 5.2576e-5;
-                break;
-        }
-
-        // Show first fruit in instructions
-        float FRUIT_X_COORDINATE = (98 / Vector2_X_to_RectTransform_PosX_Factor);
-        switch (Screen.width)
-        {
-            case 800:
-                FRUIT_X_COORDINATE = 98;
-                break;
-            
-            case 1280:
-                FRUIT_X_COORDINATE = 144.5334f;
-                break;
-
-            case 1920:
-            case 2560:
-                FRUIT_X_COORDINATE = 147;
-                break;
-            
-            case 2160:
-                FRUIT_X_COORDINATE = 233;
-                break;
-
-            case 2960:
-                FRUIT_X_COORDINATE = 257.85f;
-                break;
-        }
-        // FRUIT_X_COORDINATE /= Vector2_X_to_RectTransform_PosX_Factor;
-        Debug.Log("FRUIT X coordinate: " + FRUIT_X_COORDINATE);
-        */
-
-        /*GameObject fruit = Instantiate(FRUIT_OBJECTS[0], new Vector2(FRUIT_X_COORDINATE, FRUIT_Y_COORDINATE), Quaternion.identity, gameObject.transform
-                                                                                                                                             .parent);          // Instructions Background
-                                                                                                                                            /*.parent            // Canvas
-                                                                                                                                            .GetChild(1)       // Game Frame
-                                                                                                                                            .GetChild(0));     // Fruit A Panel (Source)
-        fruit.transform.localScale = Vector3.one * FRUIT_SIZE;*/
-        instructionFruitImages[0].sprite = FRUIT_OBJECTS[0].GetComponent<Image>().sprite;
-
-        
-        // Show second fruit in instructions
-        /*
-        FRUIT_X_COORDINATE = (327 / Vector2_X_to_RectTransform_PosX_Factor);
-        GameObject fruit = Instantiate(FRUIT_OBJECTS[1], new Vector2(FRUIT_X_COORDINATE, FRUIT_Y_COORDINATE), Quaternion.identity, gameObject.transform
-                                                                                                                                    .parent);            // Instructions Background
-                                                                                                                                    /*.parent            // Canvas
-                                                                                                                                    .GetChild(1)       // Game Frame
-                                                                                                                                    .GetChild(1));     // Fruit B Panel (Source)
-        fruit.transform.localScale = Vector3.one * FRUIT_SIZE;
-        */
-        instructionFruitImages[1].sprite = FRUIT_OBJECTS[1].GetComponent<Image>().sprite;
-
-        
-        // Show third fruit in instructions
-        /*FRUIT_X_COORDINATE = (459 / Vector2_X_to_RectTransform_PosX_Factor);
-        fruit = Instantiate(FRUIT_OBJECTS[2], new Vector2(FRUIT_X_COORDINATE, FRUIT_Y_COORDINATE), Quaternion.identity, gameObject.transform
-                                                                                                                        .parent);            // Instructions Background
-                                                                                                                        /*.parent            // Canvas
-                                                                                                                        .GetChild(1)       // Game Frame
-                                                                                                                        .GetChild(2));     // Fruit C Panel (Source)
-        fruit.transform.localScale = Vector3.one * FRUIT_SIZE;*/
-        instructionFruitImages[2].sprite = FRUIT_OBJECTS[2].GetComponent<Image>().sprite;
+            // Replace the instructions' default Image sprites to those belonging to the corresponding fruits to be collected
+            instructionFruitImages[i].sprite = FRUIT_OBJECTS[i].GetComponent<Image>().sprite;
 
     }   // End Start
 
