@@ -1,6 +1,7 @@
 ﻿// Script in charge of 
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class FruitInitialization : MonoBehaviour
@@ -128,15 +129,24 @@ public class FruitInitialization : MonoBehaviour
         
         for (int i=0; i<cycles; i++)
         {
-            GameObject newFruitA = Instantiate(fruits[fruitIndexes[0]], randomCoordinates(227, 433), Quaternion.identity, treePanels[0]);                        
+            float X_COORDINATE = Screen.width * 0.1773f;
+            float Y_COORDINATE = Screen.height * 0.6152f;
+
+            GameObject newFruitA = Instantiate(fruits[fruitIndexes[0]], randomCoordinates(X_COORDINATE, Y_COORDINATE), Quaternion.identity, treePanels[0]);                        
             newFruitA.transform.SetParent(treePanels[0].transform, false); 
 
             goal =  newFruitA.transform.position;        
 
-            GameObject newFruitB = Instantiate(fruits[fruitIndexes[1]], randomCoordinates(1053, 435), Quaternion.identity, treePanels[1]);            
+            X_COORDINATE = Screen.width * 0.8226f;
+            Y_COORDINATE = Screen.height * 0.6041f;
+
+            GameObject newFruitB = Instantiate(fruits[fruitIndexes[1]], randomCoordinates(X_COORDINATE, Y_COORDINATE), Quaternion.identity, treePanels[1]);            
             newFruitB.transform.SetParent(treePanels[1].transform, false);            
 
-            GameObject newFruitC = Instantiate(fruits[fruitIndexes[2]], randomCoordinates(640, 513), Quaternion.identity, treePanels[2]);            
+            X_COORDINATE = Screen.width * 0.5f;
+            Y_COORDINATE = Screen.height * 0.7125f;
+
+            GameObject newFruitC = Instantiate(fruits[fruitIndexes[2]], randomCoordinates(X_COORDINATE, Y_COORDINATE), Quaternion.identity, treePanels[2]);            
             newFruitC.transform.SetParent(treePanels[2].transform, false);            
         }
         return goal;
