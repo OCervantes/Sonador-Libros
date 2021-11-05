@@ -7,23 +7,22 @@ public class FruitsToCollect : MonoBehaviour
     public FruitInitialization fruitInitializer;     // Referenced by Basket and Dialog
     public AudioSource audioSource;
     [SerializeField] AudioClip[] un, singleFruitsFeru, numbersFeru, pluralFruitsFeru;
-    static int[] NUMBER_OF_FRUITS_PER_TYPE;          // Declarado al inicio, porque no se permite declarar vars estáticas dentro de Start()
+    static uint[] NUMBER_OF_FRUITS_PER_TYPE;          // Declarado al inicio, porque no se permite declarar vars estáticas dentro de Start()
     [SerializeField] Image[] instructionFruitImages;
+    
+    // Debido a que se manda a llamar en SayInstructions, no se puede declarar después del ciclo for
+    private float elapsedInstructionAudioTime = 1.0f;
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
-        NUMBER_OF_FRUITS_PER_TYPE  = new int [3];
+        NUMBER_OF_FRUITS_PER_TYPE  = new uint [3];
         GameObject[] FRUIT_OBJECTS = new GameObject [3];
 
         Text instructions = GetComponent<Text>();
         instructions.text = "";
-
-
-        // Debido a que se manda a llamar en SayInstructions, no se puede declarar después del ciclo for
-        float elapsedInstructionAudioTime = 0f;
         
-        int NUMBER_OF_FRUIT_TYPES = fruitInitializer.fruits.Length;     // = 3
+        uint NUMBER_OF_FRUIT_TYPES = (uint) fruitInitializer.fruits.Length;     // = 3
 
         // For each fruit type:
         for (int i = 0; i < NUMBER_OF_FRUIT_TYPES; i++)
@@ -34,11 +33,11 @@ public class FruitsToCollect : MonoBehaviour
                 1 = Pera
                 2 = Durazno
              */
-            int CURRENT_FRUIT_INDEX = FruitInitialization.fruitIndexes[i];
+            uint CURRENT_FRUIT_INDEX = (uint) FruitInitialization.fruitIndexes[i];
 
             // Get corresponding fruit and the number of its instances
             FRUIT_OBJECTS[i]             = fruitInitializer.fruits[CURRENT_FRUIT_INDEX];
-            NUMBER_OF_FRUITS_PER_TYPE[i] = FruitInitialization.numFruits[CURRENT_FRUIT_INDEX];
+            NUMBER_OF_FRUITS_PER_TYPE[i] = (uint) FruitInitialization.numFruits[CURRENT_FRUIT_INDEX];
 
             // Print it in the instructions
             const string SPACES_BETWEEN_NUMBER_OF_FRUITS = "    ";
@@ -46,94 +45,65 @@ public class FruitsToCollect : MonoBehaviour
 
             if ( i != (NUMBER_OF_FRUIT_TYPES - 1) )            
                 instructions.text += ", ";
-            
-            // Play corresponding audio
-            StartCoroutine( SayInstructions(i, CURRENT_FRUIT_INDEX) );
-        
-        }   // End for
-        
-        IEnumerator SayInstructions(int i, int CURRENT_FRUIT_INDEX)
-        {
-            Debug.Log("Instructions Coroutine");
-
-            // Fruta (singular)
-            if (FruitInitialization.numFruits[CURRENT_FRUIT_INDEX] == 1)
-            {
-                // Masculina (Durazno)
-                if (fruitInitializer.fruits[CURRENT_FRUIT_INDEX].name == "Durazno")
-                {
-                    // Un                    
-                    yield return new WaitForSeconds(un[0].length + elapsedInstructionAudioTime);
-                    audioSource.PlayOneShot(un[0]);
-                    elapsedInstructionAudioTime += un[0].length;
-                    
-                    // Durazno
-                    yield return new WaitForSeconds(singleFruitsFeru[2].length + elapsedInstructionAudioTime);
-                    audioSource.PlayOneShot(singleFruitsFeru[2]);
-                    elapsedInstructionAudioTime += singleFruitsFeru[2].length;
-                
-                }   // End if
-
-                // Femenina (Manzana, Pera)
-                else
-                {
-                    // Una                    
-                    yield return new WaitForSeconds(numbersFeru[0].length + elapsedInstructionAudioTime);
-                    audioSource.PlayOneShot(numbersFeru[0]);
-                    elapsedInstructionAudioTime += numbersFeru[0].length;
-                    
-                    // (fruta)
-                    yield return new WaitForSeconds(singleFruitsFeru[CURRENT_FRUIT_INDEX].length + elapsedInstructionAudioTime);
-                    audioSource.PlayOneShot(singleFruitsFeru[CURRENT_FRUIT_INDEX]);
-                    elapsedInstructionAudioTime += singleFruitsFeru[CURRENT_FRUIT_INDEX].length;
-                
-                }   // End else
-
-            }   // End if
-
-            // Frutas (plural)
-            else
-            {
-                // Masculinas (Duraznos)
-                if (fruitInitializer.fruits[CURRENT_FRUIT_INDEX].name == "Durazno")
-                {
-                    // (número variable)                    
-                    yield return new WaitForSeconds(numbersFeru[FruitInitialization.numFruits[CURRENT_FRUIT_INDEX]-1].length + elapsedInstructionAudioTime);
-                    audioSource.PlayOneShot(numbersFeru[FruitInitialization.numFruits[CURRENT_FRUIT_INDEX]-1]);
-                    elapsedInstructionAudioTime += numbersFeru[FruitInitialization.numFruits[CURRENT_FRUIT_INDEX]-1].length;
-                                        
-                    // Duraznos
-                    yield return new WaitForSeconds(pluralFruitsFeru[2].length + elapsedInstructionAudioTime);
-                    audioSource.PlayOneShot(pluralFruitsFeru[2]);
-                    elapsedInstructionAudioTime += pluralFruitsFeru[2].length;
-                
-                }   // End if
-
-                // Femeninas (Manzanas, Peras)
-                else
-                {
-                    // (número variable)                
-                    yield return new WaitForSeconds(numbersFeru[FruitInitialization.numFruits[CURRENT_FRUIT_INDEX]-1].length + elapsedInstructionAudioTime);
-                    audioSource.PlayOneShot(numbersFeru[FruitInitialization.numFruits[CURRENT_FRUIT_INDEX]-1]);
-                    elapsedInstructionAudioTime += numbersFeru[FruitInitialization.numFruits[CURRENT_FRUIT_INDEX]-1].length;
-                    
-                    // (frutas)
-                    yield return new WaitForSeconds(pluralFruitsFeru[CURRENT_FRUIT_INDEX].length + elapsedInstructionAudioTime);
-                    audioSource.PlayOneShot(pluralFruitsFeru[CURRENT_FRUIT_INDEX]);
-                    elapsedInstructionAudioTime += pluralFruitsFeru[CURRENT_FRUIT_INDEX].length;
-                
-                }   // End else
-            
-            }   // End else
-        
-        }   // End SayInstructions
-        
-        // For each fruit type:
-        for (int i = 0; i < NUMBER_OF_FRUIT_TYPES; i++)
 
             // Replace the instructions' default Image sprites to those belonging to the corresponding fruits to be collected
             instructionFruitImages[i].sprite = FRUIT_OBJECTS[i].GetComponent<Image>().sprite;
+        
+        }   // End for
+
+        // Ciclo por aparte, para evitar suspender la carga de sprites de las instruccioens  
+        for (int i = 0; i < NUMBER_OF_FRUIT_TYPES; i++)
+        {
+            uint CURRENT_FRUIT_INDEX = (uint) FruitInitialization.fruitIndexes[i];
+
+            // Play corresponding audio
+            yield return new WaitForSeconds(1.5f);
+            StartCoroutine( SelectInstructionsAudio(NUMBER_OF_FRUITS_PER_TYPE[i], FRUIT_OBJECTS[i], CURRENT_FRUIT_INDEX) );
+        }
 
     }   // End Start
+    
+    IEnumerator SelectInstructionsAudio(uint numberOfFruits, GameObject fruitType, uint fruitIndex)
+    {
+        const float TIMEBREAK_BEFORE_NUMBER_OF_FRUITS = 0.73f;
+        const float TIMEBREAK_BEFORE_FRUIT_NAMES = 0.5f;
+
+        // One fruit
+        if (numberOfFruits == 1)
+        {
+            // Is the fruit a peach (masculine)?
+            yield return new WaitForSeconds(TIMEBREAK_BEFORE_NUMBER_OF_FRUITS);
+            if (fruitType.name == "Durazno")
+                PlayInstructionsAudio(un[0]);                       // "Un"
+
+            // If not, it's feminine (Manzana, Pera)
+            else
+                PlayInstructionsAudio(numbersFeru[0]);              // "Una"
+
+            
+            yield return new WaitForSeconds(TIMEBREAK_BEFORE_FRUIT_NAMES);
+            PlayInstructionsAudio(singleFruitsFeru[fruitIndex]);    // (fruit)
+        }   // End if
+
+        // More than one fruit
+        else if (numberOfFruits > 1)
+        {
+            // (Number of fruits)
+            yield return new WaitForSeconds(TIMEBREAK_BEFORE_NUMBER_OF_FRUITS);
+            PlayInstructionsAudio(numbersFeru[numberOfFruits - 1]);
+
+            // (fruits)
+            yield return new WaitForSeconds(TIMEBREAK_BEFORE_FRUIT_NAMES);
+            PlayInstructionsAudio(pluralFruitsFeru[fruitIndex]);
+
+        }   // End else
+        
+    }   // End SelectInstructionsAudio
+
+    void PlayInstructionsAudio(AudioClip audio)
+    {
+        audioSource.PlayOneShot(audio);
+
+    }   // End PlayInstructionsAudio
 
 }   // End class FruitsToCollect
