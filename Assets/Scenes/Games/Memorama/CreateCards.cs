@@ -11,6 +11,7 @@ public class CreateCards : MonoBehaviour {
 	public GameObject prefabCard;
 	public int[] size = {200, 140, 100};
 	public int nSize = 0;
+	[SerializeField] float scaleFactor = 0.3f;
 	public GameObject ParentCards;
 	//public Material[] materials;
 
@@ -88,8 +89,8 @@ public class CreateCards : MonoBehaviour {
 			new Vector2(size[nSize - 3], size[nSize - 3]);
 
 		int cont = 0;
-		for(int i=0; i<nSize; i++){
-			for(int x=0; x< (nSize != 4 ? nSize + 1 : nSize); x++){
+		for(int i=0; i< (nSize != 4 ? nSize + 1 : nSize); i++){
+			for(int x=0; x < nSize ; x++){
 				//float factor = 9.0f / ancho;
 				//mantener distribución de las cartas
 				Vector3 tempPosition = new Vector3(x,0,i /**factor*/);
@@ -99,7 +100,7 @@ public class CreateCards : MonoBehaviour {
 					tempPosition, Quaternion.identity);
 
 				//escalado
-				//cartaTemp.transform.localScale *= factor;
+				tempCard.transform.localScale *= scaleFactor;
 
 				cards.Add (tempCard);
 
